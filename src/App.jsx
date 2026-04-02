@@ -60,7 +60,7 @@ function App() {
       <main className="relative z-10 pt-16 lg:pt-20">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
-        <section className="relative flex items-center px-4 lg:px-6 py-12 lg:min-h-[780px] min-h-[calc(100svh-64px)] overflow-hidden">
+        <section className="relative flex items-center px-4 lg:px-6 py-16 lg:py-28 min-h-[600px] lg:min-h-[720px] overflow-hidden">
           
           {/* Background glow — cosmetic only */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
@@ -138,7 +138,7 @@ function App() {
               className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6"
             >
               {[
-                { stat: '98%', label: 'Accuracy Rating', icon: 'verified' },
+                { stat: '67%', label: 'Avg. Claim Undervalued', icon: 'verified' },
                 { stat: '2,400+', label: 'Claims This Month', icon: 'groups' },
                 { stat: '3.2x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },

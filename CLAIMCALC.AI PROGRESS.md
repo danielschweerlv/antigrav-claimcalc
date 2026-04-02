@@ -1,17 +1,21 @@
-# Next Steps for ClaimCalculator.ai
+# ClaimCalculator.ai — Project Progress (antigrav)
 
-We accomplished a lot today! The application is looking incredibly premium and professional. 
+We've successfully transitioned the project to **"antigrav"** and fully aligned it with the **"Neon Nocturne"** design system.
 
-When you return tomorrow, here is exactly where we left off so you can just copy/paste this into the chat to resume:
+## Completed Today
+1. [x] **Project Rebranding**: Renamed from "Anti Gravity" to "antigrav" in all configs.
+2. [x] **Design System Alignment**: Standardized typography (Space Grotesk, Manrope, Inter) and color tokens project-wide.
+3. [x] **FAQ Integration**: Created a reusable `FaqAccordion` and integrated it below the calculator on the `/calculator` page.
+4. [x] **Homepage Polishing**: Fixed the Hero section height/padding and updated the accuracy statistic to "Avg. Claim Undervalued by 67%".
+5. [x] **Deployment Setup**: Code pushed to GitHub and configured for Vercel.
 
-## What's Pending
-1. Include the FAQ section below the calculator on the `/calculator` page, matching the style from the BetterClaims reference (like an accordion/collapsible list).
-2. Any final touches to the UI or animations.
+## Next Steps
+1. [ ] Final visual audit of the live Vercel production site.
+2. [ ] Performance optimization and SEO meta-tag refinement.
 
-## How to Resume
-1. Open your terminal to this specific folder (`/Users/daniel/Desktop/Anti Gravity`).
-2. Run `npm run dev` to start the local server.
-3. Open this folder in your code editor.
-4. Just tell me (the AI): **"Let's finish the remaining tasks in NEXT_STEPS.md — specifically adding the FAQ section below the calculator."**
+## Project Resources
+- **GitHub Repo**: [danielschweerlv/claimcalculator](https://github.com/danielschweerlv/claimcalculator)
+- **Deployment Plan**: [deployment_plan.md](file:///Users/daniel/.gemini/antigravity/brain/32f000fa-92b8-4d81-9935-50546ec1e94f/deployment_plan.md)
+- **Design Spec**: [DESIGN.md](file:///Users/daniel/Desktop/antigrav/DESIGN.md)
 
-Great work today!
+Great work! The site is now live (or ready to be) with a truly professional and premium feel.
