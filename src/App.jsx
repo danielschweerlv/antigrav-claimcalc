@@ -184,7 +184,7 @@ function App() {
                     { src: '/logos/nevada-flag.svg', alt: 'State of Nevada' },
                     { src: '/logos/google-color.png', alt: 'Google' },
                     { src: '/logos/lvmpd-color.png', alt: 'LVMPD' },
-                    { src: '/logos/nhp-color.png', alt: 'Nevada Highway Patrol' },
+
                     { src: '/logos/nvcourts-color.png', alt: 'Nevada Courts' },
                     { src: '/logos/bbb-color.svg', alt: 'Better Business Bureau' },
                     { src: '/logos/dmv-color.svg', alt: 'Nevada DMV' },
@@ -211,17 +211,7 @@ function App() {
             </div>
           </div>
 
-          {/* Disclaimer */}
-          <motion.p
-            className="text-center mx-auto mt-5 px-5 lg:px-8"
-            style={{ fontSize: '11px', color: 'rgba(255,255,255,0.25)', maxWidth: '700px', lineHeight: 1.6 }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            All data sources are publicly available. ClaimCalculator.ai is not affiliated with or endorsed by any of the organizations listed below.
-          </motion.p>
+
         </section>
 
         {/* ── TRUST STATS ─────────────────────────────────────── */}
