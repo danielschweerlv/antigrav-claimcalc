@@ -150,10 +150,10 @@ function OptionBtn({ selected, onClick, children }) {
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center gap-3 w-full p-4 rounded-xl border text-left font-medium text-sm transition-all
+      className={`flex items-center gap-3 w-full px-5 py-4 min-h-[56px] rounded-[16px] border text-left font-medium text-sm transition-all duration-200
         ${selected
-          ? 'border-primary bg-primary/10 text-primary'
-          : 'border-outline-variant/20 bg-surface-container-highest text-on-surface-variant hover:border-primary/40 hover:text-on-surface'
+          ? 'border-primary/50 bg-primary/[0.08] text-primary shadow-[0_0_12px_rgba(164,230,255,0.06)]'
+          : 'border-white/[0.08] bg-surface-container-highest/60 text-on-surface-variant hover:border-primary/25 hover:bg-surface-container-highest/90 hover:-translate-y-[1px]'
         }`}
     >
       <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all
@@ -169,10 +169,10 @@ function CheckItem({ checked, onChange, label }) {
   return (
     <div
       onClick={onChange}
-      className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all
+      className={`flex items-center gap-3 px-4 py-3.5 rounded-[16px] border cursor-pointer transition-all duration-200
         ${checked
-          ? 'border-primary bg-primary/10'
-          : 'border-outline-variant/20 bg-surface-container-highest hover:border-primary/40'
+          ? 'border-primary/50 bg-primary/[0.08]'
+          : 'border-white/[0.08] bg-surface-container-highest/60 hover:border-primary/25'
         }`}
     >
       <div className={`w-4 h-4 rounded border-2 flex-shrink-0 flex items-center justify-center transition-all
@@ -188,23 +188,23 @@ function CheckItem({ checked, onChange, label }) {
 
 function StepHeading({ title, sub }) {
   return (
-    <div className="mb-5">
-      <h2 className="text-xl md:text-2xl font-headline font-bold text-on-background leading-snug mb-1">{title}</h2>
-      {sub && <p className="text-sm text-on-surface-variant">{sub}</p>}
+    <div className="mb-6">
+      <h2 className="text-xl md:text-2xl font-headline font-bold text-on-background leading-snug mb-1.5">{title}</h2>
+      {sub && <p className="text-sm text-on-surface-variant/80">{sub}</p>}
     </div>
   )
 }
 
 function NavButtons({ onNext, onBack, nextLabel = 'Continue', step }) {
   return (
-    <div className="mt-6 space-y-2">
+    <div className="mt-7 space-y-2">
       <button
         type="button"
         onClick={onNext}
-        className="w-full cta-gradient text-on-primary-fixed py-4 rounded-xl font-bold text-base flex items-center justify-center gap-2 group transition-all shadow-[0_0_20px_rgba(164,230,255,0.12)]"
+        className="w-full cta-gradient cta-shimmer text-on-primary-fixed py-4 rounded-[16px] font-headline font-bold text-base flex items-center justify-center gap-2 group transition-all duration-200 shadow-[0_0_20px_rgba(164,230,255,0.12)] hover:shadow-[0_4px_30px_rgba(164,230,255,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
       >
         {nextLabel}
-        <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
       </button>
       {onBack && (
         <button
@@ -221,6 +221,11 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step }) {
           By continuing you agree to our Terms &amp; Privacy Policy. SSL encrypted.
         </p>
       )}
+      {/* Privacy reassurance microcopy */}
+      <div className="flex items-start gap-2 pt-1">
+        <span className="material-symbols-outlined text-[#4ADE80]/60 flex-shrink-0" style={{ fontSize: '14px', marginTop: '1px', fontVariationSettings: "'FILL' 1" }}>lock</span>
+        <span className="text-[11px] text-on-surface-variant/40 leading-relaxed">Your information is encrypted and never shared without your permission.</span>
+      </div>
     </div>
   )
 }
@@ -438,11 +443,11 @@ export default function CalculatorForm() {
       case 1:
         return (
           <>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-5">
-              <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">🤖 AI-powered — real Nevada settlement data</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[8px] bg-primary/[0.08] border border-primary/20 mb-6">
+              <span className="text-[11px] font-label font-semibold text-primary uppercase tracking-[0.05em]">🤖 AI-powered — real Nevada settlement data</span>
             </div>
             <StepHeading title={<>What type of accident <span className="text-primary italic">were you in?</span></>} sub="Select the option that best describes your situation." />
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {ACCIDENT_TYPES.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.type === label} onClick={() => set('type', label)}>
                   <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
@@ -478,7 +483,7 @@ export default function CalculatorForm() {
         return (
           <>
             <StepHeading title={<>Was the accident <span className="text-primary italic">your fault?</span></>} sub="Nevada follows comparative fault rules — partial fault still allows recovery." />
-            <div className="grid gap-2.5">
+            <div className="grid gap-3">
               {FAULT_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.fault === o.value} onClick={() => set('fault', o.value)}>{o.label}</OptionBtn>
               ))}
@@ -491,7 +496,7 @@ export default function CalculatorForm() {
         return (
           <>
             <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations — timing matters." />
-            <div className="grid gap-2.5">
+            <div className="grid gap-3">
               {DATE_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
                   <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
@@ -507,7 +512,7 @@ export default function CalculatorForm() {
         return (
           <>
             <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
-            <div className="grid grid-cols-2 gap-2 max-h-72 overflow-y-auto pr-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
               {MY_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
                   <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
@@ -523,7 +528,7 @@ export default function CalculatorForm() {
         return (
           <>
             <StepHeading title={<>Do you know the <span className="text-primary italic">other party's insurance?</span></>} sub="This information can significantly affect your claim. Select the best option." />
-            <div className="grid grid-cols-2 gap-2 max-h-72 overflow-y-auto pr-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
               {OTHER_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
                   <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
@@ -611,7 +616,7 @@ export default function CalculatorForm() {
   }
 
   return (
-    <div className="relative glass-card p-8 md:p-10 rounded-2xl border border-outline-variant/10 shadow-2xl overflow-hidden">
+    <div className="relative glass-card p-7 sm:p-8 md:p-10 rounded-xl border border-primary/[0.1] shadow-[0_0_80px_rgba(164,230,255,0.06),0_25px_50px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.04)] overflow-hidden">
       {/* Progress bar */}
       <div className="mb-7">
         <div className="flex justify-between items-center mb-2">
@@ -620,9 +625,9 @@ export default function CalculatorForm() {
           </p>
           <span className="text-xs font-label text-primary font-semibold">{progress}%</span>
         </div>
-        <div className="w-full bg-surface-container-lowest h-1 rounded-full overflow-hidden">
+        <div className="w-full bg-surface-container-lowest h-[3px] rounded-full overflow-hidden">
           <motion.div
-            className="bg-primary h-full rounded-full"
+            className="bg-gradient-to-r from-primary to-[#00d1ff] h-full rounded-full"
             animate={{ width: `${progress}%` }}
             transition={{ type: 'spring', bounce: 0.1, duration: 0.6 }}
           />

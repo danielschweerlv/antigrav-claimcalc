@@ -53,47 +53,47 @@ function App() {
   return (
     <div className="relative min-h-screen bg-transparent">
 
-
-      {/* ── NAV ─────────────────────────────────────────────────────────── */}
-      
-
-      <main className="relative z-10 pt-16 lg:pt-20">
+      <main className="relative z-10 pt-[72px]">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
-        <section className="relative flex items-center px-4 lg:px-6 py-16 lg:py-28 min-h-[600px] lg:min-h-[720px] overflow-hidden">
+        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px] overflow-hidden">
           
-          {/* Background glow — cosmetic only */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px] pointer-events-none" />
+          {/* Background glow — positioned behind calculator */}
+          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-1/4 left-[15%] w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
-            {/* Left column — visible on all sizes */}
-            <AnimatedGroup variants={transitionVariants} className="space-y-6 lg:space-y-8 text-center lg:text-left">
+            {/* Left column */}
+            <AnimatedGroup variants={transitionVariants} className="space-y-6 lg:space-y-0 text-center lg:text-left">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse flex-shrink-0"></span>
-                <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Free AI-Powered Claim Analysis</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 lg:mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse flex-shrink-0"></span>
+                <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Free AI-Powered Claim Analysis</span>
               </div>
 
-              {/* Headline — large on mobile, huge on desktop */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-bold text-on-background leading-[0.95] tracking-tight">
-                Insurance companies have lawyers.{' '}
+              {/* Headline — stronger size contrast */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-black text-on-background leading-[0.95] tracking-tight lg:mb-7">
+                Insurance companies{' '}
+                <br className="hidden lg:block" />
+                have lawyers.{' '}
+                <br />
                 <span className="text-primary italic">Now you have AI.</span>
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl text-on-surface-variant max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-base sm:text-lg text-on-surface-variant/85 max-w-md mx-auto lg:mx-0 leading-relaxed lg:mb-9">
                 Answer 9 quick questions. Our AI cross-references thousands of Nevada settlements to show you what you're really owed.
               </p>
 
               {/* Social proof — avatars */}
-              <div className="flex items-center gap-3 justify-center lg:justify-start">
+              <div className="flex items-center gap-3 justify-center lg:justify-start lg:mb-6">
                 <div className="flex -space-x-2.5">
                   {[
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuBUUSlwtNdlTQyrWVYdQnqEG2G2D2qWsw8r3tEiX44M9NjTr6eGMRe5iNyh1igPZcX65tvaKU24HKD_ViEu1-vmm1ZyazdoVFdaBd-gOB-iJopbsj7CWmPEh_z2k5lhJbcUa1BQNSwHpD7Q9mFujNPUpbTPzfQ-3s8i-aCFYAKSA7ToQBPjYxtWPKZ9vcMOxxLWWwoiSpbTZoukQ2UJdSse3T5EGjjJTH_EbQZXwioeOefNc3mdh8fCnEIaf6hhgfpIyoutzG0uHBg',
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuDiiq9OcBBRXDRd1IO8Q3jyBqM9sfQ-enET6QgJD7RfCodMdVApoZPPMLpwObQxVZS679HErC21H0TqZMHW7P5HGJ94mqeUuWZHKdb9ZGXrbBCYqKaOfbE_Pf20f2Oindpn_H5fXvT1exHXEpMzVstozNUbT7OoHxTcIqOeloguSCUGiBQ0CLYcfNhjvk6vxe7H6o7C96bIOnwhWF4K-MJg0T8bGZHoEhjsSTJX0tmbUGIZ1F8G3TeDNibUacJt1o34L3Ix2vUvrrU',
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuD2xiR_WMueO6jb2T0wmxvLry5Jkp3XF11qlJC13GEG-_g5HSypgEXr1K05c4Hi7IKOyiz1cqcsMTamtRolNarJ0tI1SNJVbNxJc1AfKNukt8fW7sMTmcGhX94viu-6QrSuUdAR896ovbG5XTR-GuPOh8dTj1xgzan7n8t6U6Y1WtHwjr7e7WfBUn8vAOMX8ot4yquiRTUyp4OthMggfdxWbyWivY1jeRZkTFL53MsPaAJs1R5mz7eUrBPaYlxJ0H2tcYBoTgaP4EE',
                   ].map((src, i) => (
-                    <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`lawyer ${i + 1}`} />
+                    <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
                   ))}
                 </div>
                 <p className="text-sm text-on-surface-variant">
@@ -101,14 +101,14 @@ function App() {
                 </p>
               </div>
 
-              {/* Primary CTA — BIG on mobile */}
+              {/* Primary CTA */}
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <button
                   onClick={() => navigate('/calculator')}
-                  className="cta-gradient text-on-primary-fixed px-8 py-4 sm:py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_0_45px_rgba(164,230,255,0.35)] active:scale-95 transition-all duration-200 group"
+                  className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 sm:py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
                 >
                   Check My Claim Free
-                  <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                  <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
                 </button>
                 <p className="text-xs text-outline self-center text-center">Free · 2 min · No obligation</p>
               </div>
@@ -119,9 +119,9 @@ function App() {
               className="relative hidden lg:block"
               initial={{ opacity: 0, y: 24, filter: 'blur(12px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.4 }}
+              transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
             >
-              <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-2xl transform rotate-3" />
+              <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
               <ShineBorder borderWidth={2} duration={4} gradient="from-[#a4e6ff] via-white to-[#00d1ff]">
                 <CalculatorForm />
               </ShineBorder>
@@ -130,22 +130,41 @@ function App() {
           </div>
         </section>
 
-        {/* ── TRUST STATS (mobile-friendly) ─────────────────────────────── */}
-        <section className="py-16 lg:py-24 px-4 lg:px-6">
+        {/* ── TRUST BAR ──────────────────────────────────────────────────── */}
+        <section className="px-4 lg:px-8 -mt-4 lg:-mt-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 py-5 border-t border-b border-white/[0.06]">
+              {[
+                { icon: 'lock', text: '256-bit SSL Encrypted' },
+                { icon: 'schedule', text: 'Results in 2 Minutes' },
+                { icon: 'money_off', text: '100% Free — No Credit Card' },
+                { icon: 'shield', text: 'Your Info Stays Private' },
+              ].map(({ icon, text }) => (
+                <div key={text} className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#4ADE80] text-base" style={{ fontVariationSettings: "'FILL' 1, 'wght' 400" }}>{icon}</span>
+                  <span className="text-[13px] text-on-surface-variant/50 font-medium">{text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── TRUST STATS ─────────────────────────────────────── */}
+        <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.1 } } }, item: transitionVariants.item }}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
             >
               {[
                 { stat: '67%', label: 'Avg. Claim Undervalued', icon: 'verified' },
-                { stat: '2,400+', label: 'Claims This Month', icon: 'groups' },
+                { stat: '2,400+', label: 'Claims Evaluated', icon: 'groups' },
                 { stat: '3.2x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
-                <div key={label} className="p-5 lg:p-8 rounded-2xl bg-surface-container-low border border-outline-variant/5 text-center space-y-2">
+                <div key={label} className="p-6 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300">
                   <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
-                  <p className="text-2xl lg:text-3xl font-headline font-black text-on-background">{stat}</p>
+                  <p className="text-2xl lg:text-4xl font-headline font-black text-on-background">{stat}</p>
                   <p className="text-xs text-on-surface-variant leading-snug">{label}</p>
                 </div>
               ))}
@@ -154,11 +173,11 @@ function App() {
         </section>
 
         {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
-        <section className="py-16 lg:py-32 px-4 lg:px-6 bg-surface-container-lowest">
+        <section className="py-20 lg:py-32 px-4 lg:px-8 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto">
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
-              className="text-center space-y-3 mb-12"
+              className="text-center space-y-4 mb-16"
             >
               <h2 className="text-3xl lg:text-5xl font-headline font-bold">
                 The Path to <span className="text-primary italic">Recovery.</span>
@@ -170,15 +189,15 @@ function App() {
 
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } }, item: transitionVariants.item }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-12 mb-10"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-10 mb-12"
             >
               {[
                 { num: '01', title: 'Report Details', body: 'Answer 9 quick questions about your accident and injuries in our secure AI calculator.' },
                 { num: '02', title: 'AI Valuation', body: 'Our engine cross-references your case with current Nevada legal precedents and insurance payouts.' },
                 { num: '03', title: 'Expert Match', body: 'Get connected with top Nevada attorneys who specialize in maximizing your specific claim type.' },
               ].map(({ num, title, body }) => (
-                <div key={num} className="space-y-3 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/5">
-                  <span className="text-5xl font-headline font-black text-outline/20">{num}</span>
+                <div key={num} className="space-y-4 p-7 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/15 transition-all duration-300">
+                  <span className="text-5xl font-headline font-black text-outline/15">{num}</span>
                   <h4 className="text-lg font-headline font-bold text-on-background">{title}</h4>
                   <p className="text-on-surface-variant text-sm leading-relaxed">{body}</p>
                 </div>
@@ -189,19 +208,20 @@ function App() {
             <div className="text-center">
               <button
                 onClick={() => navigate('/calculator')}
-                className="cta-gradient text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold text-base inline-flex items-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.15)] hover:shadow-[0_0_45px_rgba(164,230,255,0.3)] active:scale-95 transition-all duration-200 group"
+                className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 rounded-[16px] font-headline font-bold text-base inline-flex items-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.15)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
               >
                 Start Free Evaluation
-                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
               </button>
             </div>
           </div>
         </section>
 
-        <section className="py-16 lg:py-24 px-4 lg:px-6">
+        {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
+        <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
-              className="relative p-8 lg:p-12 pb-14 glass-card rounded-3xl border border-outline-variant/10 min-h-[300px] flex flex-col justify-center"
+              className="relative p-8 lg:p-12 pb-14 glass-card rounded-xl border border-white/[0.08] min-h-[300px] flex flex-col justify-center"
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-60px' }}
@@ -209,6 +229,12 @@ function App() {
             >
               <span className="material-symbols-outlined text-primary text-5xl absolute -top-7 left-6 bg-[#111318] px-2" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
               
+              {/* Verified badge */}
+              <div className="flex items-center gap-1.5 mb-5">
+                <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                <span className="text-[11px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
+              </div>
+
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={activeTestimonial}
@@ -253,9 +279,9 @@ function App() {
         </section>
 
         {/* ── BOTTOM CTA BANNER ─────────────────────────────────────────── */}
-        <section className="py-16 lg:py-24 px-4 lg:px-6 bg-surface-container-lowest">
+        <section className="py-20 lg:py-28 px-4 lg:px-8 bg-surface-container-lowest">
           <motion.div
-            className="max-w-2xl mx-auto text-center space-y-6"
+            className="max-w-2xl mx-auto text-center space-y-7"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
@@ -269,18 +295,16 @@ function App() {
             </p>
             <button
               onClick={() => navigate('/calculator')}
-              className="cta-gradient text-on-primary-fixed w-full sm:w-auto px-10 py-5 rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(164,230,255,0.2)] hover:shadow-[0_0_60px_rgba(164,230,255,0.35)] active:scale-95 transition-all duration-200 group"
+              className="cta-gradient cta-shimmer text-on-primary-fixed w-full sm:w-auto px-10 py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_50px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
             >
               Get My Free Estimate
-              <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
             </button>
             <p className="text-xs text-outline">No cost. No commitment. SSL encrypted.</p>
           </motion.div>
         </section>
 
       </main>
-
-      {/* Footer is now handled by the global Layout in main.jsx */}
 
     </div>
   )

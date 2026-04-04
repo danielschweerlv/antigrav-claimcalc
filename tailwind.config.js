@@ -57,16 +57,18 @@ export default {
         "primary-container": "#00d1ff"
       },
       fontFamily: {
-        "headline": ["Space Grotesk", "sans-serif"],
-        "body": ["Manrope", "sans-serif"],
+        "headline": ["Satoshi", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
         "label": ["Inter", "sans-serif"],
-        "sans": ["Manrope", "sans-serif"]
+        "sans": ["Inter", "sans-serif"]
       },
       borderRadius: {
-        "DEFAULT": "0.125rem",
-        "lg": "0.25rem",
-        "xl": "0.5rem",
-        "full": "0.75rem"
+        "sm": "12px",
+        "DEFAULT": "16px",
+        "lg": "20px",
+        "xl": "24px",
+        "2xl": "32px",
+        "full": "9999px"
       },
     },
   },
