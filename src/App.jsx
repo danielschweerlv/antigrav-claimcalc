@@ -150,50 +150,78 @@ function App() {
         </section>
 
         {/* ── TRUSTED SOURCES ──────────────────────────────────── */}
-        <section className="py-14 lg:py-20 px-4 lg:px-8">
+        <section className="pt-16 lg:pt-20 pb-12 lg:pb-16">
           <motion.div
-            className="max-w-5xl mx-auto text-center"
+            className="text-center mb-8 px-5 lg:px-8"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <p className="text-[13px] text-on-surface-variant/40 uppercase tracking-widest font-label font-semibold mb-8 lg:mb-10">
-              Our AI references official Nevada data including
+            {/* Label */}
+            <p style={{ fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)' }} className="uppercase font-semibold">
+              Built on Verified Data
             </p>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-y-8 gap-x-6 lg:gap-x-10 max-w-4xl mx-auto justify-items-center">
-              {[
-                { name: 'nv.gov', src: '/logos/nevada-seal.png', alt: 'State of Nevada Official Seal', url: 'https://nv.gov', imgClass: 'h-8 lg:h-10' },
-                { name: 'google.com', src: '/logos/google-logo.png', alt: 'Google Logo', url: 'https://google.com', imgClass: 'h-5 lg:h-6' },
-                { name: 'lvmpd.com', src: '/logos/lvmpd-badge.png', alt: 'Las Vegas Metropolitan Police Department Badge', url: 'https://lvmpd.com', imgClass: 'h-8 lg:h-10' },
-                { name: 'nhp.nv.gov', src: '/logos/nhp-logo.png', alt: 'Nevada Highway Patrol Logo', url: 'https://nhp.nv.gov', imgClass: 'h-8 lg:h-9' },
-                { name: 'nvcourts.gov', src: '/logos/nvcourts-logo.png', alt: 'Nevada Courts Official Logo', url: 'https://nvcourts.gov', imgClass: 'h-5 lg:h-6' },
-                { name: 'bbb.org', src: '/logos/bbb-logo.svg', alt: 'Better Business Bureau Logo', url: 'https://bbb.org', imgClass: 'h-8 lg:h-10' },
-              ].map(({ name, src, alt, url, imgClass }) => (
-                <a
-                  key={name}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col items-center gap-2"
-                  title={name}
-                >
-                  <img
-                    src={src}
-                    alt={alt}
-                    className={`${imgClass} w-auto object-contain brightness-0 invert opacity-[0.5] group-hover:opacity-100 transition-all duration-300`}
-                    loading="lazy"
-                  />
-                  <span className="text-[10px] text-on-surface-variant/25 group-hover:text-on-surface-variant/50 font-medium transition-colors duration-300">
-                    {name}
-                  </span>
-                </a>
-              ))}
-            </div>
-            <p className="text-[11px] text-on-surface-variant/25 mt-8 lg:mt-10 max-w-lg mx-auto leading-relaxed">
-              Logos shown indicate data sources referenced by our AI — not endorsement or affiliation.
+            {/* Description */}
+            <p style={{ fontSize: '15px', lineHeight: 1.6, maxWidth: '600px', color: 'rgba(255,255,255,0.88)' }} className="mx-auto mt-3">
+              Our AI cross-references official Nevada government records, court data, and law enforcement databases to calculate your estimate.
             </p>
           </motion.div>
+
+          {/* Infinite Scrolling Logo Marquee */}
+          <div
+            className="w-full overflow-hidden"
+            style={{
+              borderTop: '1px solid rgba(255,255,255,0.08)',
+              borderBottom: '1px solid rgba(255,255,255,0.08)',
+              background: 'rgba(255,255,255,0.02)',
+            }}
+          >
+            <div className="marquee-track" style={{ padding: '16px 0' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="flex items-center shrink-0">
+                  {[
+                    { src: '/logos/nevada-flag.svg', alt: 'State of Nevada' },
+                    { src: '/logos/google-color.png', alt: 'Google' },
+                    { src: '/logos/lvmpd-color.png', alt: 'LVMPD' },
+                    { src: '/logos/nhp-color.png', alt: 'Nevada Highway Patrol' },
+                    { src: '/logos/nvcourts-color.png', alt: 'Nevada Courts' },
+                    { src: '/logos/bbb-color.svg', alt: 'Better Business Bureau' },
+                    { src: '/logos/dmv-color.svg', alt: 'Nevada DMV' },
+                    { src: '/logos/ag-color.png', alt: 'Nevada Attorney General' },
+                  ].map(({ src, alt }) => (
+                    <img
+                      key={`${setIdx}-${alt}`}
+                      src={src}
+                      alt={alt}
+                      className="h-9 w-auto object-contain shrink-0"
+                      style={{ margin: '0 60px' }}
+                      loading="eager"
+                      onError={(e) => {
+                        // Replace broken images with a text pill fallback
+                        const pill = document.createElement('span');
+                        pill.textContent = alt;
+                        pill.style.cssText = 'display:inline-flex;align-items:center;height:36px;padding:0 16px;border:1px solid rgba(255,255,255,0.2);border-radius:999px;color:rgba(255,255,255,0.6);font-size:12px;font-weight:500;white-space:nowrap;margin:0 60px;';
+                        e.target.replaceWith(pill);
+                      }}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <motion.p
+            className="text-center mx-auto mt-5 px-5 lg:px-8"
+            style={{ fontSize: '11px', color: 'rgba(255,255,255,0.25)', maxWidth: '700px', lineHeight: 1.6 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            All data sources are publicly available. ClaimCalculator.ai is not affiliated with or endorsed by any of the organizations listed below.
+          </motion.p>
         </section>
 
         {/* ── TRUST STATS ─────────────────────────────────────── */}
