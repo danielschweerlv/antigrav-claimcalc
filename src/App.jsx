@@ -149,6 +149,53 @@ function App() {
           </div>
         </section>
 
+        {/* ── TRUSTED SOURCES ──────────────────────────────────── */}
+        <section className="py-14 lg:py-20 px-4 lg:px-8">
+          <motion.div
+            className="max-w-5xl mx-auto text-center"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
+          >
+            <p className="text-[13px] text-on-surface-variant/40 uppercase tracking-widest font-label font-semibold mb-8 lg:mb-10">
+              Our AI references official Nevada data including
+            </p>
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-y-8 gap-x-6 lg:gap-x-10 max-w-4xl mx-auto justify-items-center">
+              {[
+                { name: 'nv.gov', src: '/logos/nevada-seal.png', alt: 'State of Nevada Official Seal', url: 'https://nv.gov', imgClass: 'h-8 lg:h-10' },
+                { name: 'google.com', src: '/logos/google-logo.png', alt: 'Google Logo', url: 'https://google.com', imgClass: 'h-5 lg:h-6' },
+                { name: 'lvmpd.com', src: '/logos/lvmpd-badge.png', alt: 'Las Vegas Metropolitan Police Department Badge', url: 'https://lvmpd.com', imgClass: 'h-8 lg:h-10' },
+                { name: 'nhp.nv.gov', src: '/logos/nhp-logo.png', alt: 'Nevada Highway Patrol Logo', url: 'https://nhp.nv.gov', imgClass: 'h-8 lg:h-9' },
+                { name: 'nvcourts.gov', src: '/logos/nvcourts-logo.png', alt: 'Nevada Courts Official Logo', url: 'https://nvcourts.gov', imgClass: 'h-5 lg:h-6' },
+                { name: 'bbb.org', src: '/logos/bbb-logo.svg', alt: 'Better Business Bureau Logo', url: 'https://bbb.org', imgClass: 'h-8 lg:h-10' },
+              ].map(({ name, src, alt, url, imgClass }) => (
+                <a
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-2"
+                  title={name}
+                >
+                  <img
+                    src={src}
+                    alt={alt}
+                    className={`${imgClass} w-auto object-contain brightness-0 invert opacity-[0.5] group-hover:opacity-100 transition-all duration-300`}
+                    loading="lazy"
+                  />
+                  <span className="text-[10px] text-on-surface-variant/25 group-hover:text-on-surface-variant/50 font-medium transition-colors duration-300">
+                    {name}
+                  </span>
+                </a>
+              ))}
+            </div>
+            <p className="text-[11px] text-on-surface-variant/25 mt-8 lg:mt-10 max-w-lg mx-auto leading-relaxed">
+              Logos shown indicate data sources referenced by our AI — not endorsement or affiliation.
+            </p>
+          </motion.div>
+        </section>
+
         {/* ── TRUST STATS ─────────────────────────────────────── */}
         <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
