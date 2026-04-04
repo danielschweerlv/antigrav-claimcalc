@@ -39,6 +39,21 @@ const FAULT_OPTIONS = [
   { value: 'Mostly me', label: 'Mostly or entirely my fault' },
 ]
 
+const ACCIDENT_LOCATIONS = [
+  { value: 'Las Vegas Strip', label: 'Las Vegas Strip' },
+  { value: 'Downtown / Fremont Street', label: 'Downtown / Fremont Street' },
+  { value: 'Henderson', label: 'Henderson' },
+  { value: 'North Las Vegas', label: 'North Las Vegas' },
+  { value: 'I-15 Corridor', label: 'I-15 Corridor' },
+  { value: 'US-95 / Spaghetti Bowl', label: 'US-95 / Spaghetti Bowl' },
+  { value: 'Reno / Sparks', label: 'Reno / Sparks' },
+  { value: 'Casino or Hotel Property', label: 'Casino or Hotel Property' },
+  { value: 'Construction Zone', label: 'Construction Zone' },
+  { value: 'Parking Lot or Garage', label: 'Parking Lot or Garage' },
+]
+
+const LOW_OFFER_INSURERS = ['GEICO', 'Allstate', 'Progressive']
+
 const DATE_OPTIONS = [
   { value: 'Less than 30 days ago', label: 'Less than 30 days ago' },
   { value: '1–6 months ago', label: '1–6 months ago' },
@@ -73,7 +88,7 @@ const OTHER_INSURERS = [
   { label: 'They had no insurance', icon: 'no_crash' },
 ]
 
-const TOTAL_STEPS = 9
+const TOTAL_STEPS = 11
 
 // ─── CALCULATION ────────────────────────────────────────────────────────────
 
@@ -89,24 +104,45 @@ function calcSettlement(data) {
   if (injuries.includes('I was not injured')) injScore = 0
   if (injScore === 0 && injuries.length === 0) injScore = 1
 
-  const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
-  const whenMap = { 'Less than 30 days ago': 1.1, '1–6 months ago': 1.0, '6–12 months ago': 0.95, 'Over a year ago': 0.85 }
+  // Fault: use slider percentage if set, otherwise fall back to categorical
+  const faultPct = data.faultPercent ?? 0
+  const faultBarred = faultPct > 50
+  let fM
+  if (faultPct > 0) {
+    fM = faultBarred ? 0 : (100 - faultPct) / 100
+  } else {
+    const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
+    fM = faultMap[data.fault] ?? 0.8
+  }
+
+  const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
 
   // Uninsured other party = UIM claim = harder to collect, slightly lower range
   const otherInsM = (data.otherInsurer === 'They had no insurance' || data.otherInsurer === "Not sure / I don't know") ? 0.7 : 1.0
 
-  const fM = faultMap[data.fault] ?? 0.8
+  // Location modifier: urban high-traffic areas slightly higher
+  const locationMap = {
+    'Las Vegas Strip': 1.1,
+    'Downtown / Fremont Street': 1.05,
+    'I-15 Corridor': 1.05,
+    'US-95 / Spaghetti Bowl': 1.05,
+    'Casino or Hotel Property': 1.08,
+    'Construction Zone': 1.06,
+  }
+  const locM = locationMap[data.accidentLocation] ?? 1.0
+
   const tM = whenMap[data.when] ?? 1.0
   const baseMed = injScore * 8000 + 4000   // proxy for medical costs based on injury severity
   const pain = baseMed * (injScore || 1.5)
   const prop = Math.round(baseMed * 0.35)
-  const base = (baseMed + pain + prop) * fM * tM * otherInsM
+  const base = (baseMed + pain + prop) * fM * tM * otherInsM * locM
 
   return {
-    withLow: Math.max(Math.round(base * 1.4), 5000),
-    withHigh: Math.round(base * 2.8),
-    withoutLow: Math.max(Math.round(base * 0.18), 500),
-    withoutHigh: Math.round(base * 0.38),
+    faultBarred,
+    withLow: faultBarred ? 0 : Math.max(Math.round(base * 1.4), 5000),
+    withHigh: faultBarred ? 0 : Math.round(base * 2.8),
+    withoutLow: faultBarred ? 0 : Math.max(Math.round(base * 0.18), 500),
+    withoutHigh: faultBarred ? 0 : Math.round(base * 0.38),
   }
 }
 
@@ -235,12 +271,12 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step }) {
 function ResultScreen({ data }) {
   const [showCallback, setShowCallback] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [cb, setCb] = useState({ name: '', phone: '', time: 'Morning (8am – 12pm)' })
+  const [cb, setCb] = useState({ name: '', phone: '', time: 'Morning (8am \u2013 12pm)' })
   const res = calcSettlement(data)
   const withAvg = Math.round((res.withLow + res.withHigh) / 2)
   const withoutAvg = Math.round((res.withoutLow + res.withoutHigh) / 2)
   const difference = withAvg - withoutAvg
-  const multiplier = withoutAvg > 0 ? (withAvg / withoutAvg).toFixed(1) : '—'
+  const multiplier = withoutAvg > 0 ? (withAvg / withoutAvg).toFixed(1) : '\u2014'
 
   return (
     <motion.div
@@ -249,6 +285,21 @@ function ResultScreen({ data }) {
       animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       transition={{ type: 'spring', bounce: 0.2, duration: 0.9 }}
     >
+      {/* Fault barred warning */}
+      {res.faultBarred && (
+        <div className="bg-error/10 border border-error/30 rounded-xl p-5 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-error text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
+            <h3 className="text-lg font-headline font-bold text-error">Nevada's 51% Rule Applies</h3>
+          </div>
+          <p className="text-sm text-on-surface-variant leading-relaxed">
+            Based on your estimated fault of {data.faultPercent}%, Nevada law (NRS 41.141) would bar you from recovering damages. When you're more than 50% at fault, your claim value is $0 under the state's modified comparative negligence rule.
+          </p>
+          <p className="text-sm text-on-surface-variant leading-relaxed">
+            That said, fault percentages are often negotiated, and an experienced attorney may be able to build a case for a lower share. It's worth a conversation.
+          </p>
+        </div>
+      )}
       {/* Compare cards */}
       <div className="grid grid-cols-2 gap-3">
         {/* With attorney */}
@@ -394,6 +445,8 @@ export default function CalculatorForm() {
     type: '',
     injuries: [],
     fault: '',
+    faultPercent: 0,
+    accidentLocation: '',
     when: '',
     myInsurer: '',
     otherInsurer: '',
@@ -444,7 +497,7 @@ export default function CalculatorForm() {
         return (
           <>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[8px] bg-primary/[0.08] border border-primary/20 mb-6">
-              <span className="text-[11px] font-label font-semibold text-primary uppercase tracking-[0.05em]">🤖 AI-powered — real Nevada settlement data</span>
+              <span className="text-[11px] font-label font-semibold text-primary uppercase tracking-[0.05em]">Nevada-specific settlement data</span>
             </div>
             <StepHeading title={<>What type of accident <span className="text-primary italic">were you in?</span></>} sub="Select the option that best describes your situation." />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -462,7 +515,7 @@ export default function CalculatorForm() {
       case 2:
         return (
           <>
-            <StepHeading title={<>How were you <span className="text-primary italic">injured</span> in the accident?</>} sub="Check everything that applies — even if minor or not yet officially diagnosed." />
+            <StepHeading title={<>How were you <span className="text-primary italic">injured</span> in the accident?</>} sub="Check everything that applies, even if minor or not yet officially diagnosed." />
             <div className="space-y-4 max-h-72 overflow-y-auto pr-1">
               {INJURY_CATEGORIES.map(cat => (
                 <div key={cat.label}>
@@ -482,7 +535,7 @@ export default function CalculatorForm() {
       case 3:
         return (
           <>
-            <StepHeading title={<>Was the accident <span className="text-primary italic">your fault?</span></>} sub="Nevada follows comparative fault rules — partial fault still allows recovery." />
+            <StepHeading title={<>Was the accident <span className="text-primary italic">your fault?</span></>} sub="Nevada follows comparative fault rules. Partial fault still allows recovery." />
             <div className="grid gap-3">
               {FAULT_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.fault === o.value} onClick={() => set('fault', o.value)}>{o.label}</OptionBtn>
@@ -495,14 +548,44 @@ export default function CalculatorForm() {
       case 4:
         return (
           <>
-            <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations — timing matters." />
-            <div className="grid gap-3">
-              {DATE_OPTIONS.map(o => (
-                <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
-                  <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
-                  {o.label}
-                </OptionBtn>
-              ))}
+            <StepHeading title={<>Your share of <span className="text-primary italic">fault</span></>} sub="In Nevada, your payout gets reduced by your percentage of fault. If you're more than 50% at fault, you get nothing. That's Nevada law (NRS 41.141)." />
+            <div className="space-y-4">
+              <div>
+                <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-3">Estimated Fault Percentage</label>
+                <input
+                  type="range"
+                  min={0} max={100} step={5}
+                  value={data.faultPercent}
+                  onChange={e => set('faultPercent', Number(e.target.value))}
+                  className="w-full h-2 rounded-full appearance-none cursor-pointer accent-primary"
+                  style={{
+                    background: `linear-gradient(to right, #a4e6ff ${data.faultPercent}%, #333539 ${data.faultPercent}%)`,
+                  }}
+                />
+                <div className="flex justify-between mt-2">
+                  <span className="text-xs text-outline">0% (not my fault)</span>
+                  <span className={`text-lg font-headline font-black ${data.faultPercent > 50 ? 'text-error' : 'text-primary'}`}>{data.faultPercent}%</span>
+                  <span className="text-xs text-outline">100%</span>
+                </div>
+              </div>
+
+              {data.faultPercent > 0 && data.faultPercent <= 50 && (
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-on-surface-variant leading-relaxed">
+                  At {data.faultPercent}% fault, your estimated recovery would be reduced by {data.faultPercent}%.
+                </div>
+              )}
+
+              {data.faultPercent > 50 && (
+                <div className="bg-error/10 border border-error/30 rounded-xl p-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
+                    <p className="text-sm font-headline font-bold text-error">Nevada's 51% Rule</p>
+                  </div>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    Under NRS 41.141, if you're more than 50% at fault, you cannot recover damages. Based on your estimate, a court would likely bar your claim. However, fault is often negotiated. An attorney may be able to argue for a lower fault percentage.
+                  </p>
+                </div>
+              )}
             </div>
             <NavButtons onNext={() => next(5)} onBack={() => next(3)} />
           </>
@@ -511,11 +594,11 @@ export default function CalculatorForm() {
       case 5:
         return (
           <>
-            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
-              {MY_INSURERS.map(({ label, icon }) => (
-                <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+            <StepHeading title={<>Where did the accident <span className="text-primary italic">happen?</span></>} sub="Location matters in Nevada. Urban accidents often involve more witnesses, surveillance footage, and higher medical costs, all of which can affect your claim's value." />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {ACCIDENT_LOCATIONS.map(({ value, label }) => (
+                <OptionBtn key={value} selected={data.accidentLocation === value} onClick={() => set('accidentLocation', value)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">location_on</span>
                   <span className="text-xs leading-tight">{label}</span>
                 </OptionBtn>
               ))}
@@ -527,12 +610,12 @@ export default function CalculatorForm() {
       case 6:
         return (
           <>
-            <StepHeading title={<>Do you know the <span className="text-primary italic">other party's insurance?</span></>} sub="This information can significantly affect your claim. Select the best option." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
-              {OTHER_INSURERS.map(({ label, icon }) => (
-                <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
-                  <span className="text-xs leading-tight">{label}</span>
+            <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
+            <div className="grid gap-3">
+              {DATE_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
+                  <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
+                  {o.label}
                 </OptionBtn>
               ))}
             </div>
@@ -543,7 +626,45 @@ export default function CalculatorForm() {
       case 7:
         return (
           <>
-            <StepHeading title={<>Briefly <span className="text-primary italic">describe your accident</span></>} sub="A short summary helps our AI give you a more accurate estimate. No legal jargon needed." />
+            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
+              {MY_INSURERS.map(({ label, icon }) => (
+                <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="text-xs leading-tight">{label}</span>
+                </OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+          </>
+        )
+
+      case 8:
+        return (
+          <>
+            <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your claim is worth. Knowing the company helps estimate negotiation room." />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
+              {OTHER_INSURERS.map(({ label, icon }) => (
+                <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="text-xs leading-tight">{label}</span>
+                </OptionBtn>
+              ))}
+            </div>
+            {data.otherInsurer && LOW_OFFER_INSURERS.includes(data.otherInsurer) && (
+              <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mt-3 text-sm text-on-surface-variant leading-relaxed">
+                <span className="material-symbols-outlined text-secondary text-base align-middle mr-1" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+                {data.otherInsurer} is known for making initial offers well below claim value. An attorney experienced with {data.otherInsurer} claims in Nevada can typically negotiate a significantly higher settlement.
+              </div>
+            )}
+            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
+          </>
+        )
+
+      case 9:
+        return (
+          <>
+            <StepHeading title={<>Briefly <span className="text-primary italic">describe your accident</span></>} sub="A short summary helps give you a more accurate estimate. No legal jargon needed." />
             <div>
               <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-2">Your Details</label>
               <textarea
@@ -554,11 +675,11 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors resize-none"
               />
             </div>
-            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
           </>
         )
 
-      case 8:
+      case 10:
         return (
           <>
             <StepHeading title={<>What's your <span className="text-primary italic">zip code?</span></>} sub="We use this to match you with licensed Nevada attorneys in your area." />
@@ -571,14 +692,14 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-4 text-2xl font-headline font-black tracking-widest outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors"
               />
             </div>
-            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
+            <NavButtons onNext={() => next(11)} onBack={() => next(9)} />
           </>
         )
 
-      case 9:
+      case 11:
         return (
           <>
-            <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full claim value — takes 10 seconds." />
+            <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full claim value. Takes 10 seconds." />
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 {[
@@ -603,7 +724,7 @@ export default function CalculatorForm() {
                 </div>
               ))}
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(8)} />
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(10)} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>

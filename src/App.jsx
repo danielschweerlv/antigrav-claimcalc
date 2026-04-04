@@ -69,20 +69,20 @@ function App() {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 lg:mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse flex-shrink-0"></span>
-                <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Free AI-Powered Claim Analysis</span>
+                <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Nevada Personal Injury Calculator</span>
               </div>
 
               {/* Headline — stronger size contrast */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-black text-on-background leading-[0.95] tracking-tight lg:mb-7">
                 Insurance companies{' '}
                 <br className="hidden lg:block" />
-                have lawyers.{' '}
+                already know your number.{' '}
                 <br />
-                <span className="text-primary italic">Now you have AI.</span>
+                <span className="text-primary italic">Now you do too.</span>
               </h1>
 
               <p className="text-base sm:text-lg text-on-surface-variant/85 max-w-md mx-auto lg:mx-0 leading-relaxed lg:mb-9">
-                Answer 9 quick questions. Our AI cross-references thousands of Nevada settlements to show you what you're really owed.
+                Find out what your Nevada injury case is actually worth before you talk to an adjuster, sign anything, or settle for less than you should.
               </p>
 
               {/* Social proof — avatars */}
@@ -107,10 +107,10 @@ function App() {
                   onClick={() => navigate('/calculator')}
                   className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 sm:py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
                 >
-                  Check My Claim Free
+                  See What Your Claim Is Worth
                   <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
                 </button>
-                <p className="text-xs text-outline self-center text-center">Free · 2 min · No obligation</p>
+                <p className="text-xs text-outline self-center text-center">No cost. No obligation. Built for Nevada injury claims.</p>
               </div>
             </AnimatedGroup>
 
@@ -247,6 +247,96 @@ function App() {
           </div>
         </section>
 
+        {/* ── NEVADA CASE TYPES ──────────────────────────────────────── */}
+        <section className="py-20 lg:py-28 px-4 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <AnimatedGroup
+              variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
+              className="text-center space-y-4 mb-16"
+            >
+              <h2 className="text-3xl lg:text-5xl font-headline font-bold">
+                Common Nevada <span className="text-primary italic">Injury Claims</span>
+              </h2>
+              <p className="text-on-surface-variant text-base lg:text-lg max-w-2xl mx-auto">
+                Nevada roads, casinos, and construction zones create risks you won't find in other states. Here's what claims in your area typically look like.
+              </p>
+            </AnimatedGroup>
+
+            <AnimatedGroup
+              variants={{ container: { visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }, item: transitionVariants.item }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5"
+            >
+              {[
+                {
+                  icon: 'directions_car',
+                  title: 'Car Accidents',
+                  desc: 'The most common injury claim in Nevada. Rear-end collisions, intersection crashes, and freeway pileups on I-15 and US-95.',
+                  range: '$5,000 - $150,000+',
+                },
+                {
+                  icon: 'local_taxi',
+                  title: 'Uber & Lyft Accidents',
+                  desc: 'Las Vegas is one of the busiest rideshare markets in the country. Active trips carry up to $1M in commercial coverage.',
+                  range: '$15,000 - $100,000+',
+                },
+                {
+                  icon: 'directions_walk',
+                  title: 'Strip & Pedestrian',
+                  desc: 'The Las Vegas Strip sees some of the highest pedestrian traffic in the U.S. These claims tend to involve severe injuries.',
+                  range: '$30,000 - $500,000+',
+                },
+                {
+                  icon: 'casino',
+                  title: 'Casino & Hotel Injuries',
+                  desc: 'Wet floors, dim lighting, escalator malfunctions. Nevada premises liability law holds property owners accountable.',
+                  range: '$10,000 - $250,000+',
+                },
+                {
+                  icon: 'two_wheeler',
+                  title: 'Motorcycle Accidents',
+                  desc: 'Year-round riding means year-round risk. Motorcyclists face severe injuries and higher medical costs.',
+                  range: '$25,000 - $300,000+',
+                },
+                {
+                  icon: 'local_shipping',
+                  title: 'Truck & 18-Wheeler',
+                  desc: 'I-15 between Las Vegas and LA is one of the heaviest commercial trucking corridors in the West.',
+                  range: '$50,000 - $1,000,000+',
+                },
+                {
+                  icon: 'construction',
+                  title: 'Construction Zone Crashes',
+                  desc: 'Narrowed lanes, sudden detours, and poor signage. Liability can fall on drivers, contractors, or government agencies.',
+                  range: '$15,000 - $200,000+',
+                },
+                {
+                  icon: 'local_parking',
+                  title: 'Parking Lot & Garage',
+                  desc: 'Casino garages, mall lots, and downtown structures. Low visibility and distracted drivers cause more damage than expected.',
+                  range: '$5,000 - $75,000+',
+                },
+              ].map(({ icon, title, desc, range }) => (
+                <div key={title} className="p-6 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/20 transition-all duration-300 flex flex-col gap-3 group">
+                  <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
+                  <h4 className="text-base font-headline font-bold text-on-background">{title}</h4>
+                  <p className="text-xs text-on-surface-variant leading-relaxed flex-1">{desc}</p>
+                  <p className="text-sm font-headline font-bold text-[#4ADE80] mt-auto pt-2 border-t border-white/[0.06]">{range}</p>
+                </div>
+              ))}
+            </AnimatedGroup>
+
+            <div className="text-center mt-10">
+              <button
+                onClick={() => navigate('/calculator')}
+                className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 rounded-[16px] font-headline font-bold text-base inline-flex items-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.15)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
+              >
+                See What Your Claim Is Worth
+                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
         {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
         <section className="py-20 lg:py-32 px-4 lg:px-8 bg-surface-container-lowest">
           <div className="max-w-7xl mx-auto">
@@ -267,7 +357,7 @@ function App() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-10 mb-12"
             >
               {[
-                { num: '01', title: 'Report Details', body: 'Answer 9 quick questions about your accident and injuries in our secure AI calculator.' },
+                { num: '01', title: 'Report Details', body: 'Answer a few quick questions about your accident and injuries in our secure calculator.' },
                 { num: '02', title: 'AI Valuation', body: 'Our engine cross-references your case with current Nevada legal precedents and insurance payouts.' },
                 { num: '03', title: 'Expert Match', body: 'Get connected with top Nevada attorneys who specialize in maximizing your specific claim type.' },
               ].map(({ num, title, body }) => (
@@ -372,7 +462,7 @@ function App() {
               onClick={() => navigate('/calculator')}
               className="cta-gradient cta-shimmer text-on-primary-fixed w-full sm:w-auto px-10 py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_50px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
             >
-              Get My Free Estimate
+              See What Your Claim Is Worth
               <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
             </button>
             <p className="text-xs text-outline">No cost. No commitment. SSL encrypted.</p>

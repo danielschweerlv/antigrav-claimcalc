@@ -66,7 +66,7 @@ export default function CalculatorPage() {
             What is your claim <span className="text-primary italic">worth?</span>
           </h1>
           <p className="text-sm text-on-surface-variant max-w-sm mx-auto">
-            Answer 9 questions and our AI calculates your Nevada settlement range.
+            Answer a few quick questions and get your Nevada settlement estimate.
           </p>
         </AnimatedGroup>
 

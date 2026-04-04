@@ -79,6 +79,40 @@
     will-change: transform;
   }
 
+  /* Range slider thumb */
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #a4e6ff;
+    cursor: pointer;
+    border: 3px solid #111318;
+    box-shadow: 0 0 8px rgba(164, 230, 255, 0.3);
+    transition: box-shadow 0.2s;
+  }
+  input[type='range']::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 16px rgba(164, 230, 255, 0.5);
+  }
+  input[type='range']::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #a4e6ff;
+    cursor: pointer;
+    border: 3px solid #111318;
+    box-shadow: 0 0 8px rgba(164, 230, 255, 0.3);
+  }
+  input[type='range']::-webkit-slider-runnable-track {
+    border-radius: 9999px;
+  }
+  input[type='range']::-moz-range-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: #333539;
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

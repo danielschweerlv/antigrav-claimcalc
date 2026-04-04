@@ -22,8 +22,8 @@ const Header = () => {
           <span className="hidden sm:inline text-2xl lg:text-3xl font-black tracking-tighter text-on-background font-headline leading-none">
             ClaimCalculator<span className="text-primary">.ai</span>
           </span>
-          <span className="sm:hidden text-xl font-black tracking-tighter text-on-background font-headline leading-none">
-            Claim<span className="text-primary">Calc</span>
+          <span className="sm:hidden text-[clamp(0.875rem,3.5vw,1.25rem)] font-black tracking-tighter text-on-background font-headline leading-none">
+            ClaimCalc<span className="text-primary">.ai</span>
           </span>
         </div>
 
