@@ -65,6 +65,20 @@ export default function Footer() {
             © {new Date().getFullYear()} ClaimCalculator.ai. All Rights Reserved.
           </p>
         </div>
+
+        <div style={{ marginTop: '20px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+          <p style={{
+            fontSize: '11px',
+            color: 'rgba(255, 255, 255, 0.28)',
+            textAlign: 'center',
+            maxWidth: '720px',
+            margin: '0 auto',
+            padding: '16px 24px 24px',
+            lineHeight: 1.6,
+          }}>
+            Data sources referenced by ClaimCalculator.ai include publicly available records from Nevada state and local government agencies. ClaimCalculator.ai is not affiliated with, endorsed by, or sponsored by any government agency, law enforcement organization, or third-party entity referenced on this site. This tool provides general estimates only and does not constitute legal advice.
+          </p>
+        </div>
       </div>
     </footer>
   )
