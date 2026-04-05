@@ -18,14 +18,10 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-4 max-w-sm text-center lg:text-left">
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <video
+              <img
                 className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0 rounded-lg"
-                src="/fading_color_dark.mp4"
-                poster="/fading_color_dark_poster.png"
-                autoPlay
-                loop
-                muted
-                playsInline
+                src="/cross_logo_final.png"
+                alt=""
                 style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}
                 aria-hidden="true"
               />

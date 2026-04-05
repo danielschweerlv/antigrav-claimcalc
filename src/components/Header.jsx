@@ -99,16 +99,12 @@ const Header = () => {
             aria-label="Open menu"
             aria-expanded={isOpen}
           >
-            <div className="sparkle-container w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 relative">
-              {/* Animated + sign video */}
-              <video
+            <div className="sparkle-container w-9 h-9 sm:w-[42px] sm:h-[42px] lg:w-12 lg:h-12 relative">
+              {/* Animated + sign */}
+              <img
                 className="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-110"
-                src="/fading_color_dark.mp4"
-                poster="/fading_color_dark_poster.png"
-                autoPlay
-                loop
-                muted
-                playsInline
+                src="/cross_logo_final.png"
+                alt=""
                 style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}
               />
               {/* Sparkle particles */}
@@ -129,12 +125,12 @@ const Header = () => {
             <img
               src="/final_text_logo_4k.png"
               alt="ClaimCalculator.ai"
-              className="hidden sm:inline h-10 lg:h-12 w-auto object-contain"
+              className="hidden sm:inline h-[30px] lg:h-9 w-auto object-contain"
             />
             <img
               src="/final_text_logo_4k.png"
               alt="ClaimCalculator.ai"
-              className="sm:hidden h-6 w-auto object-contain"
+              className="sm:hidden h-[18px] w-auto object-contain"
               style={{ maxWidth: 'calc(100vw - 170px)' }}
             />
           </div>
