@@ -16,7 +16,7 @@ const Header = () => {
         >
           {/* Plus icon with blue-to-white gradient via CSS mask */}
           <div
-            className="w-11 h-11 lg:w-12 lg:h-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
+            className="w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 flex-shrink-0 transition-transform duration-300 group-hover:scale-105"
             style={{
               background: 'linear-gradient(to top right, #00d1ff, #ffffff)',
               WebkitMaskImage: 'url(/claimcalculator_plus_icon.png)',
@@ -35,12 +35,12 @@ const Header = () => {
           <img
             src="/claimcalculator_hex_font_dark_v2.jpg"
             alt="ClaimCalculator.ai"
-            className="hidden sm:inline h-7 lg:h-8 w-auto object-contain"
+            className="hidden sm:inline h-8 lg:h-10 w-auto object-contain"
           />
           <img
             src="/claimcalculator_hex_font_dark_v2.jpg"
             alt="ClaimCalculator.ai"
-            className="sm:hidden h-5 w-auto object-contain"
+            className="sm:hidden h-7 w-auto object-contain"
           />
         </div>
 
