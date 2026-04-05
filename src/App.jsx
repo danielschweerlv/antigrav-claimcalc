@@ -181,10 +181,8 @@ function App() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="flex items-center shrink-0">
                   {[
-                    { src: '/logos/nevada-flag.svg', alt: 'State of Nevada' },
                     { src: '/logos/google-color.png', alt: 'Google' },
                     { src: '/logos/lvmpd-color.png', alt: 'LVMPD' },
-
                     { src: '/logos/nvcourts-color.png', alt: 'Nevada Courts' },
                     { src: '/logos/bbb-color.svg', alt: 'Better Business Bureau' },
                     { src: '/logos/dmv-color.svg', alt: 'Nevada DMV' },
@@ -197,14 +195,14 @@ function App() {
                       key={`${setIdx}-${alt}`}
                       src={src}
                       alt={alt}
-                      className="h-9 w-auto object-contain shrink-0"
-                      style={{ margin: '0 60px' }}
+                      className="h-14 w-auto object-contain shrink-0"
+                      style={{ margin: '0 64px' }}
                       loading="eager"
                       onError={(e) => {
                         // Replace broken images with a text pill fallback
                         const pill = document.createElement('span');
                         pill.textContent = alt;
-                        pill.style.cssText = 'display:inline-flex;align-items:center;height:36px;padding:0 16px;border:1px solid rgba(255,255,255,0.2);border-radius:999px;color:rgba(255,255,255,0.6);font-size:12px;font-weight:500;white-space:nowrap;margin:0 60px;';
+                        pill.style.cssText = 'display:inline-flex;align-items:center;height:56px;padding:0 16px;border:1px solid rgba(255,255,255,0.2);border-radius:999px;color:rgba(255,255,255,0.6);font-size:14px;font-weight:500;white-space:nowrap;margin:0 64px;';
                         e.target.replaceWith(pill);
                       }}
                     />
