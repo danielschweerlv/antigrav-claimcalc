@@ -15,18 +15,18 @@ const rights = [
   {
     icon: 'verified_user',
     num: '01',
-    title: 'Right to Have Your Valid Claim Honored',
-    summary: 'Claim denials should reflect the facts — not internal performance goals.',
-    body: 'According to the AAJ report, some insurers have allegedly denied valid claims and implemented internal performance metrics tied to claim denials. If your claim was denied without a clear, documented reason, you have the right to challenge that decision with the help of a licensed attorney.',
-    tag: 'Claim Denial',
+    title: 'Right to Have Your Valid Case Honored',
+    summary: 'Case denials should reflect the facts — not internal performance goals.',
+    body: 'According to the AAJ report, some insurers have allegedly denied valid cases and implemented internal performance metrics tied to case denials. If your case was denied without a clear, documented reason, you have the right to challenge that decision with the help of a licensed attorney.',
+    tag: 'Case Denial',
   },
   {
     icon: 'timer',
     num: '02',
-    title: 'Right to Timely Claims Processing',
+    title: 'Right to Timely Case Processing',
     summary: 'You should not be financially harmed by deliberate delays.',
-    body: "Many insurance companies have been reported to take significant time to review and process claims. Some investigations suggest these delays are not always accidental. Nevada law sets expectations for how quickly insurers must acknowledge and act on claims — you have the right to hold them to that standard.",
-    tag: 'Claims Delay',
+    body: "Many insurance companies have been reported to take significant time to review and process cases. Some investigations suggest these delays are not always accidental. Nevada law sets expectations for how quickly insurers must acknowledge and act on cases — you have the right to hold them to that standard.",
+    tag: 'Case Delay',
   },
   {
     icon: 'menu_book',
@@ -48,8 +48,8 @@ const rights = [
     icon: 'cancel',
     num: '05',
     title: 'Right to Policy Security When You Need It Most',
-    summary: "Filing a claim shouldn't put your coverage at risk.",
-    body: "Some insurers have been known to rescind (cancel) policies under certain circumstances when claim costs increase. While insurers have limited legal grounds to do this, it can leave claimants in a vulnerable position at exactly the wrong moment. An attorney can help you understand whether a rescission is legally justified.",
+    summary: "Filing a case shouldn't put your coverage at risk.",
+    body: "Some insurers have been known to rescind (cancel) policies under certain circumstances when case costs increase. While insurers have limited legal grounds to do this, it can leave you in a vulnerable position at exactly the wrong moment. An attorney can help you understand whether a rescission is legally justified.",
     tag: 'Rescission',
   },
   {
@@ -57,7 +57,7 @@ const rights = [
     num: '06',
     title: 'Right to Continued Coverage Without Retaliation',
     summary: 'Asking questions about your policy should not cost you your coverage.',
-    body: "The AAJ report highlights cases where insurers have chosen not to renew policies in the period following a claim inquiry — even before a formal claim was filed. In Nevada, this type of retaliation may be actionable. You have the right to ask questions without fear of losing your coverage.",
+    body: "The AAJ report highlights cases where insurers have chosen not to renew policies in the period following a case inquiry — even before a formal case was filed. In Nevada, this type of retaliation may be actionable. You have the right to ask questions without fear of losing your coverage.",
     tag: 'Non-Renewal',
   },
 ]
@@ -78,14 +78,14 @@ export default function YourRightsPage() {
           <AnimatedGroup variants={transitionVariants} className="text-center pt-12 pb-10 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tertiary/10 border border-tertiary/20">
               <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse flex-shrink-0" />
-              <span className="text-xs font-label font-semibold text-tertiary uppercase tracking-widest">Nevada Claimant Rights</span>
+              <span className="text-xs font-label font-semibold text-tertiary uppercase tracking-widest">Nevada Policyholder Rights</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background leading-tight max-w-3xl mx-auto">
               Understand the Tactics Insurance Companies Use That May{' '}
-              <span className="text-tertiary italic">Impact Claim Settlements</span>
+              <span className="text-tertiary italic">Impact Case Settlements</span>
             </h1>
             <p className="text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-              The following rights are drawn from documented research and industry analysis. Knowing them can change the outcome of your claim.
+              The following rights are drawn from documented research and industry analysis. Knowing them can change the outcome of your case.
             </p>
           </AnimatedGroup>
 
@@ -106,7 +106,7 @@ export default function YourRightsPage() {
                 <span className="italic text-on-surface-variant">"Tricks of the Trade: How Insurance Companies Deny, Delay, Confuse, and Refuse"</span>
               </p>
               <p className="text-xs text-outline leading-relaxed">
-                This report identifies patterns and alleged practices within the insurance industry that may negatively impact claimants. The six rights below are based directly on its findings.
+                This report identifies patterns and alleged practices within the insurance industry that may negatively impact policyholders. The six rights below are based directly on its findings.
               </p>
             </div>
           </motion.div>
@@ -168,7 +168,7 @@ export default function YourRightsPage() {
                 Knowledge is your first line of defense.
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">
-                Start by understanding what your claim is actually worth — before you speak to a single insurance adjuster.
+                Start by understanding what your case is actually worth — before you speak to a single insurance adjuster.
               </p>
               <button
                 onClick={() => navigate('/calculator')}

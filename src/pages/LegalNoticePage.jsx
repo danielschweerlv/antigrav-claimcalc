@@ -16,13 +16,13 @@ const stateNotices = [
     state: 'Nevada',
     icon: 'location_on',
     highlight: true,
-    content: 'In Nevada, attorneys must be licensed by the State Bar of Nevada to practice law in the state. ClaimCalculator.ai does not verify or endorse any particular attorney\'s qualifications beyond confirming their ability to advertise. Users should conduct their own due diligence before hiring legal counsel. Nevada has a 2-year statute of limitations for personal injury claims — only a licensed Nevada attorney can advise you on deadlines applicable to your specific case.',
+    content: 'In Nevada, attorneys must be licensed by the State Bar of Nevada to practice law in the state. ClaimCalculator.ai does not verify or endorse any particular attorney\'s qualifications beyond confirming their ability to advertise. Users should conduct their own due diligence before hiring legal counsel. Nevada has a 2-year statute of limitations for personal injury cases — only a licensed Nevada attorney can advise you on deadlines applicable to your specific case.',
   },
   {
     state: 'California',
     icon: 'gavel',
     highlight: false,
-    content: 'California licensed attorneys participate in a joint advertising program. Making a false or fraudulent worker\'s compensation claim is a felony subject to up to five years in prison or a fine of $150,000 or double the value of the fraud, whichever is greater, or by both.',
+    content: 'California licensed attorneys participate in a joint advertising program. Making a false or fraudulent worker\'s compensation case is a felony subject to up to five years in prison or a fine of $150,000 or double the value of the fraud, whichever is greater, or by both.',
   },
   {
     state: 'New York',
@@ -34,7 +34,7 @@ const stateNotices = [
     state: 'Florida',
     icon: 'gavel',
     highlight: false,
-    content: 'In Florida, ClaimCalculator.ai is a qualified provider, not a law firm. Any person who knowingly files a false or fraudulent claim for payment of a loss will incur a crime and may be subject to fines and jail time. You are not responsible for your own costs, unless compensation is recovered, except where case-related costs or reductions from the recovery amount apply.',
+    content: 'In Florida, ClaimCalculator.ai is a qualified provider, not a law firm. Any person who knowingly files a false or fraudulent case for payment of a loss will incur a crime and may be subject to fines and jail time. You are not responsible for your own costs, unless compensation is recovered, except where case-related costs or reductions from the recovery amount apply.',
   },
 ]
 
@@ -84,7 +84,7 @@ export default function LegalNoticePage() {
               {
                 icon: 'schedule',
                 title: 'Time-Sensitive Legal Information',
-                body: 'Some of the information on this website discusses time-sensitive legal information, such as statutes of limitation. Laws change, and no representation is made as to the continued accuracy of information previously published on this site. Only a licensed attorney can advise you regarding any deadlines, statutory requirements, or other limits on your claims applicable to your specific case. ClaimCalculator.ai expressly advises you not to rely on any such information on this website as a substitute for legal counsel.',
+                body: 'Some of the information on this website discusses time-sensitive legal information, such as statutes of limitation. Laws change, and no representation is made as to the continued accuracy of information previously published on this site. Only a licensed attorney can advise you regarding any deadlines, statutory requirements, or other limits on your cases applicable to your specific case. ClaimCalculator.ai expressly advises you not to rely on any such information on this website as a substitute for legal counsel.',
               },
               {
                 icon: 'star_half',

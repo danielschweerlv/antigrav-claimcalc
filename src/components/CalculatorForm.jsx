@@ -291,7 +291,7 @@ function ResultScreen({ data }) {
             <h3 className="text-lg font-headline font-bold text-error">Nevada's 51% Rule Applies</h3>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Based on your fault assessment, Nevada law (NRS 41.141) may significantly limit your ability to recover damages. When you're more than 50% at fault, your claim value is $0 under the state's modified comparative negligence rule.
+            Based on your fault assessment, Nevada law (NRS 41.141) may significantly limit your ability to recover damages. When you're more than 50% at fault, your case value is $0 under the state's modified comparative negligence rule.
           </p>
           <p className="text-sm text-on-surface-variant leading-relaxed">
             That said, fault percentages are often negotiated, and an experienced attorney may be able to build a case for a lower share. It's worth a conversation.
@@ -340,7 +340,7 @@ function ResultScreen({ data }) {
 
       {/* Note */}
       <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-on-surface-variant leading-relaxed">
-        <span className="text-primary font-semibold">Nevada claimants represented by an attorney recover an average of {multiplier}x more.</span>{' '}
+        <span className="text-primary font-semibold">Nevada residents represented by an attorney recover an average of {multiplier}x more.</span>{' '}
         Insurance companies settle fast and low when there's no attorney involved — because they know you don't know your real number.
       </div>
 
@@ -348,7 +348,7 @@ function ResultScreen({ data }) {
       <div className="bg-surface-container rounded-xl border border-outline-variant/10 p-5 space-y-4">
         <div>
           <h3 className="text-lg font-headline font-bold text-on-background mb-1">Wait — you're not done yet.</h3>
-          <p className="text-sm text-on-surface-variant">The most important step is next. A claim specialist will reach out to:</p>
+          <p className="text-sm text-on-surface-variant">The most important step is next. A case specialist will reach out to:</p>
         </div>
         <ul className="space-y-2">
           {[
@@ -572,7 +572,7 @@ export default function CalculatorForm() {
       case 4:
         return (
           <>
-            <StepHeading title={<>Were you involved in an accident with an <span className="text-primary italic">electric vehicle (EV)?</span></>} sub="EV accidents can involve unique factors like battery fires, autopilot systems, and manufacturer liability that may affect your claim." />
+            <StepHeading title={<>Were you involved in an accident with an <span className="text-primary italic">electric vehicle (EV)?</span></>} sub="EV accidents can involve unique factors like battery fires, autopilot systems, and manufacturer liability that may affect your case." />
             <div className="grid gap-3">
               {EV_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.evInvolved === o.value} onClick={() => set('evInvolved', o.value)}>
@@ -636,7 +636,7 @@ export default function CalculatorForm() {
       case 8:
         return (
           <>
-            <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your claim is worth. Knowing the company helps estimate negotiation room." />
+            <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your case is worth. Knowing the company helps estimate negotiation room." />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {OTHER_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
@@ -648,7 +648,7 @@ export default function CalculatorForm() {
             {data.otherInsurer && LOW_OFFER_INSURERS.includes(data.otherInsurer) && (
               <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mt-3 text-sm text-on-surface-variant leading-relaxed">
                 <span className="material-symbols-outlined text-secondary text-base align-middle mr-1" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
-                {data.otherInsurer} is known for making initial offers well below claim value. An attorney experienced with {data.otherInsurer} claims in Nevada can typically negotiate a significantly higher settlement.
+                {data.otherInsurer} is known for making initial offers well below case value. An attorney experienced with {data.otherInsurer} cases in Nevada can typically negotiate a significantly higher settlement.
               </div>
             )}
             <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
@@ -693,7 +693,7 @@ export default function CalculatorForm() {
       case 11:
         return (
           <>
-            <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full claim value. Takes 10 seconds." />
+            <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full case value. Takes 10 seconds." />
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
@@ -826,7 +826,7 @@ export default function CalculatorForm() {
               playsInline
             />
           </div>
-          <p className="text-base text-on-surface-variant">Our AI is analyzing your claim...</p>
+          <p className="text-base text-on-surface-variant">Our AI is analyzing your case...</p>
           <p className="text-sm text-outline">Cross-referencing Nevada settlement data and injury profiles</p>
         </motion.div>
       )}

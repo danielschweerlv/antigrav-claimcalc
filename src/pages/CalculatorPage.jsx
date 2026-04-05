@@ -17,7 +17,7 @@ const transitionVariants = {
 const faqs = [
   {
     q: "How does this AI Case Calculator work?",
-    a: "Our proprietary AI Case Calculator helps car accident victims understand the potential value of their claim before talking to an insurance company or hiring a lawyer. By answering a few quick questions about your accident, you'll receive an instant estimate based on real settlement data and AI-powered analysis.\n\nTrained on thousands of verified cases, the calculator identifies similar accidents and predicts a fair compensation range. This gives users transparency and confidence when dealing with insurance — ensuring they don't accept lowball offers."
+    a: "Our proprietary AI Case Calculator helps car accident victims understand the potential value of their case before talking to an insurance company or hiring a lawyer. By answering a few quick questions about your accident, you'll receive an instant estimate based on real settlement data and AI-powered analysis.\n\nTrained on thousands of verified cases, the calculator identifies similar accidents and predicts a fair compensation range. This gives users transparency and confidence when dealing with insurance — ensuring they don't accept lowball offers."
   },
   {
     q: "What compensation or damages can I recover?",
@@ -25,27 +25,27 @@ const faqs = [
   },
   {
     q: "Can I trust my insurance to handle all this for me?",
-    a: "Insurance carriers are trained to minimize payouts. Handling a claim without an attorney often leads to recovering only obvious items, accepting early lowball offers, undervaluing pain/suffering, and overlooking claims for diminished value."
+    a: "Insurance carriers are trained to minimize payouts. Handling a case without an attorney often leads to recovering only obvious items, accepting early lowball offers, undervaluing pain/suffering, and overlooking cases for diminished value."
   },
   {
     q: "Is it best to speak with a lawyer after an accident?",
-    a: "A car accident attorney helps you navigate complex claims, ensuring you face insurance companies on an equal footing. They work to maximize compensation, handle denied/underpaid claims, negotiate directly with the insurer, and litigate if necessary. Initial consultations are completely free, and you're under no obligation to hire them unless it's the right fit."
+    a: "A car accident attorney helps you navigate complex cases, ensuring you face insurance companies on an equal footing. They work to maximize compensation, handle denied/underpaid cases, negotiate directly with the insurer, and litigate if necessary. Initial consultations are completely free, and you're under no obligation to hire them unless it's the right fit."
   },
   {
-    q: "What is the typical timeline for claim resolution and payment?",
+    q: "What is the typical timeline for case resolution and payment?",
     a: "The timeline varies based on injuries and fault disputes. Quick, straightforward cases with minor injuries usually settle in 1 to 3 months. Injury cases with longer treatment typically take 3 to 12+ months because settlement timing depends on your medical stabilization."
   },
   {
-    q: "Do I need a copy of my accident report to file a claim?",
-    a: "You do not technically need a copy to open a claim, but having it makes the process smoother. It usually becomes necessary when fault is disputed, injuries appear later, or you are pursuing compensation beyond immediate quick repairs. The police report is an objective account that insurance adjusters rely on."
+    q: "Do I need a copy of my accident report to file a case?",
+    a: "You do not technically need a copy to open a case, but having it makes the process smoother. It usually becomes necessary when fault is disputed, injuries appear later, or you are pursuing compensation beyond immediate quick repairs. The police report is an objective account that insurance adjusters rely on."
   },
   {
-    q: "How do I make a diminished value claim for my car?",
-    a: "Most people don't realize they can claim diminished value, and insurance companies rarely offer it unless you ask. First confirm your state allows it (Nevada does), file the property damage claim, and gather evidence that the vehicle is now worth less even after repairs."
+    q: "How do I make a diminished value case for my car?",
+    a: "Most people don't realize they can claim diminished value, and insurance companies rarely offer it unless you ask. First confirm your state allows it (Nevada does), file the property damage case, and gather evidence that the vehicle is now worth less even after repairs."
   },
   {
     q: "What are the best steps to take after a car accident?",
-    a: "1. Safety First: Move to a safe location if possible.\n2. Call for Help: Dial 911 if there are injuries. Report the accident to law enforcement.\n3. Exchange info: Get names, contact, insurance, and license plates.\n4. Document the scene: Take photos of damages and the scene.\n5. Wait to speak to insurance until you understand the true value of your claim."
+    a: "1. Safety First: Move to a safe location if possible.\n2. Call for Help: Dial 911 if there are injuries. Report the accident to law enforcement.\n3. Exchange info: Get names, contact, insurance, and license plates.\n4. Document the scene: Take photos of damages and the scene.\n5. Wait to speak to insurance until you understand the true value of your case."
   }
 ]
 
@@ -63,7 +63,7 @@ export default function CalculatorPage() {
             <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Free · 2 min · No obligation</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-headline font-bold text-on-background leading-tight">
-            What is your claim <span className="text-primary italic">worth?</span>
+            What is your case <span className="text-primary italic">worth?</span>
           </h1>
           <p className="text-sm text-on-surface-variant max-w-sm mx-auto">
             Answer a few quick questions and get your Nevada settlement estimate.
@@ -99,7 +99,7 @@ export default function CalculatorPage() {
                   "Assesses total compensation available",
                   "Shows you the best next steps to take",
                   "Provides access to legal resources that protect your interests",
-                  "Helps you receive the maximum compensation for your claim"
+                  "Helps you receive the maximum compensation for your case"
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-sm text-on-surface-variant items-start">
                     <span className="material-symbols-outlined text-[#4ADE80] text-lg flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
@@ -140,7 +140,7 @@ export default function CalculatorPage() {
         >
           <div className="text-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-headline font-bold text-on-background mb-3">Frequently Asked <span className="text-primary italic">Questions</span></h2>
-            <p className="text-sm font-body text-on-surface-variant">Everything you need to know about your claim and the settlement process.</p>
+            <p className="text-sm font-body text-on-surface-variant">Everything you need to know about your case and the settlement process.</p>
           </div>
           
           <FaqAccordion items={faqs} />
