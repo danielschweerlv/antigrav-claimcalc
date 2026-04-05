@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import AIChipLogo from './ui/AIChipLogo'
+import AnimatedCross from './ui/AnimatedCross'
 
 export default function Footer() {
   const navigate = useNavigate()
@@ -18,15 +19,11 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-4 max-w-sm text-center lg:text-left">
             <div className="flex items-center gap-3 justify-center lg:justify-start">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}>
+                <AnimatedCross className="w-full h-full" />
+              </div>
               <img
-                className="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0 rounded-lg"
-                src="/cross_logo_final.png"
-                alt=""
-                style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}
-                aria-hidden="true"
-              />
-              <img
-                src="/final_text_logo_4k.png"
+                src="/logos/claimcalculator-wordmark.png"
                 alt="ClaimCalculator.ai"
                 className="h-7 sm:h-8 w-auto object-contain"
               />

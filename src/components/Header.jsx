@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AnimatedCross from './ui/AnimatedCross';
 
 const DROPDOWN_TABS = [
   { id: 'navigation', label: 'Navigation' },
@@ -99,21 +100,8 @@ const Header = () => {
             aria-label="Open menu"
             aria-expanded={isOpen}
           >
-            <div className="sparkle-container w-9 h-9 sm:w-[42px] sm:h-[42px] lg:w-12 lg:h-12 relative">
-              {/* Animated + sign */}
-              <img
-                className="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-110"
-                src="/cross_logo_final.png"
-                alt=""
-                style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}
-              />
-              {/* Sparkle particles */}
-              <span className="sparkle sparkle-1" />
-              <span className="sparkle sparkle-2" />
-              <span className="sparkle sparkle-3" />
-              <span className="sparkle sparkle-4" />
-              <span className="sparkle sparkle-5" />
-              <span className="sparkle sparkle-6" />
+            <div className="w-9 h-9 sm:w-[42px] sm:h-[42px] lg:w-12 lg:h-12 relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
+              <AnimatedCross className="w-full h-full" />
             </div>
           </button>
 
@@ -123,12 +111,12 @@ const Header = () => {
             onClick={() => { window.scrollTo(0, 0); navigate('/'); }}
           >
             <img
-              src="/final_text_logo_4k.png"
+              src="/logos/claimcalculator-wordmark.png"
               alt="ClaimCalculator.ai"
               className="hidden sm:inline h-[30px] lg:h-9 w-auto object-contain"
             />
             <img
-              src="/final_text_logo_4k.png"
+              src="/logos/claimcalculator-wordmark.png"
               alt="ClaimCalculator.ai"
               className="sm:hidden h-[18px] w-auto object-contain"
               style={{ maxWidth: 'calc(100vw - 170px)' }}
