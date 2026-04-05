@@ -91,7 +91,7 @@ export default function CalculatorPage() {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Our Case Valuation */}
-            <div className="rounded-2xl bg-surface-container-low border border-[#4ADE80]/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center shadow-[0_4px_30px_rgba(74,222,128,0.03)] hover:shadow-[0_4px_30px_rgba(74,222,128,0.08)] transition-shadow">
+            <div className="rounded-2xl border border-[#4ADE80]/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center shadow-[0_4px_30px_rgba(74,222,128,0.03)] hover:shadow-[0_4px_30px_rgba(74,222,128,0.08)] transition-shadow">
               <span className="material-symbols-outlined text-5xl text-[#4ADE80] mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
               <h3 className="text-xl sm:text-2xl font-headline font-bold text-on-background mb-6">Our Case <span className="text-[#4ADE80] italic">Valuation</span></h3>
               <ul className="space-y-4 text-left w-full max-w-xs">
@@ -110,7 +110,7 @@ export default function CalculatorPage() {
             </div>
 
             {/* Typical Insurance Offer */}
-            <div className="rounded-2xl bg-surface-container-highest border border-error/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center opacity-80 hover:opacity-100 transition-opacity">
+            <div className="rounded-2xl border border-error/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center opacity-80 hover:opacity-100 transition-opacity">
               <span className="material-symbols-outlined text-5xl text-error mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
               <h3 className="text-xl sm:text-2xl font-headline font-bold text-on-background mb-6">Typical Insurance <span className="text-error italic">Offer</span></h3>
               <ul className="space-y-4 text-left w-full max-w-xs">

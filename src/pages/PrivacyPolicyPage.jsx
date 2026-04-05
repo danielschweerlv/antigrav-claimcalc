@@ -371,7 +371,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Table of contents */}
           <motion.div
-            className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10"
+            className="mb-10 p-5 rounded-2xl border border-outline-variant/10"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.3 }}
@@ -397,7 +397,7 @@ export default function PrivacyPolicyPage() {
               <motion.div
                 key={section.id}
                 id={section.id}
-                className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden"
+                className="rounded-2xl border border-outline-variant/10 overflow-hidden"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
@@ -432,7 +432,7 @@ export default function PrivacyPolicyPage() {
 
           {/* Disclaimer */}
           <motion.div
-            className="mt-10 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/5"
+            className="mt-10 p-5 rounded-2xl border border-outline-variant/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

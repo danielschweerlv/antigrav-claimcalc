@@ -79,7 +79,7 @@ export default function InsuranceTacticsPage() {
             {tactics.map((tactic, i) => (
               <div
                 key={tactic.title}
-                className="flex flex-col gap-4 p-6 lg:p-7 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-error/20 transition-colors duration-300 group"
+                className="flex flex-col gap-4 p-6 lg:p-7 rounded-2xl border border-outline-variant/10 hover:border-error/20 transition-colors duration-300 group"
               >
                 {/* Icon badge */}
                 <div className="w-12 h-12 rounded-full bg-error/15 border border-error/20 flex items-center justify-center flex-shrink-0 group-hover:bg-error/20 transition-colors">

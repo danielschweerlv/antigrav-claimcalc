@@ -97,7 +97,7 @@ export default function LegalNoticePage() {
                 body: 'Images used on this site are for illustrative purposes only and may feature paid actors and/or spokespersons, not actual lawyers or clients. Any depictions of accidents, consultations, or other events are dramatizations.',
               },
             ].map(item => (
-              <div key={item.title} className="flex flex-col sm:flex-row gap-4 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-primary/15 transition-colors">
+              <div key={item.title} className="flex flex-col sm:flex-row gap-4 p-6 rounded-2xl border border-outline-variant/10 hover:border-primary/15 transition-colors">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
                   <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>{item.icon}</span>
                 </div>
@@ -124,7 +124,7 @@ export default function LegalNoticePage() {
             {stateNotices.map(notice => (
               <div
                 key={notice.state}
-                className={`p-6 rounded-2xl border ${notice.highlight ? 'border-primary/25 bg-primary/5' : 'border-outline-variant/10 bg-surface-container-low'}`}
+                className={`p-6 rounded-2xl border ${notice.highlight ? 'border-primary/25 bg-primary/5' : 'border-outline-variant/10'}`}
               >
                 <div className="flex items-center gap-3 mb-3">
                   {notice.highlight && <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>}
@@ -138,7 +138,7 @@ export default function LegalNoticePage() {
 
           {/* Settlement disclaimer */}
           <motion.div
-            className="mt-10 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/5"
+            className="mt-10 p-5 rounded-2xl border border-outline-variant/5"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

@@ -11,7 +11,7 @@ export default function FaqAccordion({ items }) {
       {items.map((faq, i) => (
         <div 
           key={i} 
-          className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden"
+          className="rounded-2xl border border-outline-variant/10 overflow-hidden"
         >
           <button 
             className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-surface-container transition-colors group"

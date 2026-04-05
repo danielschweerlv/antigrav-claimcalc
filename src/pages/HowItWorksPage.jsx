@@ -76,7 +76,7 @@ export default function HowItWorksPage() {
             {steps.map((step, i) => (
               <div
                 key={step.num}
-                className="relative flex flex-col sm:flex-row gap-6 p-6 lg:p-8 rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden group hover:border-primary/20 transition-colors duration-300"
+                className="relative flex flex-col sm:flex-row gap-6 p-6 lg:p-8 rounded-2xl border border-outline-variant/10 overflow-hidden group hover:border-primary/20 transition-colors duration-300"
               >
                 {/* Step number watermark */}
                 <span className="absolute top-4 right-6 text-7xl font-headline font-black text-outline/8 select-none pointer-events-none leading-none">

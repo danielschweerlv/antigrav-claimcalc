@@ -228,7 +228,7 @@ function App() {
                 { stat: '3.2x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
-                <div key={label} className="p-6 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300">
+                <div key={label} className="p-6 lg:p-8 rounded-xl border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300">
                   <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
                   <p className="text-2xl lg:text-4xl font-headline font-black text-on-background">{stat}</p>
                   <p className="text-xs text-on-surface-variant leading-snug">{label}</p>
@@ -307,7 +307,7 @@ function App() {
                   range: '$5,000 - $75,000+',
                 },
               ].map(({ icon, title, desc, range }) => (
-                <div key={title} className="p-6 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/20 transition-all duration-300 flex flex-col gap-3 group">
+                <div key={title} className="p-6 rounded-xl border border-white/[0.06] hover:border-primary/20 transition-all duration-300 flex flex-col gap-3 group">
                   <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
                   <h4 className="text-base font-headline font-bold text-on-background">{title}</h4>
                   <p className="text-xs text-on-surface-variant leading-relaxed flex-1">{desc}</p>
@@ -329,7 +329,7 @@ function App() {
         </section>
 
         {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
-        <section className="py-20 lg:py-32 px-4 lg:px-8 bg-surface-container-lowest">
+        <section className="py-20 lg:py-32 px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
@@ -352,7 +352,7 @@ function App() {
                 { num: '02', title: 'AI Valuation', body: 'Our engine cross-references your case with current Nevada legal precedents and insurance payouts.' },
                 { num: '03', title: 'Expert Match', body: 'Get connected with top Nevada attorneys who specialize in maximizing your specific case type.' },
               ].map(({ num, title, body }) => (
-                <div key={num} className="space-y-4 p-7 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/15 transition-all duration-300">
+                <div key={num} className="space-y-4 p-7 lg:p-8 rounded-xl border border-white/[0.06] hover:border-primary/15 transition-all duration-300">
                   <span className="text-5xl font-headline font-black text-outline/15">{num}</span>
                   <h4 className="text-lg font-headline font-bold text-on-background">{title}</h4>
                   <p className="text-on-surface-variant text-sm leading-relaxed">{body}</p>
@@ -377,13 +377,13 @@ function App() {
         <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
-              className="relative p-8 lg:p-12 pb-14 glass-card rounded-xl border border-white/[0.08] min-h-[300px] flex flex-col justify-center"
+              className="relative p-8 lg:p-12 pb-14 rounded-xl border border-white/[0.08] min-h-[300px] flex flex-col justify-center"
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ type: 'spring', bounce: 0.2, duration: 1.4 }}
             >
-              <span className="material-symbols-outlined text-primary text-5xl absolute -top-7 left-6 bg-[#111318] px-2" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
+              <span className="material-symbols-outlined text-primary text-5xl absolute -top-7 left-6 px-2" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
               
               {/* Verified badge */}
               <div className="flex items-center gap-1.5 mb-5">
@@ -435,7 +435,7 @@ function App() {
         </section>
 
         {/* ── BOTTOM CTA BANNER ─────────────────────────────────────────── */}
-        <section className="py-20 lg:py-28 px-4 lg:px-8 bg-surface-container-lowest">
+        <section className="py-20 lg:py-28 px-4 lg:px-8">
           <motion.div
             className="max-w-2xl mx-auto text-center space-y-7"
             initial={{ opacity: 0, y: 16 }}
