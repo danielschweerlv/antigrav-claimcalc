@@ -22,11 +22,11 @@ export default function Footer() {
                 className="w-7 h-7 flex-shrink-0"
                 style={{
                   background: 'linear-gradient(to top right, #00d1ff, #ffffff)',
-                  WebkitMaskImage: 'url(/claimcalculator_plus_icon.png)',
+                  WebkitMaskImage: 'url(/fading_color_share.jpg)',
                   WebkitMaskSize: 'contain',
                   WebkitMaskRepeat: 'no-repeat',
                   WebkitMaskPosition: 'center',
-                  maskImage: 'url(/claimcalculator_plus_icon.png)',
+                  maskImage: 'url(/fading_color_share.jpg)',
                   maskSize: 'contain',
                   maskRepeat: 'no-repeat',
                   maskPosition: 'center',

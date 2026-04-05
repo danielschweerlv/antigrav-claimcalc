@@ -755,15 +755,30 @@ export default function CalculatorForm() {
         </div>
       </div>
 
-      {/* Loading */}
+      {/* Loading — pulsating + sign */}
       {loading && (
         <motion.div
-          className="text-center py-10 space-y-4"
+          className="text-center py-10 space-y-5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="w-10 h-10 border-4 border-surface-container-high border-t-primary rounded-full animate-spin mx-auto" />
+          <div className="flex justify-center">
+            <div
+              className="plus-pulse-loading w-16 h-16"
+              style={{
+                background: 'linear-gradient(to top right, #00d1ff, #a4e6ff)',
+                WebkitMaskImage: 'url(/pulse_wave_share.jpg)',
+                WebkitMaskSize: 'contain',
+                WebkitMaskRepeat: 'no-repeat',
+                WebkitMaskPosition: 'center',
+                maskImage: 'url(/pulse_wave_share.jpg)',
+                maskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                maskPosition: 'center',
+              }}
+            />
+          </div>
           <p className="text-base text-on-surface-variant">Our AI is analyzing your claim...</p>
           <p className="text-sm text-outline">Cross-referencing Nevada settlement data and injury profiles</p>
         </motion.div>
