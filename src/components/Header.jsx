@@ -99,22 +99,17 @@ const Header = () => {
             aria-label="Open menu"
             aria-expanded={isOpen}
           >
-            <div className="sparkle-container w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 relative">
-              {/* The + sign image with gradient mask */}
-              <div
-                className="w-full h-full transition-transform duration-300 group-hover:scale-110"
-                style={{
-                  background: 'linear-gradient(to top right, #00d1ff, #ffffff)',
-                  WebkitMaskImage: 'url(/fading_color_share.jpg)',
-                  WebkitMaskSize: 'contain',
-                  WebkitMaskRepeat: 'no-repeat',
-                  WebkitMaskPosition: 'center',
-                  maskImage: 'url(/fading_color_share.jpg)',
-                  maskSize: 'contain',
-                  maskRepeat: 'no-repeat',
-                  maskPosition: 'center',
-                  filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))',
-                }}
+            <div className="sparkle-container w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 relative">
+              {/* Animated + sign video */}
+              <video
+                className="w-full h-full object-contain rounded-lg transition-transform duration-300 group-hover:scale-110"
+                src="/fading_color_dark.mp4"
+                poster="/fading_color_dark_poster.png"
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}
               />
               {/* Sparkle particles */}
               <span className="sparkle sparkle-1" />
@@ -132,14 +127,15 @@ const Header = () => {
             onClick={() => { window.scrollTo(0, 0); navigate('/'); }}
           >
             <img
-              src="/claimcalculator_hex_font_dark_v2.jpg"
+              src="/final_text_logo_4k.png"
               alt="ClaimCalculator.ai"
-              className="hidden sm:inline h-8 lg:h-10 w-auto object-contain"
+              className="hidden sm:inline h-10 lg:h-12 w-auto object-contain"
             />
             <img
-              src="/claimcalculator_hex_font_dark_v2.jpg"
+              src="/final_text_logo_4k.png"
               alt="ClaimCalculator.ai"
-              className="sm:hidden h-7 w-auto object-contain"
+              className="sm:hidden h-6 w-auto object-contain"
+              style={{ maxWidth: 'calc(100vw - 170px)' }}
             />
           </div>
         </div>
