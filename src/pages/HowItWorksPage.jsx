@@ -15,7 +15,7 @@ const steps = [
   {
     num: '01',
     icon: 'calculate',
-    title: 'Learn What Your Claim Could Be Worth',
+    title: 'Learn What Your Case Could Be Worth',
     body: 'Answer a few simple questions about your auto accident online. Our AI cross-references real Nevada settlement data to give you an accurate estimate in under 2 minutes.',
     cta: null,
   },
@@ -23,14 +23,14 @@ const steps = [
     num: '02',
     icon: 'phone_in_talk',
     title: 'Speak with Our Team Over the Phone',
-    body: "Verify your accident details and claim information with our representatives over the phone. We'll confirm your estimate and walk you through your legal options — at no cost.",
+    body: "Verify your accident details and case information with our representatives over the phone. We'll confirm your estimate and walk you through your legal options — at no cost.",
     cta: null,
   },
   {
     num: '03',
     icon: 'description',
     title: 'Get a Copy of Your Accident Report',
-    body: 'Learn how to obtain your accident report. Insurance carriers will ask for it when you file a claim, and having it early strengthens your case significantly.',
+    body: 'Learn how to obtain your accident report. Insurance carriers will ask for it when you file a case, and having it early strengthens your case significantly.',
     cta: null,
   },
   {
@@ -116,7 +116,7 @@ export default function HowItWorksPage() {
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
               <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
               <h3 className="text-2xl lg:text-3xl font-headline font-bold text-on-background">
-                Ready to find out what your claim is worth?
+                Ready to find out what your case is worth?
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">
                 It takes under 2 minutes, costs nothing, and could be worth thousands more in your pocket.

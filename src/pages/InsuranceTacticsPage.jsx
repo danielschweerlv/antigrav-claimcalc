@@ -15,27 +15,27 @@ const tactics = [
   {
     icon: 'person_off',
     title: 'Initial Lowball Offers',
-    body: 'Some insurance companies may offer an initial settlement that is lower than what a claimant expected. Individuals facing financial stress may feel pressured to accept an early offer for quick resolution. It can be helpful for claimants to understand that timing and circumstances can affect settlement discussions, and an attorney can explain available options during a consultation.',
+    body: 'Some insurance companies may offer an initial settlement that is lower than what was expected. Individuals facing financial stress may feel pressured to accept an early offer for quick resolution. It can be helpful to understand that timing and circumstances can affect settlement discussions, and an attorney can explain available options during a consultation.',
   },
   {
     icon: 'local_hospital',
     title: 'Full Medical History Requests',
-    body: "Insurance companies may review a claimant's medical history as part of evaluating a claim. In some cases, prior medical records may be cited to suggest that certain symptoms existed before the accident. An attorney can help review these issues and provide guidance during a consultation.",
+    body: "Insurance companies may review your medical history as part of evaluating a case. In some cases, prior medical records may be cited to suggest that certain symptoms existed before the accident. An attorney can help review these issues and provide guidance during a consultation.",
   },
   {
     icon: 'mic',
     title: 'Recorded Statement Coercion',
-    body: 'Insurance companies may request a recorded statement early in the claims process, sometimes soon after the accident. Providing a statement at that time may limit what a claimant is able to add later. Claimants may wish to speak with an attorney first so they can better understand the process before responding to insurance questions.',
+    body: 'Insurance companies may request a recorded statement early in the case process, sometimes soon after the accident. Providing a statement at that time may limit what you are able to add later. You may wish to speak with an attorney first so you can better understand the process before responding to insurance questions.',
   },
   {
     icon: 'do_not_disturb',
-    title: 'Denying Claims',
-    body: 'Some large insurance companies have been the subject of public criticism and regulatory scrutiny over claim practices. In certain situations, consumers have alleged that valid claims were denied or that internal performance goals influenced claim decisions. These reports highlight why it can be important for individuals to understand the claims process and consult with an attorney if they have questions about a denial.',
+    title: 'Denying Cases',
+    body: 'Some large insurance companies have been the subject of public criticism and regulatory scrutiny over case practices. In certain situations, consumers have alleged that valid cases were denied or that internal performance goals influenced case decisions. These reports highlight why it can be important for individuals to understand the case process and consult with an attorney if they have questions about a denial.',
   },
   {
     icon: 'hourglass_empty',
-    title: 'Delaying Claims',
-    body: 'Many insurance companies have been reported to take significant time to review and process claims, and delays can be frustrating for policyholders. Some investigations and consumer complaints have highlighted concerns about how long certain claim files remain pending. Understanding how timing can affect a claim may help individuals know what questions to raise during a consultation with an attorney.',
+    title: 'Delaying Cases',
+    body: 'Many insurance companies have been reported to take significant time to review and process cases, and delays can be frustrating for policyholders. Some investigations and consumer complaints have highlighted concerns about how long certain case files remain pending. Understanding how timing can affect a case may help individuals know what questions to raise during a consultation with an attorney.',
   },
   {
     icon: 'help_outline',
@@ -64,7 +64,7 @@ export default function InsuranceTacticsPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background leading-tight max-w-3xl mx-auto">
               Understand the Tactics Insurance Companies Use That May{' '}
-              <span className="text-error italic">Impact Claim Settlements</span>
+              <span className="text-error italic">Impact Case Settlements</span>
             </h1>
             <p className="text-base lg:text-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
               Being informed about these common practices can help you make better decisions and know when to seek legal guidance.

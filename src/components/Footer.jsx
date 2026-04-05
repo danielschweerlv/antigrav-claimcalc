@@ -32,7 +32,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-on-surface-variant font-body text-xs leading-relaxed">
-              Helping Nevada accident victims understand the true value of their claims and connect with experienced local attorneys.
+              Helping Nevada accident victims understand the true value of their cases and connect with experienced local attorneys.
             </p>
           </div>
 
@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* Column 1: Nevada Claim Guides */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Nevada Claim Guides</h6>
+            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Nevada Case Guides</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'How Comparative Fault Works', path: '/your-rights' },
@@ -150,7 +150,7 @@ export default function Footer() {
           <div>
             <p className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-2">General Disclaimer</p>
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
-              This website provides estimates for informational and educational purposes only. Nothing on this site is legal advice, and no attorney-client relationship is created by using this tool. If you have been injured, consult a licensed Nevada personal injury attorney before making any decisions about your claim.
+              This website provides estimates for informational and educational purposes only. Nothing on this site is legal advice, and no attorney-client relationship is created by using this tool. If you have been injured, consult a licensed Nevada personal injury attorney before making any decisions about your case.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export default function Footer() {
           <div>
             <p className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-2">Attorney Advertising Disclosure</p>
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
-              ClaimCalculator.ai is an attorney advertising service. No attorney-client relationship is formed by visiting this website, using the calculator, or submitting your information through any form on this site. Attorneys and law firms who may contact you through this service have paid an advertising fee to participate. That fee does not affect the estimate you receive or the outcome of your claim. By submitting your information, you consent to being contacted by a participating Nevada-licensed attorney or their representative by phone call, text message, or email regarding your potential claim. The estimates provided by this tool are not guarantees of settlement value. Every case is different. Under Nevada's modified comparative negligence law (NRS 41.141), your recovery depends on your share of fault, the severity of your injuries, available insurance coverage, and other factors specific to your situation. If you are found more than 50% at fault, Nevada law bars you from recovering any damages.
+              ClaimCalculator.ai is an attorney advertising service. No attorney-client relationship is formed by visiting this website, using the calculator, or submitting your information through any form on this site. Attorneys and law firms who may contact you through this service have paid an advertising fee to participate. That fee does not affect the estimate you receive or the outcome of your case. By submitting your information, you consent to being contacted by a participating Nevada-licensed attorney or their representative by phone call, text message, or email regarding your potential case. The estimates provided by this tool are not guarantees of settlement value. Every case is different. Under Nevada's modified comparative negligence law (NRS 41.141), your recovery depends on your share of fault, the severity of your injuries, available insurance coverage, and other factors specific to your situation. If you are found more than 50% at fault, Nevada law bars you from recovering any damages.
             </p>
           </div>
 

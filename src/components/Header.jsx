@@ -18,9 +18,9 @@ const DROPDOWN_CONTENT = {
     { label: 'Contact Us', href: 'mailto:support@claimcalculator.ai' },
   ],
   'case-types': [
-    { label: 'Car Accidents', desc: 'The most common injury claim in Nevada. Rear-end collisions, intersection crashes, and freeway pileups on I-15 and US-95.', range: '$5,000 - $150,000+', path: '/calculator' },
+    { label: 'Car Accidents', desc: 'The most common injury case in Nevada. Rear-end collisions, intersection crashes, and freeway pileups on I-15 and US-95.', range: '$5,000 - $150,000+', path: '/calculator' },
     { label: 'Uber & Lyft Accidents', desc: 'Las Vegas is one of the busiest rideshare markets in the country. Active trips carry up to $1M in commercial coverage.', range: '$15,000 - $100,000+', path: '/calculator' },
-    { label: 'Strip & Pedestrian Accidents', desc: 'The Las Vegas Strip sees some of the highest pedestrian traffic in the U.S. These claims tend to involve severe injuries.', range: '$30,000 - $500,000+', path: '/calculator' },
+    { label: 'Strip & Pedestrian Accidents', desc: 'The Las Vegas Strip sees some of the highest pedestrian traffic in the U.S. These cases tend to involve severe injuries.', range: '$30,000 - $500,000+', path: '/calculator' },
     { label: 'Casino & Hotel Injuries', desc: 'Wet floors, dim lighting, escalator malfunctions. Nevada premises liability law holds property owners accountable.', range: '$10,000 - $250,000+', path: '/calculator' },
     { label: 'Motorcycle Accidents', desc: 'Year-round riding means year-round risk. Motorcyclists face severe injuries and higher medical costs.', range: '$25,000 - $300,000+', path: '/calculator' },
     { label: 'Truck & 18-Wheeler Accidents', desc: 'I-15 between Las Vegas and LA is one of the heaviest commercial trucking corridors in the West.', range: '$50,000 - $1,000,000+', path: '/calculator' },
@@ -33,7 +33,7 @@ const DROPDOWN_CONTENT = {
     { label: "Nevada's 2-Year Filing Deadline", desc: 'Under NRS 11.190, you have two years from the date of the accident to file a personal injury lawsuit in Nevada. Missing this deadline means losing your right to compensation entirely.', path: '/your-rights' },
     { label: 'Insurance Lowball Tactics', desc: 'Learn how insurance companies minimize payouts through early lowball offers, recorded statements, delayed processing, and confusing policy language.', path: '/insurance-tactics' },
     { label: 'Strip & Casino Injury Liability', desc: "Nevada premises liability law requires property owners — including casinos and hotels — to maintain safe conditions. If you're injured due to negligence on their property, they may be liable.", path: '/your-rights' },
-    { label: 'Understanding Your Medical Bills', desc: 'Medical bills are a core component of your claim value. Learn how medical expense documentation impacts your settlement and why keeping every record matters.', path: '/how-it-works' },
+    { label: 'Understanding Your Medical Bills', desc: 'Medical bills are a core component of your case value. Learn how medical expense documentation impacts your settlement and why keeping every record matters.', path: '/how-it-works' },
   ],
   attorneys: [
     { label: 'Partner With Us', desc: 'Join ClaimCalculator.ai as a participating Nevada-licensed attorney. Receive pre-qualified leads from accident victims actively seeking legal representation.', href: 'mailto:partners@claimcalculator.ai' },
