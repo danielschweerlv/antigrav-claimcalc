@@ -3,6 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
+const CASE_TYPES = [
+  { value: 'Motor Vehicle Accident', label: 'Motor Vehicle Accident', icon: 'directions_car' },
+  { value: 'Premises Liability/Slip and Fall', label: 'Premises Liability/Slip and Fall', icon: 'falling' },
+  { value: 'Work-Related Injury', label: 'Work-Related Injury', icon: 'construction' },
+  { value: 'Product Liability', label: 'Product Liability', icon: 'package_2' },
+  { value: 'Other', label: 'Other', icon: 'more_horiz' },
+]
+
 const ACCIDENT_TYPES = [
   { label: 'Rear-end collision', icon: 'directions_car' },
   { label: 'T-bone / side impact', icon: 'swap_horiz' },
@@ -82,7 +90,93 @@ const OTHER_INSURERS = [
   { label: "They Have No Insurance / I Don't Know", icon: 'no_crash' },
 ]
 
-const TOTAL_STEPS = 11
+// Non-motor-vehicle specific options
+const FAULT_JOB_FAULT_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+]
+
+const FAULT_JOB_ON_JOB_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+]
+
+const REPORT_OPTIONS = [
+  { value: 'Property Owner/Manager', label: 'Property Owner/Manager' },
+  { value: 'Law Enforcement', label: 'Law Enforcement' },
+  { value: 'Supervisor/Manager at your workplace', label: 'Supervisor/Manager at your workplace' },
+  { value: 'Doctor', label: 'Doctor' },
+  { value: 'Other', label: 'Other' },
+]
+
+const ADJUSTER_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+  { value: 'Not Sure', label: 'Not Sure' },
+]
+
+const CAMERAS_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+  { value: 'Not Sure', label: 'Not Sure' },
+]
+
+const WITNESSES_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+  { value: 'Not Sure', label: 'Not Sure' },
+]
+
+const SURFACE_OPTIONS = [
+  { value: 'No, it was uneven or sloped', label: 'No, it was uneven or sloped' },
+  { value: 'Yes, it was level and even', label: 'Yes, it was level and even' },
+  { value: 'Not Sure', label: 'Not Sure' },
+]
+
+const LIGHTING_OPTIONS = [
+  { value: 'No, it was poorly lit', label: 'No, it was poorly lit' },
+  { value: 'Yes, it was well-lit', label: 'Yes, it was well-lit' },
+  { value: 'Not Sure', label: 'Not Sure' },
+]
+
+const LAWYER_OPTIONS = [
+  { value: 'No', label: 'No' },
+  { value: 'Yes', label: 'Yes' },
+]
+
+// ─── STEP FLOW DEFINITIONS ─────────────────────────────────────────────────
+// Motor Vehicle:     caseType → accidentType → injuries → fault → ev → commercial → when → myInsurer → otherInsurer → lawyer → zip → contact
+// Non-Motor Vehicle: caseType → injuries → faultJob → report → adjuster → cameras → conditions → when → myInsurer → lawyer → zip → contact
+
+const MOTOR_VEHICLE_STEPS = [
+  'caseType',        // 1
+  'accidentType',    // 2
+  'injuries',        // 3
+  'fault',           // 4
+  'ev',              // 5
+  'commercial',      // 6
+  'when',            // 7
+  'myInsurer',       // 8
+  'otherInsurer',    // 9
+  'lawyer',          // 10
+  'zip',             // 11
+  'contact',         // 12
+]
+
+const NON_MOTOR_VEHICLE_STEPS = [
+  'caseType',        // 1
+  'injuries',        // 2
+  'faultJob',        // 3
+  'report',          // 4
+  'adjuster',        // 5
+  'cameras',         // 6
+  'conditions',      // 7
+  'when',            // 8
+  'myInsurer',       // 9
+  'lawyer',          // 10
+  'zip',             // 11
+  'contact',         // 12
+]
 
 // ─── CALCULATION ────────────────────────────────────────────────────────────
 
@@ -98,27 +192,46 @@ function calcSettlement(data) {
   if (injuries.includes('I was not injured')) injScore = 0
   if (injScore === 0 && injuries.length === 0) injScore = 1
 
-  // Fault: use categorical options
+  // Fault: use categorical options (motor vehicle path)
   const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
-  const fM = faultMap[data.fault] ?? 0.8
-  const faultBarred = fM <= 0.25 && data.fault === 'Mostly me'
+  // For non-motor-vehicle, use faultAtFault field
+  let fM = 0.8
+  if (data.caseType === 'Motor Vehicle Accident') {
+    fM = faultMap[data.fault] ?? 0.8
+  } else {
+    fM = data.faultAtFault === 'Yes' ? 0.4 : 1.0
+  }
+  const faultBarred = data.caseType === 'Motor Vehicle Accident' && fM <= 0.25 && data.fault === 'Mostly me'
 
   const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
 
   // Uninsured other party = UIM claim = harder to collect, slightly lower range
   const otherInsM = (data.otherInsurer === "They Have No Insurance / I Don't Know") ? 0.7 : 1.0
 
-  // EV modifier: EV accidents can involve more complex liability (battery fires, autopilot, manufacturer claims)
+  // EV modifier
   const evM = data.evInvolved === 'Yes' ? 1.12 : 1.0
 
-  // Commercial vehicle modifier: commercial vehicles carry higher policy limits
+  // Commercial vehicle modifier
   const commM = data.commercialVehicle === 'Yes' ? 1.18 : 1.0
 
+  // Non-motor-vehicle modifiers
+  const onJobM = data.onTheJob === 'Yes' ? 1.15 : 1.0
+  const cameraM = data.cameras === 'Yes' ? 1.08 : 1.0
+  const witnessM = data.witnesses === 'Yes' ? 1.08 : 1.0
+  const surfaceM = data.surface === 'No, it was uneven or sloped' ? 1.1 : 1.0
+  const lightingM = data.lighting === 'No, it was poorly lit' ? 1.1 : 1.0
+
   const tM = whenMap[data.when] ?? 1.0
-  const baseMed = injScore * 8000 + 4000   // proxy for medical costs based on injury severity
+  const baseMed = injScore * 8000 + 4000
   const pain = baseMed * (injScore || 1.5)
   const prop = Math.round(baseMed * 0.35)
-  const base = (baseMed + pain + prop) * fM * tM * otherInsM * evM * commM
+
+  let base
+  if (data.caseType === 'Motor Vehicle Accident') {
+    base = (baseMed + pain + prop) * fM * tM * otherInsM * evM * commM
+  } else {
+    base = (baseMed + pain + prop) * fM * tM * onJobM * cameraM * witnessM * surfaceM * lightingM
+  }
 
   return {
     faultBarred,
@@ -135,9 +248,6 @@ function calcSettlement(data) {
 const fmt = n => '$' + n.toLocaleString()
 
 // ─── STEP ANIMATION ─────────────────────────────────────────────────────────
-// Adapted from the card-stack pattern:
-// Forward → new step springs up from below, old step exits upward
-// Back    → new step drops in from above, old step exits downward
 
 const stepVariants = {
   enter: (dir) => ({
@@ -240,7 +350,7 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step, disabled = f
           Go Back
         </button>
       )}
-      {step === 1 && (
+      {step === 0 && (
         <p className="text-[10px] text-center text-outline leading-tight pt-1">
           By continuing you agree to our Terms &amp; Privacy Policy. SSL encrypted.
         </p>
@@ -435,12 +545,13 @@ function ResultScreen({ data }) {
 // ─── MAIN COMPONENT ─────────────────────────────────────────────────────────
 
 export default function CalculatorForm() {
-  const [step, setStep] = useState(1)
-  const [direction, setDirection] = useState(1) // 1 = forward, -1 = back
+  const [stepIndex, setStepIndex] = useState(0)
+  const [direction, setDirection] = useState(1)
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [contactTouched, setContactTouched] = useState({})
   const [data, setData] = useState({
+    caseType: '',
     type: '',
     injuries: [],
     fault: '',
@@ -455,7 +566,22 @@ export default function CalculatorForm() {
     lastName: '',
     email: '',
     phone: '',
+    // Non-motor-vehicle fields
+    faultAtFault: '',
+    onTheJob: '',
+    reportedTo: [],
+    adjuster: '',
+    cameras: '',
+    witnesses: '',
+    surface: '',
+    lighting: '',
+    hiredLawyer: '',
   })
+
+  const isMotorVehicle = data.caseType === 'Motor Vehicle Accident'
+  const steps = data.caseType === '' ? ['caseType'] : (isMotorVehicle ? MOTOR_VEHICLE_STEPS : NON_MOTOR_VEHICLE_STEPS)
+  const currentStepName = steps[stepIndex] || 'caseType'
+  const TOTAL_STEPS = steps.length
 
   const set = (key, val) => setData(prev => ({ ...prev, [key]: val }))
 
@@ -473,7 +599,17 @@ export default function CalculatorForm() {
     })
   }
 
-  // Contact form validation for Step 11
+  const toggleReport = (item) => {
+    setData(prev => {
+      const list = prev.reportedTo || []
+      return {
+        ...prev,
+        reportedTo: list.includes(item) ? list.filter(i => i !== item) : [...list, item],
+      }
+    })
+  }
+
+  // Contact form validation
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isValidPhone = (phone) => phone.replace(/\D/g, '').length >= 7
   const contactComplete = data.firstName.trim() && data.lastName.trim() && isValidEmail(data.email) && isValidPhone(data.phone)
@@ -482,19 +618,43 @@ export default function CalculatorForm() {
     setContactTouched(prev => ({ ...prev, [field]: true }))
   }
 
-  const progress = done ? 100 : Math.round((step / TOTAL_STEPS) * 100)
+  // ─── REQUIRED VALIDATION PER STEP ──────────────────────────────────────────
+  const isStepValid = () => {
+    switch (currentStepName) {
+      case 'caseType': return !!data.caseType
+      case 'accidentType': return !!data.type
+      case 'injuries': return data.injuries.length > 0
+      case 'fault': return !!data.fault
+      case 'ev': return !!data.evInvolved
+      case 'commercial': return !!data.commercialVehicle
+      case 'when': return !!data.when
+      case 'myInsurer': return !!data.myInsurer
+      case 'otherInsurer': return !!data.otherInsurer
+      case 'lawyer': return !!data.hiredLawyer
+      case 'zip': return data.zip.length >= 5
+      case 'contact': return contactComplete
+      // Non-motor-vehicle steps
+      case 'faultJob': return !!data.faultAtFault && !!data.onTheJob
+      case 'report': return (data.reportedTo || []).length > 0
+      case 'adjuster': return !!data.adjuster
+      case 'cameras': return !!data.cameras && !!data.witnesses
+      case 'conditions': return !!data.surface && !!data.lighting
+      default: return true
+    }
+  }
 
-  const next = (n) => {
-    setDirection(n > step ? 1 : -1)
-    setStep(n)
+  const progress = done ? 100 : Math.round(((stepIndex + 1) / TOTAL_STEPS) * 100)
+
+  const goTo = (idx) => {
+    setDirection(idx > stepIndex ? 1 : -1)
+    setStepIndex(idx)
   }
 
   const showResult = () => {
-    // Mark all fields as touched to show validation
     setContactTouched({ firstName: true, lastName: true, email: true, phone: true })
     if (!contactComplete) return
     setDirection(1)
-    setStep(null)
+    setStepIndex(-1)
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -502,27 +662,36 @@ export default function CalculatorForm() {
     }, 2200)
   }
 
-  // ─── STEP FLOW (11 steps total) ──────────────────────────────────────────
-  // 1. Accident type
-  // 2. Injuries
-  // 3. Fault
-  // 4. EV involvement
-  // 5. Commercial vehicle
-  // 6. When
-  // 7. Your insurance
-  // 8. Other driver's insurance
-  // 9. Description
-  // 10. Zip code
-  // 11. Contact info (REQUIRED)
+  // ─── RENDER STEP ─────────────────────────────────────────────────────────
 
   const renderStep = () => {
-    switch (step) {
-      case 1:
+    const stepName = currentStepName
+
+    switch (stepName) {
+      // ── SHARED: Case Type (first step for ALL paths) ──
+      case 'caseType':
         return (
           <>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[8px] bg-primary/[0.08] border border-primary/20 mb-6">
               <span className="text-[11px] font-label font-semibold text-primary uppercase tracking-[0.05em]">Nevada-specific settlement data</span>
             </div>
+            <StepHeading title={<>What type of <span className="text-primary italic">injury case</span> is this?</>} sub="Select the option that best describes your situation." />
+            <div className="grid grid-cols-1 gap-3">
+              {CASE_TYPES.map(({ value, label, icon }) => (
+                <OptionBtn key={value} selected={data.caseType === value} onClick={() => set('caseType', value)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  {label}
+                </OptionBtn>
+              ))}
+            </div>
+            <NavButtons step={0} onNext={() => goTo(1)} disabled={!data.caseType} />
+          </>
+        )
+
+      // ── MOTOR VEHICLE: Accident Type ──
+      case 'accidentType':
+        return (
+          <>
             <StepHeading title={<>What type of accident <span className="text-primary italic">were you in?</span></>} sub="Select the option that best describes your situation." />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {ACCIDENT_TYPES.map(({ label, icon }) => (
@@ -532,14 +701,15 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons step={1} onNext={() => next(2)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.type} />
           </>
         )
 
-      case 2:
+      // ── SHARED: Injuries ──
+      case 'injuries':
         return (
           <>
-            <StepHeading title={<>How were you <span className="text-primary italic">injured</span> in the accident?</>} sub="Check everything that applies, even if minor or not yet officially diagnosed." />
+            <StepHeading title={<>How were you <span className="text-primary italic">injured?</span></>} sub="Check everything that applies, even if minor or not yet officially diagnosed." />
             <div className="space-y-4 max-h-72 overflow-y-auto pr-1">
               {INJURY_CATEGORIES.map(cat => (
                 <div key={cat.label}>
@@ -552,11 +722,12 @@ export default function CalculatorForm() {
                 </div>
               ))}
             </div>
-            <NavButtons onNext={() => next(3)} onBack={() => next(1)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={data.injuries.length === 0} />
           </>
         )
 
-      case 3:
+      // ── MOTOR VEHICLE: Fault ──
+      case 'fault':
         return (
           <>
             <StepHeading title={<>Was the accident <span className="text-primary italic">your fault?</span></>} sub="Nevada follows comparative fault rules. Partial fault still allows recovery." />
@@ -565,11 +736,12 @@ export default function CalculatorForm() {
                 <OptionBtn key={o.value} selected={data.fault === o.value} onClick={() => set('fault', o.value)}>{o.label}</OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(4)} onBack={() => next(2)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.fault} />
           </>
         )
 
-      case 4:
+      // ── MOTOR VEHICLE: EV ──
+      case 'ev':
         return (
           <>
             <StepHeading title={<>Were you involved in an accident with an <span className="text-primary italic">electric vehicle (EV)?</span></>} sub="EV accidents can involve unique factors like battery fires, autopilot systems, and manufacturer liability that may affect your case." />
@@ -581,11 +753,12 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(5)} onBack={() => next(3)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.evInvolved} />
           </>
         )
 
-      case 5:
+      // ── MOTOR VEHICLE: Commercial ──
+      case 'commercial':
         return (
           <>
             <StepHeading title={<>Did the accident involve a <span className="text-primary italic">commercial vehicle?</span></>} sub="Accidents involving commercial vehicles like semi-trucks, delivery vans, or rideshare vehicles often involve higher insurance policy limits and additional liable parties." />
@@ -597,14 +770,15 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(6)} onBack={() => next(4)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.commercialVehicle} />
           </>
         )
 
-      case 6:
+      // ── SHARED: When ──
+      case 'when':
         return (
           <>
-            <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
+            <StepHeading title={<>When did this <span className="text-primary italic">{isMotorVehicle ? 'accident' : 'injury'} occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
             <div className="grid gap-3">
               {DATE_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
@@ -613,14 +787,15 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(7)} onBack={() => next(5)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.when} />
           </>
         )
 
-      case 7:
+      // ── SHARED: My Insurance ──
+      case 'myInsurer':
         return (
           <>
-            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
+            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your insurance company. This helps us understand your coverage situation." />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {MY_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
@@ -629,11 +804,12 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.myInsurer} />
           </>
         )
 
-      case 8:
+      // ── MOTOR VEHICLE: Other Driver's Insurance ──
+      case 'otherInsurer':
         return (
           <>
             <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your case is worth. Knowing the company helps estimate negotiation room." />
@@ -651,29 +827,37 @@ export default function CalculatorForm() {
                 {data.otherInsurer} is known for making initial offers well below case value. An attorney experienced with {data.otherInsurer} cases in Nevada can typically negotiate a significantly higher settlement.
               </div>
             )}
-            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.otherInsurer} />
           </>
         )
 
-      case 9:
+      // ── SHARED: Lawyer + Tell Us About Your Case (replaces old "describe your accident") ──
+      case 'lawyer':
         return (
           <>
-            <StepHeading title={<>Briefly <span className="text-primary italic">describe your accident</span></>} sub="A short summary helps give you a more accurate estimate. No legal jargon needed." />
+            <StepHeading title={<>Have you hired a <span className="text-primary italic">lawyer yet?</span></>} />
+            <div className="grid gap-3 mb-8">
+              {LAWYER_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.hiredLawyer === o.value} onClick={() => set('hiredLawyer', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <StepHeading title={<>Tell us about <span className="text-primary italic">your case</span></>} sub="Providing more detail helps our AI calculate your settlement." />
             <div>
               <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-2">Your Details</label>
               <textarea
                 rows={4}
-                placeholder="e.g. I was stopped at a red light when another vehicle rear-ended me. I had immediate neck and back pain and went to the ER that night..."
+                placeholder="e.g. I slipped on a wet floor at a grocery store and hurt my back. I went to the ER that night and have been in physical therapy since..."
                 value={data.description}
                 onChange={e => set('description', e.target.value)}
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors resize-none"
               />
             </div>
-            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.hiredLawyer} />
           </>
         )
 
-      case 10:
+      // ── SHARED: Zip Code ──
+      case 'zip':
         return (
           <>
             <StepHeading title={<>What's your <span className="text-primary italic">zip code?</span></>} sub="We use this to match you with licensed Nevada attorneys in your area." />
@@ -686,11 +870,12 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-4 text-2xl font-headline font-black tracking-widest outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors"
               />
             </div>
-            <NavButtons onNext={() => next(11)} onBack={() => next(9)} />
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={data.zip.length < 5} />
           </>
         )
 
-      case 11:
+      // ── SHARED: Contact Info ──
+      case 'contact':
         return (
           <>
             <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full case value. Takes 10 seconds." />
@@ -776,10 +961,102 @@ export default function CalculatorForm() {
                 )}
               </div>
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(10)} disabled={!contactComplete} />
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => goTo(stepIndex - 1)} disabled={!contactComplete} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>
+          </>
+        )
+
+      // ═══════════════════════════════════════════════════════════════════════
+      // NON-MOTOR-VEHICLE STEPS
+      // ═══════════════════════════════════════════════════════════════════════
+
+      // ── Fault + On the Job ──
+      case 'faultJob':
+        return (
+          <>
+            <StepHeading title={<>Were you <span className="text-primary italic">at fault?</span></>} />
+            <div className="grid gap-3 mb-8">
+              {FAULT_JOB_FAULT_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.faultAtFault === o.value} onClick={() => set('faultAtFault', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <StepHeading title={<>Did it happen <span className="text-primary italic">on the job?</span></>} />
+            <div className="grid gap-3">
+              {FAULT_JOB_ON_JOB_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.onTheJob === o.value} onClick={() => set('onTheJob', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.faultAtFault || !data.onTheJob} />
+          </>
+        )
+
+      // ── Report ──
+      case 'report':
+        return (
+          <>
+            <StepHeading title={<>Did you report the injury to <span className="text-primary italic">any of the following?</span></>} sub="Select all that apply." />
+            <div className="grid gap-3">
+              {REPORT_OPTIONS.map(o => (
+                <CheckItem key={o.value} label={o.label} checked={(data.reportedTo || []).includes(o.value)} onChange={() => toggleReport(o.value)} />
+              ))}
+            </div>
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={(data.reportedTo || []).length === 0} />
+          </>
+        )
+
+      // ── Adjuster ──
+      case 'adjuster':
+        return (
+          <>
+            <StepHeading title={<>Have you received any settlement offers or been contacted by <span className="text-primary italic">insurance adjusters?</span></>} />
+            <div className="grid gap-3">
+              {ADJUSTER_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.adjuster === o.value} onClick={() => set('adjuster', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.adjuster} />
+          </>
+        )
+
+      // ── Cameras + Witnesses ──
+      case 'cameras':
+        return (
+          <>
+            <StepHeading title={<>Were there any <span className="text-primary italic">surveillance cameras</span> in the area where the injury occurred?</>} />
+            <div className="grid gap-3 mb-8">
+              {CAMERAS_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.cameras === o.value} onClick={() => set('cameras', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <StepHeading title={<>Were there any <span className="text-primary italic">witnesses</span> to the injury?</>} />
+            <div className="grid gap-3">
+              {WITNESSES_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.witnesses === o.value} onClick={() => set('witnesses', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.cameras || !data.witnesses} />
+          </>
+        )
+
+      // ── Conditions (Surface + Lighting) ──
+      case 'conditions':
+        return (
+          <>
+            <StepHeading title={<>Was the surface where the injury occurred <span className="text-primary italic">level and even?</span></>} />
+            <div className="grid gap-3 mb-8">
+              {SURFACE_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.surface === o.value} onClick={() => set('surface', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <StepHeading title={<>Was the area where the injury occurred <span className="text-primary italic">well-lit?</span></>} />
+            <div className="grid gap-3">
+              {LIGHTING_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.lighting === o.value} onClick={() => set('lighting', o.value)}>{o.label}</OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => goTo(stepIndex + 1)} onBack={() => goTo(stepIndex - 1)} disabled={!data.surface || !data.lighting} />
           </>
         )
 
@@ -794,7 +1071,7 @@ export default function CalculatorForm() {
       <div className="mb-7">
         <div className="flex justify-between items-center mb-2">
           <p className="text-xs font-label text-outline uppercase tracking-widest">
-            {done ? 'Your Estimate' : `Step ${step} of ${TOTAL_STEPS}`}
+            {done ? 'Your Estimate' : `Step ${stepIndex + 1} of ${TOTAL_STEPS}`}
           </p>
           <span className="text-xs font-label text-primary font-semibold">{progress}%</span>
         </div>
@@ -839,7 +1116,7 @@ export default function CalculatorForm() {
         <div className="min-h-[300px] relative">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={step}
+              key={currentStepName}
               custom={direction}
               variants={stepVariants}
               initial="enter"
