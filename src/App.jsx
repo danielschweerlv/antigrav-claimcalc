@@ -435,7 +435,7 @@ function App() {
         </section>
 
         {/* ── BOTTOM CTA BANNER ─────────────────────────────────────────── */}
-        <section className="py-20 lg:py-28 px-4 lg:px-8 bg-surface-container-lowest">
+        <section className="py-20 lg:py-28 px-4 lg:px-8">
           <motion.div
             className="max-w-2xl mx-auto text-center space-y-7"
             initial={{ opacity: 0, y: 16 }}

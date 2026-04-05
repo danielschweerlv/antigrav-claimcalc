@@ -12,7 +12,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#0c0e12] py-10 px-4 lg:px-6 relative z-50">
+    <footer className="py-10 px-4 lg:px-6 relative z-50">
       <div className="max-w-7xl mx-auto space-y-12">
 
         {/* Top row: Logo + AI chip */}
@@ -35,7 +35,7 @@ export default function Footer() {
 
           {/* AI Microchip Logo */}
           <div className="flex flex-shrink-0 items-center justify-center">
-            <div className="bg-[#111318]/40 p-4 sm:p-6 rounded-[2rem] border border-outline-variant/10">
+            <div className="p-4 sm:p-6 rounded-[2rem]">
               <AIChipLogo className="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44" />
             </div>
           </div>
