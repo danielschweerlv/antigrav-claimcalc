@@ -119,7 +119,7 @@ export default function YourRightsPage() {
             {rights.map((right, i) => (
               <div
                 key={right.num}
-                className="flex flex-col sm:flex-row gap-5 lg:gap-8 p-6 lg:p-8 rounded-2xl border border-outline-variant/10 hover:border-tertiary/20 transition-colors duration-300 group relative overflow-hidden"
+                className="flex flex-col sm:flex-row gap-5 lg:gap-8 p-6 lg:p-8 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-tertiary/20 transition-colors duration-300 group relative overflow-hidden"
               >
                 {/* Watermark number */}
                 <span className="absolute top-4 right-6 text-7xl font-headline font-black text-outline/8 select-none pointer-events-none leading-none">{right.num}</span>

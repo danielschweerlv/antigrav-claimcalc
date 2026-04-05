@@ -180,7 +180,7 @@ export default function TermsOfServicePage() {
           </motion.div>
 
           {/* Table of contents */}
-          <motion.div className="mb-10 p-5 rounded-2xl border border-outline-variant/10" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.3 }}>
+          <motion.div className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.3 }}>
             <p className="text-xs font-label font-bold text-outline uppercase tracking-widest mb-4">Table of Contents</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
               {sections.map(s => (
@@ -195,7 +195,7 @@ export default function TermsOfServicePage() {
           {/* Sections */}
           <div className="space-y-3">
             {sections.map((section, i) => (
-              <motion.div key={section.id} id={section.id} className="rounded-2xl border border-outline-variant/10 overflow-hidden" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ type: 'spring', bounce: 0.2, duration: 1.1, delay: Math.min(i * 0.04, 0.25) }}>
+              <motion.div key={section.id} id={section.id} className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ type: 'spring', bounce: 0.2, duration: 1.1, delay: Math.min(i * 0.04, 0.25) }}>
                 <button className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-surface-container transition-colors" onClick={() => setActiveSection(activeSection === section.id ? null : section.id)}>
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-bold text-primary w-7 flex-shrink-0">{section.num}.</span>
@@ -231,7 +231,7 @@ export default function TermsOfServicePage() {
                           </ul>
                         </div>
                       ) : (
-                        <p className={`text-sm leading-relaxed ${section.isLegal ? 'text-on-surface-variant/70 font-label text-[11px] p-3 rounded-xl border border-outline-variant/10' : 'text-on-surface-variant'}`}>{section.content}</p>
+                        <p className={`text-sm leading-relaxed ${section.isLegal ? 'text-on-surface-variant/70 font-label text-[11px] bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/10' : 'text-on-surface-variant'}`}>{section.content}</p>
                       )}
                     </div>
                   </motion.div>

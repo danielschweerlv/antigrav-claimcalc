@@ -25,7 +25,7 @@ const ShineBorder = ({
       </div>
 
       {/* Content Layer */}
-      <div className="relative rounded-2xl bg-background h-full shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+      <div className="relative rounded-2xl bg-surface-container-low h-full shadow-[0_0_40px_rgba(0,0,0,0.5)]">
         {children}
       </div>
     </div>
