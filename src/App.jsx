@@ -189,6 +189,9 @@ function App() {
                     { src: '/logos/bbb-color.svg', alt: 'Better Business Bureau' },
                     { src: '/logos/dmv-color.svg', alt: 'Nevada DMV' },
                     { src: '/logos/ag-color.png', alt: 'Nevada Attorney General' },
+                    { src: '/logos/kbb-color.png', alt: 'Kelley Blue Book' },
+                    { src: '/logos/carfax-color.png', alt: 'Carfax' },
+                    { src: '/logos/carmax-color.png', alt: 'CarMax' },
                   ].map(({ src, alt }) => (
                     <img
                       key={`${setIdx}-${alt}`}
