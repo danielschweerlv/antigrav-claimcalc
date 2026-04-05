@@ -14,16 +14,16 @@ const Header = () => {
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => navigate('/')}
         >
-          <img 
-            src="/logo.png" 
-            alt="ClaimCalculator.ai Logo" 
-            className="w-10 h-10 object-contain drop-shadow-[0_0_8px_rgba(0,209,255,0.4)] transition-transform duration-300 group-hover:scale-105"
+          <img
+            src="/claimcalculator_plus_icon.png"
+            alt="ClaimCalculator.ai Logo"
+            className="w-9 h-9 object-contain drop-shadow-[0_0_8px_rgba(0,209,255,0.4)] transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="hidden sm:inline text-2xl lg:text-3xl font-black tracking-tighter text-on-background font-headline leading-none">
-            ClaimCalculator<span className="text-primary">.ai</span>
+          <span className="hidden sm:inline text-2xl lg:text-3xl font-black tracking-tighter font-headline leading-none">
+            <span className="text-white">Claim</span><span className="text-primary-container">Calculator</span><span className="text-primary">.ai</span>
           </span>
-          <span className="sm:hidden text-[clamp(0.875rem,3.5vw,1.25rem)] font-black tracking-tighter text-on-background font-headline leading-none">
-            ClaimCalc<span className="text-primary">.ai</span>
+          <span className="sm:hidden text-[clamp(0.875rem,3.5vw,1.25rem)] font-black tracking-tighter font-headline leading-none">
+            <span className="text-white">Claim</span><span className="text-primary-container">Calc</span><span className="text-primary">.ai</span>
           </span>
         </div>
 
