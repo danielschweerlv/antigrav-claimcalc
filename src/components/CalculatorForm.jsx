@@ -45,6 +45,12 @@ const EV_OPTIONS = [
   { value: 'Not sure', label: "I'm not sure", icon: 'help_outline' },
 ]
 
+const COMMERCIAL_VEHICLE_OPTIONS = [
+  { value: 'Yes', label: 'Yes', icon: 'local_shipping' },
+  { value: 'No', label: 'No', icon: 'no_crash' },
+  { value: 'Not sure', label: "I'm not sure", icon: 'help_outline' },
+]
+
 const LOW_OFFER_INSURERS = ['GEICO', 'Allstate', 'Progressive']
 
 const DATE_OPTIONS = [
@@ -71,15 +77,12 @@ const OTHER_INSURERS = [
   { label: 'Progressive', icon: 'shield' },
   { label: 'Allstate', icon: 'shield' },
   { label: 'Farmers', icon: 'shield' },
-  { label: 'Nationwide', icon: 'shield' },
-  { label: 'Liberty Mutual', icon: 'shield' },
   { label: 'USAA', icon: 'shield' },
-  { label: 'Other / Not listed', icon: 'more_horiz' },
-  { label: "Not sure / I don't know", icon: 'help_outline' },
-  { label: 'They had no insurance', icon: 'no_crash' },
+  { label: 'Other / Not Listed', icon: 'more_horiz' },
+  { label: "They Have No Insurance / I Don't Know", icon: 'no_crash' },
 ]
 
-const TOTAL_STEPS = 10
+const TOTAL_STEPS = 11
 
 // ─── CALCULATION ────────────────────────────────────────────────────────────
 
@@ -103,16 +106,19 @@ function calcSettlement(data) {
   const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
 
   // Uninsured other party = UIM claim = harder to collect, slightly lower range
-  const otherInsM = (data.otherInsurer === 'They had no insurance' || data.otherInsurer === "Not sure / I don't know") ? 0.7 : 1.0
+  const otherInsM = (data.otherInsurer === "They Have No Insurance / I Don't Know") ? 0.7 : 1.0
 
   // EV modifier: EV accidents can involve more complex liability (battery fires, autopilot, manufacturer claims)
   const evM = data.evInvolved === 'Yes' ? 1.12 : 1.0
+
+  // Commercial vehicle modifier: commercial vehicles carry higher policy limits
+  const commM = data.commercialVehicle === 'Yes' ? 1.18 : 1.0
 
   const tM = whenMap[data.when] ?? 1.0
   const baseMed = injScore * 8000 + 4000   // proxy for medical costs based on injury severity
   const pain = baseMed * (injScore || 1.5)
   const prop = Math.round(baseMed * 0.35)
-  const base = (baseMed + pain + prop) * fM * tM * otherInsM * evM
+  const base = (baseMed + pain + prop) * fM * tM * otherInsM * evM * commM
 
   return {
     faultBarred,
@@ -439,6 +445,7 @@ export default function CalculatorForm() {
     injuries: [],
     fault: '',
     evInvolved: '',
+    commercialVehicle: '',
     when: '',
     myInsurer: '',
     otherInsurer: '',
@@ -466,7 +473,7 @@ export default function CalculatorForm() {
     })
   }
 
-  // Contact form validation for Step 10
+  // Contact form validation for Step 11
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   const isValidPhone = (phone) => phone.replace(/\D/g, '').length >= 7
   const contactComplete = data.firstName.trim() && data.lastName.trim() && isValidEmail(data.email) && isValidPhone(data.phone)
@@ -495,17 +502,18 @@ export default function CalculatorForm() {
     }, 2200)
   }
 
-  // ─── STEP FLOW (10 steps total) ──────────────────────────────────────────
+  // ─── STEP FLOW (11 steps total) ──────────────────────────────────────────
   // 1. Accident type
   // 2. Injuries
   // 3. Fault
-  // 4. EV involvement (NEW)
-  // 5. When
-  // 6. Your insurance
-  // 7. Other driver's insurance
-  // 8. Description
-  // 9. Zip code
-  // 10. Contact info (REQUIRED)
+  // 4. EV involvement
+  // 5. Commercial vehicle
+  // 6. When
+  // 7. Your insurance
+  // 8. Other driver's insurance
+  // 9. Description
+  // 10. Zip code
+  // 11. Contact info (REQUIRED)
 
   const renderStep = () => {
     switch (step) {
@@ -580,11 +588,11 @@ export default function CalculatorForm() {
       case 5:
         return (
           <>
-            <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
+            <StepHeading title={<>Did the accident involve a <span className="text-primary italic">commercial vehicle?</span></>} sub="Accidents involving commercial vehicles like semi-trucks, delivery vans, or rideshare vehicles often involve higher insurance policy limits and additional liable parties." />
             <div className="grid gap-3">
-              {DATE_OPTIONS.map(o => (
-                <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
-                  <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
+              {COMMERCIAL_VEHICLE_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.commercialVehicle === o.value} onClick={() => set('commercialVehicle', o.value)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{o.icon}</span>
                   {o.label}
                 </OptionBtn>
               ))}
@@ -596,12 +604,12 @@ export default function CalculatorForm() {
       case 6:
         return (
           <>
-            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {MY_INSURERS.map(({ label, icon }) => (
-                <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
-                  <span className="text-xs leading-tight">{label}</span>
+            <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
+            <div className="grid gap-3">
+              {DATE_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
+                  <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
+                  {o.label}
                 </OptionBtn>
               ))}
             </div>
@@ -612,8 +620,24 @@ export default function CalculatorForm() {
       case 7:
         return (
           <>
+            <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {MY_INSURERS.map(({ label, icon }) => (
+                <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="text-xs leading-tight">{label}</span>
+                </OptionBtn>
+              ))}
+            </div>
+            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+          </>
+        )
+
+      case 8:
+        return (
+          <>
             <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your claim is worth. Knowing the company helps estimate negotiation room." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {OTHER_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
                   <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
@@ -627,11 +651,11 @@ export default function CalculatorForm() {
                 {data.otherInsurer} is known for making initial offers well below claim value. An attorney experienced with {data.otherInsurer} claims in Nevada can typically negotiate a significantly higher settlement.
               </div>
             )}
-            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
           </>
         )
 
-      case 8:
+      case 9:
         return (
           <>
             <StepHeading title={<>Briefly <span className="text-primary italic">describe your accident</span></>} sub="A short summary helps give you a more accurate estimate. No legal jargon needed." />
@@ -645,11 +669,11 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors resize-none"
               />
             </div>
-            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
+            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
           </>
         )
 
-      case 9:
+      case 10:
         return (
           <>
             <StepHeading title={<>What's your <span className="text-primary italic">zip code?</span></>} sub="We use this to match you with licensed Nevada attorneys in your area." />
@@ -662,11 +686,11 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-4 text-2xl font-headline font-black tracking-widest outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors"
               />
             </div>
-            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
+            <NavButtons onNext={() => next(11)} onBack={() => next(9)} />
           </>
         )
 
-      case 10:
+      case 11:
         return (
           <>
             <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full claim value. Takes 10 seconds." />
@@ -752,7 +776,7 @@ export default function CalculatorForm() {
                 )}
               </div>
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(9)} disabled={!contactComplete} />
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(10)} disabled={!contactComplete} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>
