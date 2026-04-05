@@ -18,8 +18,27 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="space-y-4 max-w-sm text-center lg:text-left">
             <div className="flex items-center gap-2 justify-center lg:justify-start">
-              <img src="/logo.png" alt="ClaimCalculator.ai" className="w-7 h-7 object-contain drop-shadow-[0_0_8px_rgba(0,209,255,0.4)]" />
-              <span className="text-base font-bold text-on-background font-headline">ClaimCalculator<span className="text-primary">.ai</span></span>
+              <div
+                className="w-7 h-7 flex-shrink-0"
+                style={{
+                  background: 'linear-gradient(to top right, #00d1ff, #ffffff)',
+                  WebkitMaskImage: 'url(/claimcalculator_plus_icon.png)',
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center',
+                  maskImage: 'url(/claimcalculator_plus_icon.png)',
+                  maskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))',
+                }}
+                aria-hidden="true"
+              />
+              <img
+                src="/claimcalculator_hex_font_dark_v2.jpg"
+                alt="ClaimCalculator.ai"
+                className="h-5 w-auto object-contain"
+              />
             </div>
             <p className="text-on-surface-variant font-body text-xs leading-relaxed">
               Helping Nevada accident victims understand the true value of their claims and connect with experienced local attorneys.
