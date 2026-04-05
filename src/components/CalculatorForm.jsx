@@ -39,17 +39,10 @@ const FAULT_OPTIONS = [
   { value: 'Mostly me', label: 'Mostly or entirely my fault' },
 ]
 
-const ACCIDENT_LOCATIONS = [
-  { value: 'Las Vegas Strip', label: 'Las Vegas Strip' },
-  { value: 'Downtown / Fremont Street', label: 'Downtown / Fremont Street' },
-  { value: 'Henderson', label: 'Henderson' },
-  { value: 'North Las Vegas', label: 'North Las Vegas' },
-  { value: 'I-15 Corridor', label: 'I-15 Corridor' },
-  { value: 'US-95 / Spaghetti Bowl', label: 'US-95 / Spaghetti Bowl' },
-  { value: 'Reno / Sparks', label: 'Reno / Sparks' },
-  { value: 'Casino or Hotel Property', label: 'Casino or Hotel Property' },
-  { value: 'Construction Zone', label: 'Construction Zone' },
-  { value: 'Parking Lot or Garage', label: 'Parking Lot or Garage' },
+const EV_OPTIONS = [
+  { value: 'Yes', label: 'Yes', icon: 'electric_car' },
+  { value: 'No', label: 'No', icon: 'no_crash' },
+  { value: 'Not sure', label: "I'm not sure", icon: 'help_outline' },
 ]
 
 const LOW_OFFER_INSURERS = ['GEICO', 'Allstate', 'Progressive']
@@ -67,11 +60,9 @@ const MY_INSURERS = [
   { label: 'Progressive', icon: 'shield' },
   { label: 'Allstate', icon: 'shield' },
   { label: 'Farmers', icon: 'shield' },
-  { label: 'Nationwide', icon: 'shield' },
-  { label: 'Liberty Mutual', icon: 'shield' },
   { label: 'USAA', icon: 'shield' },
-  { label: 'Other / Not listed', icon: 'more_horiz' },
-  { label: 'I do not have insurance', icon: 'no_crash' },
+  { label: 'Other / Not Listed', icon: 'more_horiz' },
+  { label: 'I Have No Insurance', icon: 'no_crash' },
 ]
 
 const OTHER_INSURERS = [
@@ -88,7 +79,7 @@ const OTHER_INSURERS = [
   { label: 'They had no insurance', icon: 'no_crash' },
 ]
 
-const TOTAL_STEPS = 11
+const TOTAL_STEPS = 10
 
 // ─── CALCULATION ────────────────────────────────────────────────────────────
 
@@ -104,38 +95,24 @@ function calcSettlement(data) {
   if (injuries.includes('I was not injured')) injScore = 0
   if (injScore === 0 && injuries.length === 0) injScore = 1
 
-  // Fault: use slider percentage if set, otherwise fall back to categorical
-  const faultPct = data.faultPercent ?? 0
-  const faultBarred = faultPct > 50
-  let fM
-  if (faultPct > 0) {
-    fM = faultBarred ? 0 : (100 - faultPct) / 100
-  } else {
-    const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
-    fM = faultMap[data.fault] ?? 0.8
-  }
+  // Fault: use categorical options
+  const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
+  const fM = faultMap[data.fault] ?? 0.8
+  const faultBarred = fM <= 0.25 && data.fault === 'Mostly me'
 
   const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
 
   // Uninsured other party = UIM claim = harder to collect, slightly lower range
   const otherInsM = (data.otherInsurer === 'They had no insurance' || data.otherInsurer === "Not sure / I don't know") ? 0.7 : 1.0
 
-  // Location modifier: urban high-traffic areas slightly higher
-  const locationMap = {
-    'Las Vegas Strip': 1.1,
-    'Downtown / Fremont Street': 1.05,
-    'I-15 Corridor': 1.05,
-    'US-95 / Spaghetti Bowl': 1.05,
-    'Casino or Hotel Property': 1.08,
-    'Construction Zone': 1.06,
-  }
-  const locM = locationMap[data.accidentLocation] ?? 1.0
+  // EV modifier: EV accidents can involve more complex liability (battery fires, autopilot, manufacturer claims)
+  const evM = data.evInvolved === 'Yes' ? 1.12 : 1.0
 
   const tM = whenMap[data.when] ?? 1.0
   const baseMed = injScore * 8000 + 4000   // proxy for medical costs based on injury severity
   const pain = baseMed * (injScore || 1.5)
   const prop = Math.round(baseMed * 0.35)
-  const base = (baseMed + pain + prop) * fM * tM * otherInsM * locM
+  const base = (baseMed + pain + prop) * fM * tM * otherInsM * evM
 
   return {
     faultBarred,
@@ -231,13 +208,18 @@ function StepHeading({ title, sub }) {
   )
 }
 
-function NavButtons({ onNext, onBack, nextLabel = 'Continue', step }) {
+function NavButtons({ onNext, onBack, nextLabel = 'Continue', step, disabled = false }) {
   return (
     <div className="mt-7 space-y-2">
       <button
         type="button"
-        onClick={onNext}
-        className="w-full cta-gradient cta-shimmer text-on-primary-fixed py-4 rounded-[16px] font-headline font-bold text-base flex items-center justify-center gap-2 group transition-all duration-200 shadow-[0_0_20px_rgba(164,230,255,0.12)] hover:shadow-[0_4px_30px_rgba(164,230,255,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
+        onClick={disabled ? undefined : onNext}
+        disabled={disabled}
+        className={`w-full py-4 rounded-[16px] font-headline font-bold text-base flex items-center justify-center gap-2 group transition-all duration-200
+          ${disabled
+            ? 'bg-surface-container-highest/60 text-outline/40 cursor-not-allowed border border-outline-variant/10'
+            : 'cta-gradient cta-shimmer text-on-primary-fixed shadow-[0_0_20px_rgba(164,230,255,0.12)] hover:shadow-[0_4px_30px_rgba(164,230,255,0.2)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]'
+          }`}
       >
         {nextLabel}
         <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
@@ -263,6 +245,16 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step }) {
         <span className="text-[11px] text-on-surface-variant/40 leading-relaxed">Your information is encrypted and never shared without your permission.</span>
       </div>
     </div>
+  )
+}
+
+// ─── REQUIRED FIELD LABEL ───────────────────────────────────────────────────
+
+function RequiredLabel({ children }) {
+  return (
+    <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">
+      {children} <span className="text-red-500 text-xs">*</span>
+    </label>
   )
 }
 
@@ -293,7 +285,7 @@ function ResultScreen({ data }) {
             <h3 className="text-lg font-headline font-bold text-error">Nevada's 51% Rule Applies</h3>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
-            Based on your estimated fault of {data.faultPercent}%, Nevada law (NRS 41.141) would bar you from recovering damages. When you're more than 50% at fault, your claim value is $0 under the state's modified comparative negligence rule.
+            Based on your fault assessment, Nevada law (NRS 41.141) may significantly limit your ability to recover damages. When you're more than 50% at fault, your claim value is $0 under the state's modified comparative negligence rule.
           </p>
           <p className="text-sm text-on-surface-variant leading-relaxed">
             That said, fault percentages are often negotiated, and an experienced attorney may be able to build a case for a lower share. It's worth a conversation.
@@ -441,12 +433,12 @@ export default function CalculatorForm() {
   const [direction, setDirection] = useState(1) // 1 = forward, -1 = back
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
+  const [contactTouched, setContactTouched] = useState({})
   const [data, setData] = useState({
     type: '',
     injuries: [],
     fault: '',
-    faultPercent: 0,
-    accidentLocation: '',
+    evInvolved: '',
     when: '',
     myInsurer: '',
     otherInsurer: '',
@@ -474,6 +466,15 @@ export default function CalculatorForm() {
     })
   }
 
+  // Contact form validation for Step 10
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const isValidPhone = (phone) => phone.replace(/\D/g, '').length >= 7
+  const contactComplete = data.firstName.trim() && data.lastName.trim() && isValidEmail(data.email) && isValidPhone(data.phone)
+
+  const handleContactBlur = (field) => {
+    setContactTouched(prev => ({ ...prev, [field]: true }))
+  }
+
   const progress = done ? 100 : Math.round((step / TOTAL_STEPS) * 100)
 
   const next = (n) => {
@@ -482,6 +483,9 @@ export default function CalculatorForm() {
   }
 
   const showResult = () => {
+    // Mark all fields as touched to show validation
+    setContactTouched({ firstName: true, lastName: true, email: true, phone: true })
+    if (!contactComplete) return
     setDirection(1)
     setStep(null)
     setLoading(true)
@@ -490,6 +494,18 @@ export default function CalculatorForm() {
       setDone(true)
     }, 2200)
   }
+
+  // ─── STEP FLOW (10 steps total) ──────────────────────────────────────────
+  // 1. Accident type
+  // 2. Injuries
+  // 3. Fault
+  // 4. EV involvement (NEW)
+  // 5. When
+  // 6. Your insurance
+  // 7. Other driver's insurance
+  // 8. Description
+  // 9. Zip code
+  // 10. Contact info (REQUIRED)
 
   const renderStep = () => {
     switch (step) {
@@ -548,66 +564,20 @@ export default function CalculatorForm() {
       case 4:
         return (
           <>
-            <StepHeading title={<>Your share of <span className="text-primary italic">fault</span></>} sub="In Nevada, your payout gets reduced by your percentage of fault. If you're more than 50% at fault, you get nothing. That's Nevada law (NRS 41.141)." />
-            <div className="space-y-4">
-              <div>
-                <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-3">Estimated Fault Percentage</label>
-                <input
-                  type="range"
-                  min={0} max={100} step={5}
-                  value={data.faultPercent}
-                  onChange={e => set('faultPercent', Number(e.target.value))}
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer accent-primary"
-                  style={{
-                    background: `linear-gradient(to right, #a4e6ff ${data.faultPercent}%, #333539 ${data.faultPercent}%)`,
-                  }}
-                />
-                <div className="flex justify-between mt-2">
-                  <span className="text-xs text-outline">0% (not my fault)</span>
-                  <span className={`text-lg font-headline font-black ${data.faultPercent > 50 ? 'text-error' : 'text-primary'}`}>{data.faultPercent}%</span>
-                  <span className="text-xs text-outline">100%</span>
-                </div>
-              </div>
-
-              {data.faultPercent > 0 && data.faultPercent <= 50 && (
-                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm text-on-surface-variant leading-relaxed">
-                  At {data.faultPercent}% fault, your estimated recovery would be reduced by {data.faultPercent}%.
-                </div>
-              )}
-
-              {data.faultPercent > 50 && (
-                <div className="bg-error/10 border border-error/30 rounded-xl p-4 space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
-                    <p className="text-sm font-headline font-bold text-error">Nevada's 51% Rule</p>
-                  </div>
-                  <p className="text-sm text-on-surface-variant leading-relaxed">
-                    Under NRS 41.141, if you're more than 50% at fault, you cannot recover damages. Based on your estimate, a court would likely bar your claim. However, fault is often negotiated. An attorney may be able to argue for a lower fault percentage.
-                  </p>
-                </div>
-              )}
+            <StepHeading title={<>Were you involved in an accident with an <span className="text-primary italic">electric vehicle (EV)?</span></>} sub="EV accidents can involve unique factors like battery fires, autopilot systems, and manufacturer liability that may affect your claim." />
+            <div className="grid gap-3">
+              {EV_OPTIONS.map(o => (
+                <OptionBtn key={o.value} selected={data.evInvolved === o.value} onClick={() => set('evInvolved', o.value)}>
+                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{o.icon}</span>
+                  {o.label}
+                </OptionBtn>
+              ))}
             </div>
             <NavButtons onNext={() => next(5)} onBack={() => next(3)} />
           </>
         )
 
       case 5:
-        return (
-          <>
-            <StepHeading title={<>Where did the accident <span className="text-primary italic">happen?</span></>} sub="Location matters in Nevada. Urban accidents often involve more witnesses, surveillance footage, and higher medical costs, all of which can affect your claim's value." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {ACCIDENT_LOCATIONS.map(({ value, label }) => (
-                <OptionBtn key={value} selected={data.accidentLocation === value} onClick={() => set('accidentLocation', value)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">location_on</span>
-                  <span className="text-xs leading-tight">{label}</span>
-                </OptionBtn>
-              ))}
-            </div>
-            <NavButtons onNext={() => next(6)} onBack={() => next(4)} />
-          </>
-        )
-
-      case 6:
         return (
           <>
             <StepHeading title={<>When did this <span className="text-primary italic">accident occur?</span></>} sub="Nevada has a 2-year statute of limitations. Timing matters." />
@@ -619,15 +589,15 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(7)} onBack={() => next(5)} />
+            <NavButtons onNext={() => next(6)} onBack={() => next(4)} />
           </>
         )
 
-      case 7:
+      case 6:
         return (
           <>
             <StepHeading title={<>Who is your <span className="text-primary italic">insurance provider?</span></>} sub="Select your car insurance company. This helps us understand your coverage situation." />
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-72 overflow-y-auto pr-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {MY_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
                   <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
@@ -635,11 +605,11 @@ export default function CalculatorForm() {
                 </OptionBtn>
               ))}
             </div>
-            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
+            <NavButtons onNext={() => next(7)} onBack={() => next(5)} />
           </>
         )
 
-      case 8:
+      case 7:
         return (
           <>
             <StepHeading title={<>Do you know the <span className="text-primary italic">other driver's insurance?</span></>} sub="Some insurers are known for making low initial offers to see if you'll accept less than your claim is worth. Knowing the company helps estimate negotiation room." />
@@ -657,11 +627,11 @@ export default function CalculatorForm() {
                 {data.otherInsurer} is known for making initial offers well below claim value. An attorney experienced with {data.otherInsurer} claims in Nevada can typically negotiate a significantly higher settlement.
               </div>
             )}
-            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
+            <NavButtons onNext={() => next(8)} onBack={() => next(6)} />
           </>
         )
 
-      case 9:
+      case 8:
         return (
           <>
             <StepHeading title={<>Briefly <span className="text-primary italic">describe your accident</span></>} sub="A short summary helps give you a more accurate estimate. No legal jargon needed." />
@@ -675,11 +645,11 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors resize-none"
               />
             </div>
-            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
+            <NavButtons onNext={() => next(9)} onBack={() => next(7)} />
           </>
         )
 
-      case 10:
+      case 9:
         return (
           <>
             <StepHeading title={<>What's your <span className="text-primary italic">zip code?</span></>} sub="We use this to match you with licensed Nevada attorneys in your area." />
@@ -692,39 +662,97 @@ export default function CalculatorForm() {
                 className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-4 py-4 text-2xl font-headline font-black tracking-widest outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors"
               />
             </div>
-            <NavButtons onNext={() => next(11)} onBack={() => next(9)} />
+            <NavButtons onNext={() => next(10)} onBack={() => next(8)} />
           </>
         )
 
-      case 11:
+      case 10:
         return (
           <>
             <StepHeading title={<>Last step. <span className="text-primary italic">Your estimate is ready.</span></>} sub="Enter your contact details to unlock your full claim value. Takes 10 seconds." />
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
-                {[
-                  { key: 'firstName', label: 'First Name', placeholder: 'First name', type: 'text' },
-                  { key: 'lastName', label: 'Last Name', placeholder: 'Last name', type: 'text' },
-                ].map(f => (
-                  <div key={f.key}>
-                    <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">{f.label}</label>
-                    <input type={f.type} placeholder={f.placeholder} value={data[f.key]} onChange={e => set(f.key, e.target.value)}
-                      className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors" />
-                  </div>
-                ))}
-              </div>
-              {[
-                { key: 'email', label: 'Email Address', placeholder: 'you@email.com', type: 'email' },
-                { key: 'phone', label: 'Phone Number', placeholder: '(702) 555-0100', type: 'tel' },
-              ].map(f => (
-                <div key={f.key}>
-                  <label className="block text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">{f.label}</label>
-                  <input type={f.type} placeholder={f.placeholder} value={data[f.key]} onChange={e => set(f.key, e.target.value)}
-                    className="w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border border-outline-variant/20 focus:border-primary/60 transition-colors" />
+                <div>
+                  <RequiredLabel>First Name</RequiredLabel>
+                  <input
+                    type="text"
+                    placeholder="First name"
+                    value={data.firstName}
+                    onChange={e => set('firstName', e.target.value)}
+                    onBlur={() => handleContactBlur('firstName')}
+                    className={`w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border transition-colors ${
+                      contactTouched.firstName && !data.firstName.trim()
+                        ? 'border-red-500/60 focus:border-red-500'
+                        : 'border-outline-variant/20 focus:border-primary/60'
+                    }`}
+                  />
+                  {contactTouched.firstName && !data.firstName.trim() && (
+                    <p className="text-red-500 text-[10px] mt-1">First name is required</p>
+                  )}
                 </div>
-              ))}
+                <div>
+                  <RequiredLabel>Last Name</RequiredLabel>
+                  <input
+                    type="text"
+                    placeholder="Last name"
+                    value={data.lastName}
+                    onChange={e => set('lastName', e.target.value)}
+                    onBlur={() => handleContactBlur('lastName')}
+                    className={`w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border transition-colors ${
+                      contactTouched.lastName && !data.lastName.trim()
+                        ? 'border-red-500/60 focus:border-red-500'
+                        : 'border-outline-variant/20 focus:border-primary/60'
+                    }`}
+                  />
+                  {contactTouched.lastName && !data.lastName.trim() && (
+                    <p className="text-red-500 text-[10px] mt-1">Last name is required</p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <RequiredLabel>Email Address</RequiredLabel>
+                <input
+                  type="email"
+                  placeholder="you@email.com"
+                  value={data.email}
+                  onChange={e => set('email', e.target.value)}
+                  onBlur={() => handleContactBlur('email')}
+                  className={`w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border transition-colors ${
+                    contactTouched.email && !isValidEmail(data.email)
+                      ? 'border-red-500/60 focus:border-red-500'
+                      : 'border-outline-variant/20 focus:border-primary/60'
+                  }`}
+                />
+                {contactTouched.email && !data.email.trim() && (
+                  <p className="text-red-500 text-[10px] mt-1">Email is required</p>
+                )}
+                {contactTouched.email && data.email.trim() && !isValidEmail(data.email) && (
+                  <p className="text-red-500 text-[10px] mt-1">Enter a valid email address</p>
+                )}
+              </div>
+              <div>
+                <RequiredLabel>Phone Number</RequiredLabel>
+                <input
+                  type="tel"
+                  placeholder="(702) 555-0100"
+                  value={data.phone}
+                  onChange={e => set('phone', e.target.value)}
+                  onBlur={() => handleContactBlur('phone')}
+                  className={`w-full bg-surface-container-highest text-on-surface placeholder-outline/50 rounded-xl px-3 py-3 text-sm outline-none border transition-colors ${
+                    contactTouched.phone && !isValidPhone(data.phone)
+                      ? 'border-red-500/60 focus:border-red-500'
+                      : 'border-outline-variant/20 focus:border-primary/60'
+                  }`}
+                />
+                {contactTouched.phone && !data.phone.trim() && (
+                  <p className="text-red-500 text-[10px] mt-1">Phone number is required</p>
+                )}
+                {contactTouched.phone && data.phone.trim() && !isValidPhone(data.phone) && (
+                  <p className="text-red-500 text-[10px] mt-1">Enter a valid phone number</p>
+                )}
+              </div>
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(10)} />
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => next(9)} disabled={!contactComplete} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>
