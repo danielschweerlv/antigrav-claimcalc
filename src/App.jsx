@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
-import ShineBorder from './components/ui/shine-border'
 import InjuryValuesSection from './components/InjuryValuesSection'
 import WhatIsSection from './components/WhatIsSection'
 
@@ -246,32 +245,7 @@ function App() {
           <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-1/4 left-[15%] w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-          {/* Nevada state outline watermark */}
-          <svg
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '280px',
-              height: 'auto',
-              opacity: 0.04,
-              color: 'white',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-            viewBox="0 0 200 280"
-            xmlns="http://www.w3.org/2000/svg"
-            className="nevada-watermark"
-          >
-            <path
-              d="M 30 10 L 170 10 L 170 40 L 195 70 L 195 270 L 80 270 L 30 200 Z"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            />
-          </svg>
+
 
           <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
@@ -325,9 +299,9 @@ function App() {
               transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
             >
               <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
-              <ShineBorder borderWidth={2} duration={4} gradient="from-[#a4e6ff] via-white to-[#00d1ff]">
+              <div className="relative rounded-2xl border border-white/[0.10] bg-surface-container-low shadow-[0_0_40px_rgba(0,0,0,0.5)]">
                 <CalculatorForm />
-              </ShineBorder>
+              </div>
             </motion.div>
 
           </div>
