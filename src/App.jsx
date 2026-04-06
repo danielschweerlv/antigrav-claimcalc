@@ -1,9 +1,80 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
 import ShineBorder from './components/ui/shine-border'
+
+const AVATAR_POOL = [
+  'https://randomuser.me/api/portraits/thumb/men/89.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/82.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/49.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/72.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/75.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/56.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/92.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/78.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/12.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/93.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/10.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/22.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/58.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/33.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/63.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/94.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/87.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/53.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/25.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/51.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/5.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/82.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/22.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/86.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/66.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/44.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/28.jpg',
+  'https://randomuser.me/api/portraits/thumb/women/58.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/29.jpg',
+  'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+]
+
+function RotatingAvatars() {
+  const [visible, setVisible] = useState([0, 1, 2])
+  const [fading, setFading] = useState(null) // index in visible[] that is fading
+  const nextRef = useRef(3)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const swapSlot = Math.floor(Math.random() * 3)
+      const nextIdx = nextRef.current % AVATAR_POOL.length
+      nextRef.current += 1
+      setFading(swapSlot)
+      setTimeout(() => {
+        setVisible(prev => {
+          const updated = [...prev]
+          updated[swapSlot] = nextIdx
+          return updated
+        })
+        setFading(null)
+      }, 400)
+    }, 2200)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="flex -space-x-2.5">
+      {visible.map((poolIdx, slot) => (
+        <img
+          key={`${slot}-${poolIdx}`}
+          className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover transition-opacity duration-400"
+          style={{ opacity: fading === slot ? 0 : 1 }}
+          src={AVATAR_POOL[poolIdx]}
+          alt={`user ${slot + 1}`}
+        />
+      ))}
+    </div>
+  )
+}
 
 const transitionVariants = {
   container: {
@@ -87,15 +158,7 @@ function App() {
 
               {/* Social proof — avatars */}
               <div className="flex items-center gap-3 justify-center lg:justify-start lg:mb-6">
-                <div className="flex -space-x-2.5">
-                  {[
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBUUSlwtNdlTQyrWVYdQnqEG2G2D2qWsw8r3tEiX44M9NjTr6eGMRe5iNyh1igPZcX65tvaKU24HKD_ViEu1-vmm1ZyazdoVFdaBd-gOB-iJopbsj7CWmPEh_z2k5lhJbcUa1BQNSwHpD7Q9mFujNPUpbTPzfQ-3s8i-aCFYAKSA7ToQBPjYxtWPKZ9vcMOxxLWWwoiSpbTZoukQ2UJdSse3T5EGjjJTH_EbQZXwioeOefNc3mdh8fCnEIaf6hhgfpIyoutzG0uHBg',
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuDiiq9OcBBRXDRd1IO8Q3jyBqM9sfQ-enET6QgJD7RfCodMdVApoZPPMLpwObQxVZS679HErC21H0TqZMHW7P5HGJ94mqeUuWZHKdb9ZGXrbBCYqKaOfbE_Pf20f2Oindpn_H5fXvT1exHXEpMzVstozNUbT7OoHxTcIqOeloguSCUGiBQ0CLYcfNhjvk6vxe7H6o7C96bIOnwhWF4K-MJg0T8bGZHoEhjsSTJX0tmbUGIZ1F8G3TeDNibUacJt1o34L3Ix2vUvrrU',
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuD2xiR_WMueO6jb2T0wmxvLry5Jkp3XF11qlJC13GEG-_g5HSypgEXr1K05c4Hi7IKOyiz1cqcsMTamtRolNarJ0tI1SNJVbNxJc1AfKNukt8fW7sMTmcGhX94viu-6QrSuUdAR896ovbG5XTR-GuPOh8dTj1xgzan7n8t6U6Y1WtHwjr7e7WfBUn8vAOMX8ot4yquiRTUyp4OthMggfdxWbyWivY1jeRZkTFL53MsPaAJs1R5mz7eUrBPaYlxJ0H2tcYBoTgaP4EE',
-                  ].map((src, i) => (
-                    <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
-                  ))}
-                </div>
+                <RotatingAvatars />
                 <p className="text-sm text-on-surface-variant">
                   Join <span className="text-on-background font-bold">2,400+</span> people who discovered they were owed more
                 </p>
