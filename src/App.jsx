@@ -39,39 +39,55 @@ const AVATAR_POOL = [
 ]
 
 function RotatingAvatars() {
-  const [visible, setVisible] = useState([0, 1, 2])
-  const [fading, setFading] = useState(null) // index in visible[] that is fading
-  const nextRef = useRef(3)
+  const [groupOffset, setGroupOffset] = useState(0)
+  const [outgoing, setOutgoing] = useState(null) // offset of the group fading out
+  const SWEEP_MS = 600
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const swapSlot = Math.floor(Math.random() * 3)
-      const nextIdx = nextRef.current % AVATAR_POOL.length
-      nextRef.current += 1
-      setFading(swapSlot)
-      setTimeout(() => {
-        setVisible(prev => {
-          const updated = [...prev]
-          updated[swapSlot] = nextIdx
-          return updated
-        })
-        setFading(null)
-      }, 400)
-    }, 2200)
+      setOutgoing(groupOffset)
+      const next = (groupOffset + 3) % AVATAR_POOL.length
+      setGroupOffset(next)
+      setTimeout(() => setOutgoing(null), SWEEP_MS)
+    }, 5000)
     return () => clearInterval(interval)
-  }, [])
+  }, [groupOffset])
+
+  const getGroup = (offset) =>
+    [0, 1, 2].map(i => AVATAR_POOL[(offset + i) % AVATAR_POOL.length])
 
   return (
-    <div className="flex -space-x-2.5">
-      {visible.map((poolIdx, slot) => (
-        <img
-          key={`${slot}-${poolIdx}`}
-          className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover transition-opacity duration-400"
-          style={{ opacity: fading === slot ? 0 : 1 }}
-          src={AVATAR_POOL[poolIdx]}
-          alt={`user ${slot + 1}`}
-        />
-      ))}
+    <div className="flex -space-x-2.5 relative" style={{ width: 88, height: 36 }}>
+      {/* incoming group */}
+      <div
+        className="flex -space-x-2.5 absolute inset-0"
+        style={{
+          opacity: outgoing !== null ? 0 : 1,
+          transform: outgoing !== null ? 'translateX(-8px)' : 'translateX(0)',
+          transition: outgoing !== null
+            ? 'none'
+            : `opacity ${SWEEP_MS}ms ease, transform ${SWEEP_MS}ms ease`,
+        }}
+      >
+        {getGroup(groupOffset).map((src, i) => (
+          <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
+        ))}
+      </div>
+      {/* outgoing group */}
+      {outgoing !== null && (
+        <div
+          className="flex -space-x-2.5 absolute inset-0"
+          style={{
+            opacity: 0,
+            transform: 'translateX(8px)',
+            transition: `opacity ${SWEEP_MS}ms ease, transform ${SWEEP_MS}ms ease`,
+          }}
+        >
+          {getGroup(outgoing).map((src, i) => (
+            <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
