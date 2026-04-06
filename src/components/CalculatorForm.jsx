@@ -643,7 +643,7 @@ export default function CalculatorForm() {
     }
   }
 
-  const progress = done ? 100 : Math.round(((stepIndex + 1) / TOTAL_STEPS) * 100)
+  const progress = done ? 100 : (data.caseType === '' && stepIndex === 0) ? 11 : Math.round(((stepIndex + 1) / TOTAL_STEPS) * 100)
 
   const goTo = (idx) => {
     setDirection(idx > stepIndex ? 1 : -1)
