@@ -73,7 +73,7 @@ function App() {
               </div>
 
               {/* Headline — stronger size contrast */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-black text-on-background leading-[0.95] tracking-tight lg:mb-7">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-black lg:font-extrabold text-on-background leading-[0.95] tracking-tight lg:mb-7">
                 Insurance companies{' '}
                 <br className="hidden lg:block" />
                 already know your number.{' '}
