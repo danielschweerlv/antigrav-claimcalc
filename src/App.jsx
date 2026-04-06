@@ -260,15 +260,134 @@ function App() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 60"
+              viewBox="0 0 1920 80"
               style={{ display: 'block', width: '100%', height: '60px' }}
-              preserveAspectRatio="none"
+              preserveAspectRatio="xMidYMax meet"
+              aria-hidden="true"
             >
-              {/* Las Vegas Strip detailed skyline - north (left) to south (right) */}
-              <path
-                d="M0,60 L0,52 L20,52 L20,48 L35,48 L35,52 L50,52 L50,45 L65,45 L65,52 L72,52 L72,20 L74,15 L75,8 L76,15 L78,20 L78,52 L90,52 L90,44 L110,44 L110,38 L125,38 L125,52 L135,52 L135,42 L155,42 L155,48 L165,48 L165,42 L180,42 L180,52 L195,52 L195,40 L215,40 L215,35 L225,35 L225,40 L240,40 L240,52 L255,52 L258,44 L265,38 L272,44 L275,52 L285,52 L285,36 L305,36 L305,30 L315,30 L315,36 L330,36 L330,52 L345,52 L345,40 L360,40 L360,34 L368,34 L368,40 L380,40 L380,52 L395,52 L395,44 L420,44 L420,52 L430,52 L430,36 L445,36 L445,30 L458,30 L458,36 L470,36 L470,52 L488,52 L491,45 L497,38 L500,34 L503,38 L509,45 L512,52 L525,52 L525,40 L545,40 L545,44 L560,44 L560,40 L575,40 L575,52 L590,52 L590,36 L608,36 L608,30 L618,30 L618,36 L632,36 L632,52 L648,52 L648,42 L668,42 L668,52 L680,52 L680,38 L695,38 L695,32 L705,32 L705,38 L718,38 L718,52 L730,52 L733,10 L736,4 L738,0 L740,4 L743,10 L746,52 L758,52 L758,44 L778,44 L778,52 L792,52 L792,40 L812,40 L812,46 L828,46 L828,40 L845,40 L845,52 L860,52 L862,38 L870,30 L876,24 L880,20 L884,24 L890,30 L898,38 L900,52 L915,52 L915,44 L935,44 L935,52 L950,52 L950,38 L968,38 L968,32 L978,32 L978,38 L995,38 L995,52 L1010,52 L1012,34 L1022,22 L1028,16 L1032,12 L1036,16 L1042,22 L1052,34 L1054,52 L1068,52 L1068,44 L1088,44 L1088,40 L1105,40 L1105,44 L1120,44 L1120,52 L1135,52 L1135,36 L1152,36 L1152,30 L1162,30 L1162,36 L1178,36 L1178,52 L1192,52 L1192,44 L1210,44 L1210,52 L1225,52 L1228,20 L1232,12 L1234,6 L1236,12 L1240,20 L1243,52 L1258,52 L1258,42 L1278,42 L1278,52 L1295,52 Q1295,20 1320,18 Q1345,16 1360,20 Q1380,24 1380,52 L1440,52 L1440,60 Z"
-                fill="white"
-              />
+              {/* Ground baseline */}
+              <rect x="0" y="72" width="1920" height="8" fill="white"/>
+
+              {/* === LEFT: Venetian bridge + building === */}
+              <rect x="10" y="55" width="60" height="17" fill="white"/>
+              <rect x="20" y="45" width="40" height="12" fill="white"/>
+              {/* bridge arch */}
+              <path d="M10,72 Q40,58 70,72" fill="white"/>
+
+              {/* === Eiffel Tower replica === */}
+              {/* legs */}
+              <path d="M130,72 L148,30 L152,30 L170,72 Z" fill="white"/>
+              {/* upper tower */}
+              <path d="M144,30 L149,10 L151,10 L156,30 Z" fill="white"/>
+              {/* horizontal crossbar */}
+              <rect x="138" y="38" width="24" height="3" fill="white"/>
+              <rect x="145" y="22" width="10" height="2" fill="white"/>
+
+              {/* === High Roller Ferris Wheel === */}
+              <circle cx="250" cy="38" r="26" fill="white"/>
+              <circle cx="250" cy="38" r="18" fill="black" opacity="0.99"/>
+              {/* spokes */}
+              <line x1="250" y1="12" x2="250" y2="64" stroke="white" strokeWidth="1.5"/>
+              <line x1="224" y1="38" x2="276" y2="38" stroke="white" strokeWidth="1.5"/>
+              <line x1="231" y1="19" x2="269" y2="57" stroke="white" strokeWidth="1.5"/>
+              <line x1="269" y1="19" x2="231" y2="57" stroke="white" strokeWidth="1.5"/>
+              {/* gondolas - dots around rim */}
+              <circle cx="250" cy="12" r="2.5" fill="white"/>
+              <circle cx="276" cy="38" r="2.5" fill="white"/>
+              <circle cx="250" cy="64" r="2.5" fill="white"/>
+              <circle cx="224" cy="38" r="2.5" fill="white"/>
+              <circle cx="269" cy="19" r="2.5" fill="white"/>
+              <circle cx="269" cy="57" r="2.5" fill="white"/>
+              <circle cx="231" cy="19" r="2.5" fill="white"/>
+              <circle cx="231" cy="57" r="2.5" fill="white"/>
+              {/* support legs */}
+              <path d="M236,64 L240,72 M264,64 L260,72" stroke="white" strokeWidth="2" fill="none"/>
+
+              {/* === MSG Sphere (large globe) === */}
+              <circle cx="370" cy="52" r="26" fill="white"/>
+              {/* screen detail lines */}
+              <path d="M344,52 Q370,44 396,52" stroke="black" strokeWidth="1" fill="none" opacity="0.6"/>
+              <path d="M346,46 Q370,38 394,46" stroke="black" strokeWidth="1" fill="none" opacity="0.6"/>
+
+              {/* === Casino mid-rises left cluster === */}
+              <rect x="410" y="40" width="28" height="32" fill="white"/>
+              <rect x="442" y="48" width="20" height="24" fill="white"/>
+              <rect x="466" y="36" width="32" height="36" fill="white"/>
+              <rect x="502" y="44" width="22" height="28" fill="white"/>
+
+              {/* === Stratosphere Tower === */}
+              {/* base building */}
+              <rect x="540" y="50" width="30" height="22" fill="white"/>
+              {/* tower shaft */}
+              <rect x="551" y="18" width="8" height="34" fill="white"/>
+              {/* observation pod */}
+              <ellipse cx="555" cy="18" rx="12" ry="6" fill="white"/>
+              {/* needle */}
+              <rect x="554" y="2" width="2" height="16" fill="white"/>
+              {/* top pod detail */}
+              <rect x="549" y="14" width="12" height="4" fill="white"/>
+
+              {/* === Mid-rises right of Strat === */}
+              <rect x="582" y="38" width="26" height="34" fill="white"/>
+              <rect x="612" y="44" width="20" height="28" fill="white"/>
+
+              {/* === Wynn curved tower === */}
+              <path d="M645,72 L645,28 Q660,20 680,28 L680,72 Z" fill="white"/>
+              <path d="M655,28 Q668,22 678,28" fill="white"/>
+
+              {/* === More casino mid-rises center-right === */}
+              <rect x="695" y="35" width="30" height="37" fill="white"/>
+              <rect x="729" y="42" width="22" height="30" fill="white"/>
+              <rect x="755" y="38" width="28" height="34" fill="white"/>
+              <rect x="787" y="46" width="18" height="26" fill="white"/>
+
+              {/* === Statue of Liberty === */}
+              {/* base/pedestal */}
+              <rect x="815" y="58" width="14" height="14" fill="white"/>
+              {/* body */}
+              <rect x="818" y="44" width="8" height="16" fill="white"/>
+              {/* head */}
+              <ellipse cx="822" cy="42" rx="5" ry="4" fill="white"/>
+              {/* crown spikes */}
+              <path d="M818,40 L816,34 L820,38 M822,38 L820,32 L824,38 M826,40 L828,34 L824,38" stroke="white" strokeWidth="1.5" fill="none"/>
+              {/* torch arm */}
+              <path d="M826,48 L834,42 L836,40" stroke="white" strokeWidth="2" fill="none"/>
+              <circle cx="836" cy="39" r="2" fill="white"/>
+
+              {/* === Hotel towers right cluster === */}
+              <rect x="850" y="32" width="32" height="40" fill="white"/>
+              <rect x="886" y="40" width="24" height="32" fill="white"/>
+              <rect x="914" y="36" width="28" height="36" fill="white"/>
+
+              {/* === Welcome to Las Vegas Sign === */}
+              <rect x="952" y="44" width="50" height="28" fill="white"/>
+              {/* sign detail - oval top */}
+              <ellipse cx="977" cy="44" rx="25" ry="8" fill="white"/>
+              {/* sign pole */}
+              <rect x="974" y="58" width="6" height="14" fill="white"/>
+
+              {/* === More hotel blocks === */}
+              <rect x="1016" y="38" width="34" height="34" fill="white"/>
+              <rect x="1054" y="44" width="26" height="28" fill="white"/>
+              <rect x="1084" y="36" width="30" height="36" fill="white"/>
+
+              {/* === Luxor Pyramid === */}
+              <path d="M1130,72 L1175,20 L1220,72 Z" fill="white"/>
+              {/* capstone beam (light ray) */}
+              <rect x="1174" y="8" width="2" height="12" fill="white"/>
+
+              {/* === Sphinx === */}
+              <path d="M1225,72 L1225,60 Q1240,52 1255,58 L1265,58 L1265,72 Z" fill="white"/>
+              {/* sphinx head */}
+              <ellipse cx="1255" cy="56" rx="10" ry="8" fill="white"/>
+              <path d="M1248,56 L1240,62 L1248,62 Z" fill="white"/>
+
+              {/* === Mandalay Bay right === */}
+              <rect x="1280" y="40" width="40" height="32" fill="white"/>
+              <rect x="1324" y="46" width="28" height="26" fill="white"/>
+
+              {/* Right fill */}
+              <rect x="1360" y="55" width="560" height="17" fill="white"/>
             </svg>
           </div>
           <div className="max-w-5xl mx-auto">
