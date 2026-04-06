@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
 import ShineBorder from './components/ui/shine-border'
+import InjuryValuesSection from './components/InjuryValuesSection'
 
 
 const AVATAR_POOL = [
@@ -604,6 +605,9 @@ function App() {
             </div>
           </div>
         </section>
+
+        {/* ── INJURY VALUES BY TYPE ─────────────────────────────────────── */}
+        <InjuryValuesSection />
 
         {/* ── TESTIMONIALS CAROUSEL ─────────────────────────────────────── */}
         <section className="py-20 lg:py-28 px-4 lg:px-8">
