@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
 import ShineBorder from './components/ui/shine-border'
+import SuccessStoriesSection from './components/SuccessStoriesSection'
 
 const AVATAR_POOL = [
   'https://randomuser.me/api/portraits/thumb/men/89.jpg',
@@ -513,6 +514,9 @@ function App() {
             </div>
           </div>
         </section>
+
+        {/* ── SUCCESS STORIES ─────────────────────────────────────────── */}
+        <SuccessStoriesSection />
 
         {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
         <section className="py-20 lg:py-28 px-4 lg:px-8">
