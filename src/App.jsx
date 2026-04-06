@@ -239,7 +239,7 @@ function App() {
       <main className="relative z-10 pt-[58px]">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
-        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px] overflow-hidden" style={{ isolation: 'isolate' }}>
+        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px]" style={{ isolation: 'isolate' }}>
           
           {/* Background glow — positioned behind calculator */}
           <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -320,7 +320,6 @@ function App() {
               transform: 'translateY(-100%)',
               opacity: 0.12,
               pointerEvents: 'none',
-              overflow: 'hidden',
               display: 'flex',
               alignItems: 'flex-end',
             }}
