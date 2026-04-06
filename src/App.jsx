@@ -239,7 +239,7 @@ function App() {
       <main className="relative z-10 pt-[58px]">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
-        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px]" style={{ isolation: 'isolate' }}>
+        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px]" style={{ isolation: 'isolate', zIndex: 2 }}>
           
           {/* Background glow — positioned behind calculator */}
           <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -247,7 +247,7 @@ function App() {
 
 
 
-          <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+          <div className="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
             {/* Left column */}
             <AnimatedGroup variants={transitionVariants} className="space-y-6 lg:space-y-0 text-center lg:text-left">
@@ -293,7 +293,7 @@ function App() {
 
             {/* Right column — DESKTOP ONLY: embedded calculator preview */}
             <motion.div
-              className="relative hidden lg:block self-center overflow-hidden"
+              className="relative hidden lg:block self-center overflow-hidden z-20"
               initial={{ opacity: 0, y: 24, filter: 'blur(12px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
@@ -308,7 +308,7 @@ function App() {
         </section>
 
         {/* ── TRUST BAR ──────────────────────────────────────────────────── */}
-        <section className="relative overflow-visible px-4 lg:px-8 -mt-4 lg:-mt-8">
+        <section className="relative overflow-visible px-4 lg:px-8 -mt-4 lg:-mt-8" style={{ zIndex: 1 }}>
           {/* ── LAS VEGAS SKYLINE DIVIDER ── */}
           <div
             aria-hidden="true"
@@ -322,6 +322,7 @@ function App() {
               pointerEvents: 'none',
               display: 'flex',
               alignItems: 'flex-end',
+              zIndex: 0,
             }}
             className="lv-skyline-divider"
           >
