@@ -253,15 +253,23 @@ function App() {
               transform: 'translateY(-100%)',
               opacity: 0.12,
               pointerEvents: 'none',
-              backgroundImage: 'url(/lv-skyline.png)',
-              backgroundSize: '100% auto',
-              backgroundPosition: 'center bottom',
-              backgroundRepeat: 'no-repeat',
-              filter: 'invert(1)',
               overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'flex-end',
             }}
             className="lv-skyline-divider"
-          />
+          >
+            <img
+              src="/lv-skyline.png"
+              alt=""
+              style={{
+                display: 'block',
+                width: '100%',
+                height: 'auto',
+                filter: 'invert(1)',
+              }}
+            />
+          </div>
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 py-5 border-t border-b border-white/[0.06]">
               {[
