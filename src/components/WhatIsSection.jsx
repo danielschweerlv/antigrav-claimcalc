@@ -43,10 +43,7 @@ export default function WhatIsSection() {
   const navigate = useNavigate()
 
   return (
-    <section
-      style={{ backgroundColor: '#0D0D0D' }}
-      className="py-20 lg:py-28 px-4 lg:px-8"
-    >
+    <section className="py-16 lg:py-24 px-4 lg:px-8">
       <div className="max-w-5xl mx-auto">
 
         {/* ── Header ──────────────────────────────────────────── */}
@@ -88,29 +85,31 @@ export default function WhatIsSection() {
             <motion.div
               key={title}
               variants={itemVariants}
-              className="flex flex-col gap-4 p-7 rounded-xl border transition-all duration-300 hover:border-primary/25 group"
+              className="flex flex-col gap-3 p-6 rounded-xl border transition-all duration-300 hover:border-primary/25 group"
               style={{
-                background: 'rgba(255,255,255,0.04)',
+                background: 'rgba(255,255,255,0.03)',
                 borderColor: 'rgba(255,255,255,0.07)',
               }}
             >
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: 'rgba(164,230,255,0.10)' }}
-              >
-                <span
-                  className="material-symbols-outlined text-primary text-2xl"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(164,230,255,0.10)' }}
                 >
-                  {icon}
-                </span>
+                  <span
+                    className="material-symbols-outlined text-primary text-xl"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    {icon}
+                  </span>
+                </div>
+                <h4 className="font-headline font-bold text-white text-[17px] leading-tight">
+                  {title}
+                </h4>
               </div>
-              <h4 className="font-headline font-bold text-white text-lg leading-tight">
-                {title}
-              </h4>
               <p
-                className="text-sm leading-relaxed"
-                style={{ color: 'rgba(255,255,255,0.6)' }}
+                className="text-[15px] leading-relaxed"
+                style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 {body}
               </p>
