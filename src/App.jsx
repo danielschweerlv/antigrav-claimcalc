@@ -459,7 +459,7 @@ function App() {
               <h2 className="text-3xl lg:text-5xl font-headline ">
                 The Path to <span className="text-primary italic">Recovery.</span>
               </h2>
-              <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-xl mx-auto">
+              <p className="text-on-surface-variant text-[19px] lg:text-lg max-w-xl mx-auto">
                 Three simple steps between you and the compensation you deserve.
               </p>
             </AnimatedGroup>
@@ -518,7 +518,7 @@ function App() {
                   href="/success-stories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[13px] text-outline hover:text-primary transition-colors duration-200 group"
+                  className="flex items-center gap-1 text-[15px] text-outline hover:text-primary transition-colors duration-200 group"
                 >
                   See all stories
                   <span className="material-symbols-outlined text-[13px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
@@ -574,7 +574,7 @@ function App() {
                     </div>
                     <div>
                       <h5 className="text-on-background text-sm sm:text-[15px]">{TESTIMONIALS[activeTestimonial].name}</h5>
-                      <p className="text-xs sm:text-[13px] text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
+                      <p className="text-xs sm:text-[15px] text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
                     </div>
                     {/* Stars */}
                     <div className="ml-auto flex flex-shrink-0">
@@ -613,7 +613,7 @@ function App() {
             <h2 className="text-3xl lg:text-4xl font-headline ">
               The insurance adjuster <span className="text-primary italic">isn't on your side.</span>
             </h2>
-            <p className="text-on-surface-variant text-[17px]">
+            <p className="text-on-surface-variant text-[19px]">
               Nevadans who hire an attorney recover an average of <span className="text-on-background font-bold">3.2× more</span> than those who don't. See where you stand — free.
             </p>
             <button

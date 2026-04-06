@@ -12,7 +12,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="py-8 px-4 lg:px-6 relative z-50">
+    <footer className="py-8 px-4 lg:px-6 relative z-[60]">
       <div className="max-w-7xl mx-auto space-y-8">
 
         {/* Top row: Logo */}
@@ -27,7 +27,7 @@ export default function Footer() {
               className="h-7 sm:h-8 w-auto object-contain"
             />
           </div>
-          <p className="text-on-surface-variant font-body text-xs leading-relaxed text-center lg:text-left max-w-sm">
+          <p className="text-on-surface-variant font-body text-sm leading-relaxed text-center lg:text-left max-w-sm">
             Helping people across Nevada understand the true value of their cases and connect with experienced local attorneys.
           </p>
         </div>
@@ -47,9 +47,9 @@ export default function Footer() {
               ].map(({ label, path, href }) => (
                 <li key={label}>
                   {href ? (
-                    <a className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body" href={href}>{label}</a>
+                    <a className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body" href={href}>{label}</a>
                   ) : (
-                    <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
+                    <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body text-left">{label}</button>
                   )}
                 </li>
               ))}
@@ -68,7 +68,7 @@ export default function Footer() {
                 { label: 'Free Evaluation', path: '/calculator' },
               ].map(({ label, path }) => (
                 <li key={label}>
-                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
+                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body text-left">{label}</button>
                 </li>
               ))}
             </ul>
@@ -84,7 +84,7 @@ export default function Footer() {
                 { label: 'Login', href: '#' },
               ].map(({ label, href }) => (
                 <li key={label}>
-                  <a className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body" href={href}>{label}</a>
+                  <a className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body" href={href}>{label}</a>
                 </li>
               ))}
             </ul>
@@ -100,15 +100,27 @@ export default function Footer() {
                 { label: 'Legal Notice', path: '/legal-notice' },
               ].map(({ label, path }) => (
                 <li key={label}>
-                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
+                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body text-left">{label}</button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Disclaimer Block 1 — General Disclaimer */}
+        {/* Disclaimer Block */}
         <div className="pt-6 border-t border-outline-variant/10 space-y-4">
+
+          {/* Centered CPU Architecture — above disclaimers */}
+          <div className="flex justify-center pb-2">
+            <CpuArchitecture
+              className="w-48 h-24 sm:w-64 sm:h-32 lg:w-80 lg:h-40"
+              animateText={true}
+              animateLines={true}
+              animateMarkers={true}
+              showCpuConnections={true}
+            />
+          </div>
+
           <div>
             <p className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-2">General Disclaimer</p>
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
@@ -122,17 +134,6 @@ export default function Footer() {
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
               ClaimCalculator.ai is an attorney advertising service. No attorney-client relationship is formed by visiting this website, using the calculator, or submitting your information through any form on this site. Attorneys and law firms who may contact you through this service have paid an advertising fee to participate. That fee does not affect the estimate you receive or the outcome of your case. By submitting your information, you consent to being contacted by a participating Nevada-licensed attorney or their representative by phone call, text message, or email regarding your potential case. The estimates provided by this tool are not guarantees of settlement value. Every case is different. Under Nevada's modified comparative negligence law (NRS 41.141), your recovery depends on your share of fault, the severity of your injuries, available insurance coverage, and other factors specific to your situation. If you are found more than 50% at fault, Nevada law bars you from recovering any damages.
             </p>
-          </div>
-
-          {/* Centered CPU Architecture */}
-          <div className="flex justify-center pt-3">
-            <CpuArchitecture
-              className="w-48 h-24 sm:w-64 sm:h-32 lg:w-80 lg:h-40"
-              animateText={true}
-              animateLines={true}
-              animateMarkers={true}
-              showCpuConnections={true}
-            />
           </div>
 
           {/* Copyright */}
