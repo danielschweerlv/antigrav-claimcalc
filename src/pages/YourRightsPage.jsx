@@ -32,7 +32,7 @@ const rights = [
     icon: 'menu_book',
     title: 'Right to Clear, Understandable Policy Terms',
     num: '03',
-    summary: "Complexity is not an excuse — you deserve to understand what you paid for.",
+    summary: "Complexity is not an excuse. You deserve to understand what you paid for.",
     body: "Insurance policies can contain highly technical language that few consumers can interpret without assistance. Several states have enacted 'plain-language' requirements to help address this. An attorney can review your policy and explain exactly what coverage you're entitled to before the insurer tells you otherwise.",
     tag: 'Policy Language',
   },

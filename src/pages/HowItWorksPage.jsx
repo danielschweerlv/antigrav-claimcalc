@@ -23,7 +23,7 @@ const steps = [
     num: '02',
     icon: 'phone_in_talk',
     title: 'Speak with Our Team Over the Phone',
-    body: "Verify your accident details and case information with our representatives over the phone. We'll confirm your estimate and walk you through your legal options — at no cost.",
+    body: "Verify your accident details and case information with our representatives over the phone. We'll confirm your estimate and walk you through your legal options at no cost.",
     cta: null,
   },
   {
@@ -37,7 +37,7 @@ const steps = [
     num: '04',
     icon: 'gavel',
     title: 'Connect with an Auto Accident Attorney',
-    body: 'Talk to an attorney who can discuss your situation and the factors that could affect your potential compensation — with no upfront fees. You only pay if you win.',
+    body: 'Talk to an attorney who can discuss your situation and the factors that could affect your potential compensation. No upfront fees. You only pay if you win.',
     cta: null,
   },
 ]
@@ -64,7 +64,7 @@ export default function HowItWorksPage() {
               How Our Service <span className="text-primary italic">Works</span>
             </h1>
             <p className="text-base lg:text-lg text-on-surface-variant max-w-xl mx-auto leading-relaxed">
-              From your first question to connecting with a Nevada attorney — here's exactly what happens and why it matters.
+              From your first question to connecting with a Nevada attorney, here's exactly what happens and why it matters.
             </p>
           </AnimatedGroup>
 

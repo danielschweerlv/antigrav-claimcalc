@@ -20,7 +20,7 @@ const DROPDOWN_CONTENT = {
   ],
   'case-types': [
     { label: 'Car Accidents', desc: 'The most common injury case in Nevada. Rear-end collisions, intersection crashes, and freeway pileups on I-15 and US-95.', range: '$5,000 - $150,000+', path: '/calculator' },
-    { label: 'Uber & Lyft Accidents', desc: 'Las Vegas is one of the busiest rideshare markets in the country. Active trips carry up to $1M in commercial coverage.', range: '$15,000 - $100,000+', path: '/calculator' },
+    { label: 'Ride Share Accidents', desc: 'Las Vegas is one of the busiest Ride Share markets in the country. Active trips carry up to $1M in commercial coverage.', range: '$15,000 - $100,000+', path: '/calculator' },
     { label: 'Strip & Pedestrian Accidents', desc: 'The Las Vegas Strip sees some of the highest pedestrian traffic in the U.S. These cases tend to involve severe injuries.', range: '$30,000 - $500,000+', path: '/calculator' },
     { label: 'Casino & Hotel Injuries', desc: 'Wet floors, dim lighting, escalator malfunctions. Nevada premises liability law holds property owners accountable.', range: '$10,000 - $250,000+', path: '/calculator' },
     { label: 'Motorcycle Accidents', desc: 'Year-round riding means year-round risk. Motorcyclists face severe injuries and higher medical costs.', range: '$25,000 - $300,000+', path: '/calculator' },
@@ -37,8 +37,8 @@ const DROPDOWN_CONTENT = {
     { label: 'Understanding Your Medical Bills', desc: 'Medical bills are a core component of your case value. Learn how medical expense documentation impacts your settlement and why keeping every record matters.', path: '/how-it-works' },
   ],
   attorneys: [
-    { label: 'Partner With Us', desc: 'Join ClaimCalculator.ai as a participating Nevada-licensed attorney. Receive pre-qualified leads from accident victims actively seeking legal representation.', href: 'mailto:partners@claimcalculator.ai' },
-    { label: 'Submit a Case Result', desc: 'Help improve our settlement estimates by sharing anonymized case outcomes. Your data helps Nevada accident victims get more accurate valuations.', href: 'mailto:results@claimcalculator.ai' },
+    { label: 'Partner With Us', desc: 'Join ClaimCalculator.ai as a participating Nevada-licensed attorney. Receive pre-qualified leads from people actively seeking legal representation.', href: 'mailto:partners@claimcalculator.ai' },
+    { label: 'Submit a Case Result', desc: 'Help improve our settlement estimates by sharing anonymized case outcomes. Your data helps people across Nevada get more accurate valuations.', href: 'mailto:results@claimcalculator.ai' },
     { label: 'Attorney Login', desc: 'Access your attorney dashboard to manage leads, track case submissions, and view analytics.', href: '#' },
     { label: 'Privacy Policy', desc: 'Read our full privacy policy covering how user data is collected, stored, and protected.', path: '/privacy-policy' },
     { label: 'Terms of Service', desc: 'Review the terms governing use of ClaimCalculator.ai, including disclaimers and limitations.', path: '/terms-of-service' },

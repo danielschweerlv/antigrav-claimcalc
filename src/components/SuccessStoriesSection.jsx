@@ -49,7 +49,7 @@ const STORIES = [
   {
     initial: 22000,
     final: 165000,
-    quote: "The Lyft driver ran a red light on Tropicana and they tried to dodge responsibility. I honestly didn't know who to go after. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
+    quote: "The Ride Share driver ran a red light on Tropicana and they tried to dodge responsibility. I honestly didn't know who to go after. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
     initials: 'M.T.',
     location: 'Las Vegas, NV',
     weeks: 16,
@@ -79,7 +79,7 @@ const STORIES = [
   {
     initial: 40000,
     final: 285000,
-    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, and no warning. After seeing the estimate I realized this wasn't just a fender bender claim. My attorney got way more than I expected.",
+    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, and no warning. After seeing the estimate I realized this was a real case. My attorney got way more than I expected.",
     initials: 'R.H.',
     location: 'Las Vegas, NV',
     weeks: 22,
@@ -129,11 +129,11 @@ const STORIES = [
   {
     initial: 15000,
     final: 88000,
-    quote: "I was a passenger in an Uber that got T-boned near Nellis. Both the at-fault driver and Uber's policy were in play — I had no idea how to navigate that. The calculator and the attorney they matched me with figured it all out.",
+    quote: "I was a passenger in a Ride Share that got T-boned near Nellis. Both the at-fault driver and the Ride Share policy were in play. I had no idea how to navigate that. The attorney they matched me with figured it all out.",
     initials: 'K.J.',
     location: 'Las Vegas, NV',
     weeks: 18,
-    type: 'Uber Accident',
+    type: 'Ride Share Accident',
     date: 'January 2024',
   },
 ]
@@ -285,7 +285,7 @@ export default function SuccessStoriesSection() {
           <span className="material-symbols-outlined text-primary text-4xl flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
           <div className="flex-1">
             <p className="text-base font-headline font-bold text-on-background">
-              Nevada injury victims who use an attorney recover an average of <span className="text-primary">3.2× more</span> than those who don't.
+              People who hire an attorney in Nevada recover an average of <span className="text-primary">3.2× more</span> than those who don't.
             </p>
             <p className="text-sm text-on-surface-variant mt-1">
               Don't leave money on the table. Your free estimate takes under 2 minutes.

@@ -139,7 +139,7 @@ const TESTIMONIALS = [
     type: "Premises Liability",
   },
   {
-    quote: "The Lyft driver ran a red light on Tropicana and they tried to dodge responsibility. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
+    quote: "The Ride Share driver ran a red light on Tropicana and they tried to dodge responsibility. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
     name: "M.T.",
     location: "Las Vegas, NV",
     initials: "MT",
@@ -166,7 +166,7 @@ const TESTIMONIALS = [
     type: "Bicycle Accident",
   },
   {
-    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, no warning. After seeing the estimate I realized this wasn't just a fender bender claim.",
+    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, no warning. After seeing the estimate I realized this was a serious case.",
     name: "R.H.",
     location: "Las Vegas, NV",
     initials: "RH",
@@ -211,13 +211,13 @@ const TESTIMONIALS = [
     type: "Car Accident",
   },
   {
-    quote: "I was a passenger in an Uber that got T-boned near Nellis. Both the at-fault driver and Uber's policy were in play — the attorney they matched me with figured it all out.",
+    quote: "I was a passenger in a Ride Share that got T-boned near Nellis. Both the at-fault driver and the Ride Share policy were in play. The attorney they matched me with figured it all out.",
     name: "K.J.",
     location: "Las Vegas, NV",
     initials: "KJ",
     initial: 15000,
     final: 88000,
-    type: "Uber Accident",
+    type: "Ride Share Accident",
   },
 ]
 

@@ -15,7 +15,7 @@ const tactics = [
   {
     icon: 'person_off',
     title: 'Initial Lowball Offers',
-    body: 'Some insurance companies may offer an initial settlement that is lower than what was expected. Individuals facing financial stress may feel pressured to accept an early offer for quick resolution. It can be helpful to understand that timing and circumstances can affect settlement discussions, and an attorney can explain available options during a consultation.',
+    body: 'Some insurance companies may offer an initial settlement lower than expected. If you are facing financial pressure, you may feel pushed to accept early. Timing matters. An attorney can walk you through your options during a free consultation.',
   },
   {
     icon: 'local_hospital',
@@ -30,17 +30,17 @@ const tactics = [
   {
     icon: 'do_not_disturb',
     title: 'Denying Cases',
-    body: 'Some large insurance companies have been the subject of public criticism and regulatory scrutiny over case practices. In certain situations, consumers have alleged that valid cases were denied or that internal performance goals influenced case decisions. These reports highlight why it can be important for individuals to understand the case process and consult with an attorney if they have questions about a denial.',
+    body: 'Some large insurance companies have faced public criticism and regulatory scrutiny over case practices. Consumers have alleged that valid cases were denied and that internal performance goals influenced case decisions. That is why understanding the case process matters. Talk to an attorney if you have questions about a denial.',
   },
   {
     icon: 'hourglass_empty',
     title: 'Delaying Cases',
-    body: 'Many insurance companies have been reported to take significant time to review and process cases, and delays can be frustrating for policyholders. Some investigations and consumer complaints have highlighted concerns about how long certain case files remain pending. Understanding how timing can affect a case may help individuals know what questions to raise during a consultation with an attorney.',
+    body: 'Many insurance companies take a long time to review and process cases, and delays can be frustrating. Some investigations have raised concerns about how long certain files stay pending. Understanding how timing affects your case helps you know what to ask an attorney during a consultation.',
   },
   {
     icon: 'help_outline',
     title: 'Confusing Language',
-    body: "Insurance policies can contain complex or highly technical language that many consumers find difficult to interpret. Several states have enacted 'plain-language' requirements to help make policy terms easier to understand. Even so, individuals may still have questions about coverage provisions, and an attorney can assist in reviewing those questions during a consultation.",
+    body: "Insurance policies can contain complex, highly technical language that is hard to interpret. Several states have passed plain-language requirements to help. Even so, you may still have questions about your coverage. An attorney can review those questions with you during a free consultation.",
   },
 ]
 
@@ -114,7 +114,7 @@ export default function InsuranceTacticsPage() {
                 Don't face these tactics alone.
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">
-                An attorney can help you navigate insurance company pressure and ensure you receive the full compensation you're owed under Nevada law.
+                An attorney can help you navigate insurance company pressure and fight for the full compensation you are owed under Nevada law.
               </p>
               <button
                 onClick={() => navigate('/calculator')}

@@ -29,7 +29,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-on-surface-variant font-body text-xs leading-relaxed">
-              Helping Nevada accident victims understand the true value of their cases and connect with experienced local attorneys.
+              Helping people across Nevada understand the true value of their cases and connect with experienced local attorneys.
             </p>
           </div>
 

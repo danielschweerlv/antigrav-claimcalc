@@ -17,7 +17,7 @@ const transitionVariants = {
 const faqs = [
   {
     q: "How does this AI Case Calculator work?",
-    a: "Our proprietary AI Case Calculator helps car accident victims understand the potential value of their case before talking to an insurance company or hiring a lawyer. By answering a few quick questions about your accident, you'll receive an instant estimate based on real settlement data and AI-powered analysis.\n\nTrained on thousands of verified cases, the calculator identifies similar accidents and predicts a fair compensation range. This gives users transparency and confidence when dealing with insurance — ensuring they don't accept lowball offers."
+    a: "Our proprietary AI Case Calculator helps you understand the potential value of your case before talking to an insurance company or hiring a lawyer. Answer a few quick questions about your accident and you'll get an instant estimate based on real settlement data and AI-powered analysis.\n\nTrained on thousands of verified cases, the calculator identifies similar accidents and predicts a fair compensation range. This gives you real numbers and confidence when dealing with insurance, so you don't accept a lowball offer."
   },
   {
     q: "What compensation or damages can I recover?",
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: "Is it best to speak with a lawyer after an accident?",
-    a: "A car accident attorney helps you navigate complex cases, ensuring you face insurance companies on an equal footing. They work to maximize compensation, handle denied/underpaid cases, negotiate directly with the insurer, and litigate if necessary. Initial consultations are completely free, and you're under no obligation to hire them unless it's the right fit."
+    a: "A car accident attorney helps you navigate complex cases and face insurance companies on equal footing. They work to maximize your compensation, handle denied or underpaid cases, negotiate directly with the insurer, and litigate if necessary. Initial consultations are completely free. You're under no obligation to hire unless it's the right fit."
   },
   {
     q: "What is the typical timeline for case resolution and payment?",
@@ -41,7 +41,7 @@ const faqs = [
   },
   {
     q: "How do I make a diminished value case for my car?",
-    a: "Most people don't realize they can claim diminished value, and insurance companies rarely offer it unless you ask. First confirm your state allows it (Nevada does), file the property damage case, and gather evidence that the vehicle is now worth less even after repairs."
+    a: "Most people don't realize they can pursue diminished value, and insurance companies rarely bring it up. First, confirm your state allows it. Nevada does. File the property damage case, then gather evidence that the vehicle is worth less even after repairs."
   },
   {
     q: "What are the best steps to take after a car accident?",
@@ -140,7 +140,7 @@ export default function CalculatorPage() {
         >
           <div className="text-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-headline font-bold text-on-background mb-3">Frequently Asked <span className="text-primary italic">Questions</span></h2>
-            <p className="text-sm font-body text-on-surface-variant">Everything you need to know about your case and the settlement process.</p>
+            <p className="text-sm font-body text-on-surface-variant">Everything you need to know about your case and what to expect from the process.</p>
           </div>
           
           <FaqAccordion items={faqs} />
