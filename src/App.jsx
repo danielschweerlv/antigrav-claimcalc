@@ -250,7 +250,7 @@ function App() {
             opacity: 0.12,
             pointerEvents: 'none',
             position: 'relative',
-            marginBottom: '-60px',
+            marginBottom: '-120px',
           }}
           className="lv-skyline-divider"
         >
