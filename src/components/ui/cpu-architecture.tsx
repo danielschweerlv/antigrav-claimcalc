@@ -85,35 +85,35 @@ const CpuArchitecture = ({
 
       {/* 1. Blue Light */}
       <g mask="url(#cpu-mask-1)">
-        <circle className="cpu-architecture cpu-line-1" cx="0" cy="0" r="8" fill="url(#cpu-blue-grad)" />
+        <circle className="cpu-architecture cpu-line-1" cx="0" cy="0" r="11" fill="url(#cpu-blue-grad)" />
       </g>
       {/* 2. Yellow Light */}
       <g mask="url(#cpu-mask-2)">
-        <circle className="cpu-architecture cpu-line-2" cx="0" cy="0" r="8" fill="url(#cpu-yellow-grad)" />
+        <circle className="cpu-architecture cpu-line-2" cx="0" cy="0" r="11" fill="url(#cpu-yellow-grad)" />
       </g>
       {/* 3. Pinkish Light */}
       <g mask="url(#cpu-mask-3)">
-        <circle className="cpu-architecture cpu-line-3" cx="0" cy="0" r="8" fill="url(#cpu-pinkish-grad)" />
+        <circle className="cpu-architecture cpu-line-3" cx="0" cy="0" r="11" fill="url(#cpu-pinkish-grad)" />
       </g>
       {/* 4. White Light */}
       <g mask="url(#cpu-mask-4)">
-        <circle className="cpu-architecture cpu-line-4" cx="0" cy="0" r="8" fill="url(#cpu-white-grad)" />
+        <circle className="cpu-architecture cpu-line-4" cx="0" cy="0" r="11" fill="url(#cpu-white-grad)" />
       </g>
       {/* 5. Green Light */}
       <g mask="url(#cpu-mask-5)">
-        <circle className="cpu-architecture cpu-line-5" cx="0" cy="0" r="8" fill="url(#cpu-green-grad)" />
+        <circle className="cpu-architecture cpu-line-5" cx="0" cy="0" r="11" fill="url(#cpu-green-grad)" />
       </g>
       {/* 6. Orange Light */}
       <g mask="url(#cpu-mask-6)">
-        <circle className="cpu-architecture cpu-line-6" cx="0" cy="0" r="8" fill="url(#cpu-orange-grad)" />
+        <circle className="cpu-architecture cpu-line-6" cx="0" cy="0" r="11" fill="url(#cpu-orange-grad)" />
       </g>
       {/* 7. Cyan Light */}
       <g mask="url(#cpu-mask-7)">
-        <circle className="cpu-architecture cpu-line-7" cx="0" cy="0" r="8" fill="url(#cpu-cyan-grad)" />
+        <circle className="cpu-architecture cpu-line-7" cx="0" cy="0" r="11" fill="url(#cpu-cyan-grad)" />
       </g>
       {/* 8. Rose Light */}
       <g mask="url(#cpu-mask-8)">
-        <circle className="cpu-architecture cpu-line-8" cx="0" cy="0" r="8" fill="url(#cpu-rose-grad)" />
+        <circle className="cpu-architecture cpu-line-8" cx="0" cy="0" r="11" fill="url(#cpu-rose-grad)" />
       </g>
 
       {/* CPU Box */}
@@ -130,16 +130,32 @@ const CpuArchitecture = ({
             <rect x="87" y="-13.6" width="2.5" height="5" rx="0.7" transform="rotate(270 115.25 19.5)" />
           </g>
         )}
-        <rect x="85" y="40" width="30" height="20" rx="2" fill="#181818" filter="url(#cpu-light-shadow)" />
+        <rect x="78" y="36" width="44" height="28" rx="3" fill="#181818" filter="url(#cpu-light-shadow)" />
+        {/* Large AI text */}
         <text
-          x="92"
-          y="52.5"
-          fontSize="7"
+          x="100"
+          y="49"
+          fontSize="11"
           fill={animateText ? "url(#cpu-text-gradient)" : "white"}
-          fontWeight="600"
-          letterSpacing="0.05em"
+          fontWeight="800"
+          letterSpacing="0.1em"
+          textAnchor="middle"
+          dominantBaseline="middle"
         >
-          {text}
+          AI
+        </text>
+        {/* Small POWERED subtext */}
+        <text
+          x="100"
+          y="59"
+          fontSize="3.8"
+          fill="rgba(255,255,255,0.45)"
+          fontWeight="500"
+          letterSpacing="0.2em"
+          textAnchor="middle"
+          dominantBaseline="middle"
+        >
+          POWERED
         </text>
       </g>
 

@@ -15,37 +15,21 @@ export default function Footer() {
     <footer className="py-10 px-4 lg:px-6 relative z-50">
       <div className="max-w-7xl mx-auto space-y-12">
 
-        {/* Top row: Logo + AI chip */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-4 max-w-sm text-center lg:text-left">
-            <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}>
-                <AnimatedCross className="w-full h-full" />
-              </div>
-              <img
-                src="/logos/claimcalculator-wordmark.png"
-                alt="ClaimCalculator.ai"
-                className="h-7 sm:h-8 w-auto object-contain"
-              />
+        {/* Top row: Logo only */}
+        <div className="flex flex-col items-center lg:items-start gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}>
+              <AnimatedCross className="w-full h-full" />
             </div>
-            <p className="text-on-surface-variant font-body text-xs leading-relaxed">
-              Helping people across Nevada understand the true value of their cases and connect with experienced local attorneys.
-            </p>
+            <img
+              src="/logos/claimcalculator-wordmark.png"
+              alt="ClaimCalculator.ai"
+              className="h-7 sm:h-8 w-auto object-contain"
+            />
           </div>
-
-          {/* AI Microchip Logo */}
-          <div className="flex flex-shrink-0 items-center justify-center">
-            <div className="p-4 sm:p-6 rounded-[2rem]">
-              <CpuArchitecture
-                className="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44"
-                text="AI"
-                animateText={true}
-                animateLines={true}
-                animateMarkers={true}
-                showCpuConnections={true}
-              />
-            </div>
-          </div>
+          <p className="text-on-surface-variant font-body text-xs leading-relaxed text-center lg:text-left max-w-sm">
+            Helping people across Nevada understand the true value of their cases and connect with experienced local attorneys.
+          </p>
         </div>
 
         {/* 4-Column Footer Links */}
@@ -164,6 +148,17 @@ export default function Footer() {
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
               ClaimCalculator.ai is an attorney advertising service. No attorney-client relationship is formed by visiting this website, using the calculator, or submitting your information through any form on this site. Attorneys and law firms who may contact you through this service have paid an advertising fee to participate. That fee does not affect the estimate you receive or the outcome of your case. By submitting your information, you consent to being contacted by a participating Nevada-licensed attorney or their representative by phone call, text message, or email regarding your potential case. The estimates provided by this tool are not guarantees of settlement value. Every case is different. Under Nevada's modified comparative negligence law (NRS 41.141), your recovery depends on your share of fault, the severity of your injuries, available insurance coverage, and other factors specific to your situation. If you are found more than 50% at fault, Nevada law bars you from recovering any damages.
             </p>
+          </div>
+
+          {/* Centered CPU Architecture */}
+          <div className="flex justify-center pt-4">
+            <CpuArchitecture
+              className="w-48 h-24 sm:w-64 sm:h-32 lg:w-80 lg:h-40"
+              animateText={true}
+              animateLines={true}
+              animateMarkers={true}
+              showCpuConnections={true}
+            />
           </div>
 
           {/* Copyright */}
