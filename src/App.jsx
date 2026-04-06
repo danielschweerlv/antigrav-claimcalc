@@ -456,7 +456,7 @@ function App() {
               variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
               className="text-center space-y-4 mb-16"
             >
-              <h2 className="text-3xl lg:text-5xl font-headline font-bold">
+              <h2 className="text-3xl lg:text-5xl font-headline font-black">
                 The Path to <span className="text-primary italic">Recovery.</span>
               </h2>
               <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-xl mx-auto">
