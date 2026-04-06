@@ -251,7 +251,7 @@ function App() {
               left: 0,
               width: '100%',
               transform: 'translateY(-100%)',
-              overflow: 'hidden',
+              overflow: 'visible',
               lineHeight: 0,
               opacity: 0.12,
               pointerEvents: 'none',
@@ -265,7 +265,7 @@ function App() {
               style={{
                 display: 'block',
                 width: '100%',
-                height: '60px',
+                height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'center bottom',
                 filter: 'invert(1)',
