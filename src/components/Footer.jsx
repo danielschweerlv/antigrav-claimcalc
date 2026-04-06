@@ -12,11 +12,11 @@ export default function Footer() {
   }
 
   return (
-    <footer className="py-10 px-4 lg:px-6 relative z-50">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <footer className="py-8 px-4 lg:px-6 relative z-50">
+      <div className="max-w-7xl mx-auto space-y-8">
 
-        {/* Top row: Logo only */}
-        <div className="flex flex-col items-center lg:items-start gap-4">
+        {/* Top row: Logo */}
+        <div className="flex flex-col items-center lg:items-start gap-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0" style={{ filter: 'drop-shadow(0 0 8px rgba(0, 209, 255, 0.4))' }}>
               <AnimatedCross className="w-full h-full" />
@@ -33,40 +33,17 @@ export default function Footer() {
         </div>
 
         {/* 4-Column Footer Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
 
-          {/* Column 1: Nevada Claim Guides */}
+          {/* Column 1: Company */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Nevada Case Guides</h6>
-            <ul className="space-y-2 mt-2">
-              {[
-                { label: 'How Comparative Fault Works', path: '/your-rights' },
-                { label: 'After a Las Vegas Accident', path: '/how-it-works' },
-                { label: "Nevada's 2-Year Filing Deadline", path: '/your-rights' },
-                { label: 'Insurance Lowball Tactics', path: '/insurance-tactics' },
-                { label: 'Strip & Casino Injury Liability', path: '/your-rights' },
-                { label: 'Understanding Your Medical Bills', path: '/how-it-works' },
-              ].map(({ label, path }) => (
-                <li key={label}>
-                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">
-                    {label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 2: Navigation */}
-          <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Navigation</h6>
+            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Company</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Home', path: '/' },
                 { label: 'How It Works', path: '/how-it-works' },
-                { label: 'Insurance Tactics', path: '/insurance-tactics' },
-                { label: 'Your Rights', path: '/your-rights' },
-                { label: 'Legal Notice', path: '/legal-notice' },
-                { label: 'Contact Us', href: 'mailto:support@claimcalculator.ai' },
+                { label: 'Success Stories', path: '/success-stories' },
+                { label: 'Contact', href: 'mailto:support@claimcalculator.ai' },
               ].map(({ label, path, href }) => (
                 <li key={label}>
                   {href ? (
@@ -79,62 +56,59 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Nevada Case Types */}
+          {/* Column 2: Resources */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Nevada Case Types</h6>
+            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Resources</h6>
             <ul className="space-y-2 mt-2">
               {[
-                'Car Accidents',
-                'Uber & Lyft Accidents',
-                'Strip & Pedestrian Accidents',
-                'Casino & Hotel Injuries',
-                'Motorcycle Accidents',
-                'Truck & 18-Wheeler Accidents',
-                'Construction Zone Crashes',
-                'Parking Lot & Garage Accidents',
-              ].map((label) => (
+                { label: 'Injury Values', path: '/injury-values' },
+                { label: 'Case Guides', path: '/case-guides' },
+                { label: 'Insurance Tactics', path: '/insurance-tactics' },
+                { label: 'Your Rights', path: '/your-rights' },
+                { label: 'Free Evaluation', path: '/calculator' },
+              ].map(({ label, path }) => (
                 <li key={label}>
-                  <button onClick={() => navTo('/calculator')} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">
-                    {label}
-                  </button>
+                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: For Attorneys */}
+          {/* Column 3: For Attorneys */}
           <div className="space-y-3">
             <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">For Attorneys</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Partner With Us', href: 'mailto:partners@claimcalculator.ai' },
-                { label: 'Submit a Case Result', href: 'mailto:results@claimcalculator.ai' },
-                { label: 'Attorney Login', href: '#' },
+                { label: 'Submit a Case', href: 'mailto:results@claimcalculator.ai' },
+                { label: 'Login', href: '#' },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <a className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body" href={href}>{label}</a>
                 </li>
               ))}
             </ul>
+          </div>
 
-            {/* Legal page links */}
-            <div className="pt-4 mt-4 border-t border-outline-variant/10">
-              <ul className="space-y-2">
-                {[
-                  { label: 'Privacy Policy', path: '/privacy-policy' },
-                  { label: 'Terms of Service', path: '/terms-of-service' },
-                ].map(({ label, path }) => (
-                  <li key={label}>
-                    <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Column 4: Legal */}
+          <div className="space-y-3">
+            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Legal</h6>
+            <ul className="space-y-2 mt-2">
+              {[
+                { label: 'Privacy Policy', path: '/privacy-policy' },
+                { label: 'Terms of Service', path: '/terms-of-service' },
+                { label: 'Legal Notice', path: '/legal-notice' },
+              ].map(({ label, path }) => (
+                <li key={label}>
+                  <button onClick={() => navTo(path)} className="text-outline hover:text-[#00d1ff] transition-colors text-xs font-body text-left">{label}</button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         {/* Disclaimer Block 1 — General Disclaimer */}
-        <div className="pt-8 border-t border-outline-variant/10 space-y-5">
+        <div className="pt-6 border-t border-outline-variant/10 space-y-4">
           <div>
             <p className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-2">General Disclaimer</p>
             <p className="text-outline/40 text-[9px] sm:text-[10px] font-body leading-[1.6] text-justify">
@@ -151,7 +125,7 @@ export default function Footer() {
           </div>
 
           {/* Centered CPU Architecture */}
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center pt-3">
             <CpuArchitecture
               className="w-48 h-24 sm:w-64 sm:h-32 lg:w-80 lg:h-40"
               animateText={true}
@@ -162,20 +136,20 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <p className="text-[#bbc9cf] font-bold text-[10px] sm:text-[11px] font-body opacity-40 pt-2 border-t border-outline-variant/5 mt-4 text-center">
+          <p className="text-[#bbc9cf] font-bold text-[10px] sm:text-[11px] font-body opacity-40 pt-2 border-t border-outline-variant/5 mt-3 text-center">
             &copy; {new Date().getFullYear()} ClaimCalculator.ai. All Rights Reserved.
           </p>
         </div>
 
         {/* Data sources disclaimer */}
-        <div style={{ marginTop: '20px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+        <div style={{ marginTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
           <p style={{
             fontSize: '11px',
             color: 'rgba(255, 255, 255, 0.28)',
             textAlign: 'center',
             maxWidth: '720px',
             margin: '0 auto',
-            padding: '16px 24px 24px',
+            padding: '12px 24px 20px',
             lineHeight: 1.6,
           }}>
             Data sources referenced by ClaimCalculator.ai include publicly available records from Nevada state and local government agencies. ClaimCalculator.ai is not affiliated with, endorsed by, or sponsored by any government agency, law enforcement organization, or third-party entity referenced on this site. This tool provides general estimates only and does not constitute legal advice.
