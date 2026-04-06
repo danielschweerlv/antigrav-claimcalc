@@ -153,6 +153,33 @@ function App() {
           <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-1/4 left-[15%] w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
+          {/* Nevada state outline watermark */}
+          <svg
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              right: 0,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '280px',
+              height: 'auto',
+              opacity: 0.04,
+              color: 'white',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+            viewBox="0 0 200 280"
+            xmlns="http://www.w3.org/2000/svg"
+            className="nevada-watermark"
+          >
+            <path
+              d="M 30 10 L 170 10 L 170 40 L 195 70 L 195 270 L 80 270 L 30 200 Z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+          </svg>
+
           <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
             {/* Left column */}
@@ -212,6 +239,66 @@ function App() {
 
           </div>
         </section>
+
+        {/* ── LAS VEGAS SKYLINE DIVIDER ──────────────────────────────────── */}
+        <div
+          aria-hidden="true"
+          style={{
+            width: '100%',
+            overflow: 'hidden',
+            lineHeight: 0,
+            opacity: 0.04,
+            pointerEvents: 'none',
+          }}
+          className="lv-skyline-divider"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 60"
+            style={{ display: 'block', width: '100%', height: '60px' }}
+            preserveAspectRatio="none"
+          >
+            {/* Las Vegas Strip simplified skyline - geometric silhouette */}
+            <path
+              d="
+                M0,60
+                L0,45
+                L60,45 L60,50 L80,50 L80,45
+                L100,45 L100,30 L110,30 L110,25 L115,25 L115,30 L120,30 L120,45
+                L150,45 L150,35 L170,35 L170,45
+                L190,45 L195,40 L200,35 L205,40 L210,45
+                L240,45 L240,38 L260,38 L260,45
+                L280,45 L282,20 L284,15 L286,20 L288,45
+                L310,45 L310,40 L340,40 L340,45
+                L360,45
+                L365,30 L370,20 L375,30 L380,45
+                L400,45 L400,42 L430,42 L430,45
+                L460,45 L460,35 L480,35 L480,45
+                L510,45 L510,40 L540,40 L540,45
+                L570,45 L570,32 L590,32 L590,45
+                L620,45 L620,36 L650,36 L650,45
+                L680,45 L683,10 L686,5 L689,10 L692,45
+                L720,45 L720,38 L750,38 L750,45
+                L770,45 L770,42 L800,42 L800,45
+                L820,45 L825,28 L830,20 L835,28 L840,45
+                L860,45 L860,36 L880,36 L880,45
+                L910,45 L910,40 L940,40 L940,45
+                L960,45 L965,25 L968,18 L971,25 L976,45
+                L1000,45 L1000,38 L1030,38 L1030,45
+                L1060,45 L1060,42 L1090,42 L1090,45
+                L1110,45 L1110,30 L1120,30 L1125,25 L1130,30 L1130,45
+                L1150,45 L1150,35 L1180,35 L1180,40 L1200,40 L1200,45
+                L1230,45 L1230,38 L1260,38 L1260,45
+                L1290,45 L1293,20 L1296,14 L1299,20 L1302,45
+                L1330,45 L1330,40 L1360,40 L1360,45
+                L1380,45 L1380,48 L1440,48
+                L1440,60
+                Z
+              "
+              fill="white"
+            />
+          </svg>
+        </div>
 
         {/* ── TRUST BAR ──────────────────────────────────────────────────── */}
         <section className="px-4 lg:px-8 -mt-4 lg:-mt-8">
