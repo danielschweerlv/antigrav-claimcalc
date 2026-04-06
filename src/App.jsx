@@ -5,6 +5,7 @@ import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
 import ShineBorder from './components/ui/shine-border'
 import InjuryValuesSection from './components/InjuryValuesSection'
+import WhatIsSection from './components/WhatIsSection'
 
 
 const AVATAR_POOL = [
@@ -380,39 +381,7 @@ function App() {
         </section>
 
         {/* ── WHAT IS CLAIMCALCULATOR.AI ────────────────────── */}
-        <section className="pt-16 lg:pt-20 pb-12 lg:pb-16 px-5 lg:px-8">
-          <motion.div
-            className="max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
-          >
-            {/* Label */}
-            <p style={{ fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)' }} className="uppercase font-semibold mb-3">
-              WHAT IS CLAIMCALCULATOR.AI?
-            </p>
-            {/* Heading */}
-            <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, lineHeight: 1.15, color: '#fff' }} className="mb-5">
-              The number the other side already knows. Now you do too.
-            </h2>
-            {/* Body copy */}
-            <div style={{ fontSize: '16px', lineHeight: 1.75, color: 'rgba(255,255,255,0.75)' }} className="space-y-4">
-              <p>
-                ClaimCalculator.ai is a free AI tool built for Nevada drivers. It looks at the details of your car accident and gives you a real estimate of what your case may be worth.
-              </p>
-              <p>
-                Insurance adjusters use data and algorithms to size up your case fast. You deserve the same information. This tool puts that number in your hands before you make any decisions.
-              </p>
-              <p>
-                There is no catch and no cost. You do not need to create an account or hand over a credit card. Just answer a few questions and get your number.
-              </p>
-              <p>
-                If your results show your case may be worth pursuing, we can connect you with a Nevada attorney who reviews cases like yours. The call is free. There is no pressure to move forward.
-              </p>
-            </div>
-          </motion.div>
-        </section>
+        <WhatIsSection />
 
         {/* ── TRUSTED SOURCES ──────────────────────────────────── */}
         <section className="pt-16 lg:pt-20 pb-12 lg:pb-16">
