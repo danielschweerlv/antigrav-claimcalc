@@ -298,11 +298,11 @@ function App() {
           >
             {/* Label */}
             <p style={{ fontSize: '11px', letterSpacing: '0.1em', color: 'rgba(255,255,255,0.4)' }} className="uppercase font-semibold">
-              Built on Verified Data
+              REFERENCED & RECOGNIZED ACROSS NEVADA
             </p>
             {/* Description */}
             <p style={{ fontSize: '15px', lineHeight: 1.6, maxWidth: '600px', color: 'rgba(255,255,255,0.88)' }} className="mx-auto mt-3">
-              Our AI cross-references official Nevada government records, court data, and law enforcement databases to calculate your estimate.
+              ClaimCalculator.ai draws from publicly available Nevada data sources and has been referenced by Nevada media and community outlets. All estimates are for informational purposes only.
             </p>
           </motion.div>
 
@@ -328,7 +328,6 @@ function App() {
                     { src: '/logos/carfax-color.png', alt: 'Carfax' },
                     { src: '/logos/carmax-color.png', alt: 'CarMax' },
                     { src: '/logos/las-vegas-cvb.png', alt: 'Las Vegas CVB', height: '52px' },
-                    { src: '/logos/reddit-logo.png', alt: 'Reddit', height: '44px' },
                     { src: '/logos/las-vegas-weekly.png', alt: 'Las Vegas Weekly', height: '30px' },
                     { src: '/logos/fox5-kvvu.png', alt: 'Fox 5 KVVU-TV', height: '58px' },
                     { src: '/logos/lv-review-journal.png', alt: 'Las Vegas Review-Journal', height: '38px' },
