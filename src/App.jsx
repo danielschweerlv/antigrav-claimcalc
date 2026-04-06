@@ -39,55 +39,59 @@ const AVATAR_POOL = [
 ]
 
 function RotatingAvatars() {
-  const [groupOffset, setGroupOffset] = useState(0)
-  const [outgoing, setOutgoing] = useState(null) // offset of the group fading out
-  const SWEEP_MS = 600
+  const STAGGER_MS = 180  // delay between each avatar swapping
+  const FADE_MS    = 400  // fade duration per avatar
+  const INTERVAL   = 5000
+
+  const [slots, setSlots] = useState([0, 1, 2])       // current pool indices shown
+  const [fadingSlot, setFadingSlot] = useState(null)  // which slot is mid-swap
+  const offsetRef = useRef(3)
+  const swapQueue = useRef([])
+  const swapping  = useRef(false)
+
+  const swapNext = () => {
+    if (swapQueue.current.length === 0) { swapping.current = false; return }
+    swapping.current = true
+    const { slotIdx, newPoolIdx } = swapQueue.current.shift()
+    // fade out
+    setFadingSlot(slotIdx)
+    setTimeout(() => {
+      // swap image
+      setSlots(prev => { const s = [...prev]; s[slotIdx] = newPoolIdx; return s })
+      setFadingSlot(null)
+      // wait a beat then do the next one
+      setTimeout(swapNext, STAGGER_MS)
+    }, FADE_MS)
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setOutgoing(groupOffset)
-      const next = (groupOffset + 3) % AVATAR_POOL.length
-      setGroupOffset(next)
-      setTimeout(() => setOutgoing(null), SWEEP_MS)
-    }, 5000)
+      // queue a staggered swap for each of the 3 slots in order
+      swapQueue.current = [0, 1, 2].map(slotIdx => {
+        const newPoolIdx = offsetRef.current % AVATAR_POOL.length
+        offsetRef.current += 1
+        return { slotIdx, newPoolIdx }
+      })
+      if (!swapping.current) swapNext()
+    }, INTERVAL)
     return () => clearInterval(interval)
-  }, [groupOffset])
-
-  const getGroup = (offset) =>
-    [0, 1, 2].map(i => AVATAR_POOL[(offset + i) % AVATAR_POOL.length])
+  }, [])
 
   return (
-    <div className="flex -space-x-2.5 relative" style={{ width: 88, height: 36 }}>
-      {/* incoming group */}
-      <div
-        className="flex -space-x-2.5 absolute inset-0"
-        style={{
-          opacity: outgoing !== null ? 0 : 1,
-          transform: outgoing !== null ? 'translateX(-8px)' : 'translateX(0)',
-          transition: outgoing !== null
-            ? 'none'
-            : `opacity ${SWEEP_MS}ms ease, transform ${SWEEP_MS}ms ease`,
-        }}
-      >
-        {getGroup(groupOffset).map((src, i) => (
-          <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
-        ))}
-      </div>
-      {/* outgoing group */}
-      {outgoing !== null && (
-        <div
-          className="flex -space-x-2.5 absolute inset-0"
+    <div className="flex -space-x-2.5">
+      {slots.map((poolIdx, slot) => (
+        <img
+          key={`${slot}-${poolIdx}`}
+          className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover"
           style={{
-            opacity: 0,
-            transform: 'translateX(8px)',
-            transition: `opacity ${SWEEP_MS}ms ease, transform ${SWEEP_MS}ms ease`,
+            opacity: fadingSlot === slot ? 0 : 1,
+            transform: fadingSlot === slot ? 'scale(0.85)' : 'scale(1)',
+            transition: `opacity ${FADE_MS}ms ease, transform ${FADE_MS}ms ease`,
           }}
-        >
-          {getGroup(outgoing).map((src, i) => (
-            <img key={i} className="w-9 h-9 rounded-full border-2 border-[#111318] object-cover" src={src} alt={`user ${i + 1}`} />
-          ))}
-        </div>
-      )}
+          src={AVATAR_POOL[poolIdx]}
+          alt={`user ${slot + 1}`}
+        />
+      ))}
     </div>
   )
 }
