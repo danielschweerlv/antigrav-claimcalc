@@ -330,13 +330,18 @@ function App() {
                     { src: '/logos/kbb-color.png', alt: 'Kelley Blue Book' },
                     { src: '/logos/carfax-color.png', alt: 'Carfax' },
                     { src: '/logos/carmax-color.png', alt: 'CarMax' },
-                  ].map(({ src, alt }) => (
+                    { src: '/logos/las-vegas-cvb.png', alt: 'Las Vegas CVB', height: '48px' },
+                    { src: '/logos/reddit-logo.png', alt: 'Reddit', height: '36px' },
+                    { src: '/logos/las-vegas-weekly.png', alt: 'Las Vegas Weekly', height: '32px' },
+                    { src: '/logos/fox5-kvvu.png', alt: 'Fox 5 KVVU-TV', height: '52px' },
+                    { src: '/logos/lv-review-journal.png', alt: 'Las Vegas Review-Journal', height: '36px' },
+                  ].map(({ src, alt, height }) => (
                     <img
                       key={`${setIdx}-${alt}`}
                       src={src}
                       alt={alt}
-                      className="h-14 w-auto object-contain shrink-0"
-                      style={{ margin: '0 64px' }}
+                      className="w-auto object-contain shrink-0"
+                      style={{ margin: '0 64px', height: height || '56px' }}
                       loading="eager"
                       onError={(e) => {
                         // Replace broken images with a text pill fallback
