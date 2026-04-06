@@ -111,7 +111,7 @@ export default function InjuryValuesSection() {
             What Is Your Injury Worth{' '}
             <span className="text-primary italic">in Nevada?</span>
           </h2>
-          <p className="text-on-surface-variant text-base lg:text-lg max-w-2xl mx-auto">
+          <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-2xl mx-auto">
             Nevada settlement values vary from national averages. Here's what cases like yours have settled for in Nevada courts.
           </p>
         </AnimatedGroup>
@@ -126,9 +126,9 @@ export default function InjuryValuesSection() {
             return (
               <div
                 key={name}
-                className="group p-6 rounded-xl border flex flex-col gap-3 transition-all duration-300"
+                className="group p-5 rounded-xl border flex flex-col gap-3 transition-all duration-300"
                 style={{
-                  backgroundColor: '#0D0D0D',
+                  background: 'rgba(255,255,255,0.03)',
                   borderColor: 'rgba(255,255,255,0.07)',
                   cursor: 'default',
                 }}
@@ -141,7 +141,7 @@ export default function InjuryValuesSection() {
               >
                 {/* Top row: name + severity pill */}
                 <div className="flex items-start justify-between gap-3">
-                  <h4 className="text-base font-headline font-bold text-white leading-snug">
+                  <h4 className="text-[15px] font-headline font-bold text-white leading-snug">
                     {name}
                   </h4>
                   <span
@@ -165,7 +165,7 @@ export default function InjuryValuesSection() {
                 </p>
 
                 {/* Description */}
-                <p className="text-xs text-on-surface-variant leading-relaxed flex-1">
+                <p className="text-sm text-on-surface-variant leading-relaxed flex-1">
                   {desc}
                 </p>
               </div>
@@ -177,8 +177,8 @@ export default function InjuryValuesSection() {
         <p
           className="text-center mt-10"
           style={{
-            fontSize: '11px',
-            color: 'rgba(255,255,255,0.3)',
+            fontSize: '13px',
+            color: 'rgba(255,255,255,0.35)',
             lineHeight: 1.6,
           }}
         >

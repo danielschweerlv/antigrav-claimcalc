@@ -88,7 +88,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0c0e12]/75 backdrop-blur-2xl saturate-150 border-b border-white/[0.06]">
-      <nav className="flex justify-between items-center w-full px-4 lg:px-8 h-[72px] max-w-7xl mx-auto">
+      <nav className="flex justify-between items-center w-full px-4 lg:px-8 h-[58px] max-w-7xl mx-auto">
         
         {/* Logo Section */}
         <div className="flex items-center gap-3">
@@ -159,7 +159,7 @@ const Header = () => {
       {/* Dropdown Panel */}
       <div
         ref={dropdownRef}
-        className={`absolute top-[72px] left-0 right-0 z-40 transition-all duration-300 ease-out origin-top ${
+        className={`absolute top-[58px] left-0 right-0 z-40 transition-all duration-300 ease-out origin-top ${
           isOpen
             ? 'opacity-100 scale-y-100 pointer-events-auto'
             : 'opacity-0 scale-y-0 pointer-events-none'

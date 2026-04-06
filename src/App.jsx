@@ -237,7 +237,7 @@ function App() {
   return (
     <div className="relative min-h-screen bg-transparent">
 
-      <main className="relative z-10 pt-[72px]">
+      <main className="relative z-10 pt-[58px]">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
         <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px] overflow-hidden" style={{ isolation: 'isolate' }}>
@@ -299,7 +299,7 @@ function App() {
               {/* Social proof — avatars */}
               <div className="flex items-center gap-3 justify-center lg:justify-start lg:mb-6">
                 <RotatingAvatars />
-                <p className="text-sm text-on-surface-variant">
+                <p className="text-base text-on-surface-variant">
                   Join <span className="text-on-background font-bold">2,400+</span> people who discovered they were owed more
                 </p>
               </div>
@@ -313,7 +313,7 @@ function App() {
                   See What Your Case Is Worth
                   <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
                 </button>
-                <p className="text-xs text-outline self-center text-center">No cost. No obligation. Built for Nevada injury cases.</p>
+                <p className="text-sm text-outline self-center text-center">No cost. No obligation. Built for Nevada injury cases.</p>
               </div>
             </AnimatedGroup>
 
@@ -465,10 +465,10 @@ function App() {
                 { stat: '3.2x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
-                <div key={label} className="p-6 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300">
+                <div key={label} className="p-5 lg:p-7 rounded-xl border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
                   <p className="text-2xl lg:text-4xl font-headline font-black text-on-background">{stat}</p>
-                  <p className="text-xs text-on-surface-variant leading-snug">{label}</p>
+                  <p className="text-sm text-on-surface-variant leading-snug">{label}</p>
                 </div>
               ))}
             </AnimatedGroup>
@@ -485,7 +485,7 @@ function App() {
               <h2 className="text-3xl lg:text-5xl font-headline font-bold">
                 Common Nevada <span className="text-primary italic">Injury Cases</span>
               </h2>
-              <p className="text-on-surface-variant text-base lg:text-lg max-w-2xl mx-auto">
+              <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-2xl mx-auto">
                 Nevada roads, casinos, and construction zones create risks you won't find in other states. Here's what cases in your area typically look like.
               </p>
             </AnimatedGroup>
@@ -544,10 +544,12 @@ function App() {
                   range: '$5,000 - $75,000+',
                 },
               ].map(({ icon, title, desc, range }) => (
-                <div key={title} className="p-6 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/20 transition-all duration-300 flex flex-col gap-3 group">
-                  <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
-                  <h4 className="text-base font-headline font-bold text-on-background">{title}</h4>
-                  <p className="text-xs text-on-surface-variant leading-relaxed flex-1">{desc}</p>
+                <div key={title} className="p-5 rounded-xl border border-white/[0.06] hover:border-primary/20 transition-all duration-300 flex flex-col gap-3 group" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="flex items-center gap-2.5">
+                    <span className="material-symbols-outlined text-xl text-primary flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
+                    <h4 className="text-base font-headline font-bold text-on-background leading-snug">{title}</h4>
+                  </div>
+                  <p className="text-sm text-on-surface-variant leading-relaxed flex-1">{desc}</p>
                   <p className="text-sm font-headline font-bold text-[#4ADE80] mt-auto pt-2 border-t border-white/[0.06]">{range}</p>
                 </div>
               ))}
@@ -575,7 +577,7 @@ function App() {
               <h2 className="text-3xl lg:text-5xl font-headline font-bold">
                 The Path to <span className="text-primary italic">Recovery.</span>
               </h2>
-              <p className="text-on-surface-variant text-base lg:text-lg max-w-xl mx-auto">
+              <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-xl mx-auto">
                 Three simple steps between you and the compensation you deserve.
               </p>
             </AnimatedGroup>
@@ -589,10 +591,12 @@ function App() {
                 { num: '02', title: 'AI Valuation', body: 'Our engine cross-references your case with current Nevada legal precedents and insurance payouts.' },
                 { num: '03', title: 'Expert Match', body: 'Get connected with top Nevada attorneys who specialize in maximizing your specific case type.' },
               ].map(({ num, title, body }) => (
-                <div key={num} className="space-y-4 p-7 lg:p-8 rounded-xl bg-surface-container-low border border-white/[0.06] hover:border-primary/15 transition-all duration-300">
-                  <span className="text-5xl font-headline font-black text-outline/15">{num}</span>
-                  <h4 className="text-lg font-headline font-bold text-on-background">{title}</h4>
-                  <p className="text-on-surface-variant text-sm leading-relaxed">{body}</p>
+                <div key={num} className="space-y-3 p-6 lg:p-7 rounded-xl border border-white/[0.06] hover:border-primary/15 transition-all duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl font-headline font-black text-outline/20 leading-none">{num}</span>
+                    <h4 className="text-lg font-headline font-bold text-on-background">{title}</h4>
+                  </div>
+                  <p className="text-on-surface-variant text-base leading-relaxed">{body}</p>
                 </div>
               ))}
             </AnimatedGroup>
@@ -629,13 +633,13 @@ function App() {
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                  <span className="text-[11px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
+                  <span className="text-[13px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
                 </div>
                 <a
                   href="/success-stories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[11px] text-outline hover:text-primary transition-colors duration-200 group"
+                  className="flex items-center gap-1 text-[13px] text-outline hover:text-primary transition-colors duration-200 group"
                 >
                   See all stories
                   <span className="material-symbols-outlined text-[13px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
@@ -690,8 +694,8 @@ function App() {
                       {TESTIMONIALS[activeTestimonial].initials}
                     </div>
                     <div>
-                      <h5 className="font-bold text-on-background text-[13px] sm:text-sm">{TESTIMONIALS[activeTestimonial].name}</h5>
-                      <p className="text-[11px] sm:text-xs text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
+                      <h5 className="font-bold text-on-background text-sm sm:text-[15px]">{TESTIMONIALS[activeTestimonial].name}</h5>
+                      <p className="text-xs sm:text-[13px] text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
                     </div>
                     {/* Stars */}
                     <div className="ml-auto flex flex-shrink-0">
@@ -730,7 +734,7 @@ function App() {
             <h2 className="text-3xl lg:text-4xl font-headline font-bold">
               The insurance adjuster <span className="text-primary italic">isn't on your side.</span>
             </h2>
-            <p className="text-on-surface-variant text-base">
+            <p className="text-on-surface-variant text-[17px]">
               Nevadans who hire an attorney recover an average of <span className="text-on-background font-bold">3.2× more</span> than those who don't. See where you stand — free.
             </p>
             <button
@@ -740,7 +744,7 @@ function App() {
               See What Your Case Is Worth
               <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
             </button>
-            <p className="text-xs text-outline">No cost. No commitment. SSL encrypted.</p>
+            <p className="text-sm text-outline">No cost. No commitment. SSL encrypted.</p>
           </motion.div>
         </section>
 
