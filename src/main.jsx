@@ -10,6 +10,7 @@ import YourRightsPage from './pages/YourRightsPage.jsx'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx'
 import TermsOfServicePage from './pages/TermsOfServicePage.jsx'
 import LegalNoticePage from './pages/LegalNoticePage.jsx'
+import SuccessStoriesPage from './pages/SuccessStoriesPage.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import { CanvasRevealEffect } from './components/ui/canvas-reveal-effect'
@@ -50,6 +51,7 @@ function Layout() {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
           <Route path="/legal-notice" element={<LegalNoticePage />} />
+          <Route path="/success-stories" element={<SuccessStoriesPage />} />
         </Routes>
       </div>
       <Footer />

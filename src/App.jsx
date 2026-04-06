@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
 import ShineBorder from './components/ui/shine-border'
-import SuccessStoriesSection from './components/SuccessStoriesSection'
+
 
 const AVATAR_POOL = [
   'https://randomuser.me/api/portraits/thumb/men/89.jpg',
@@ -112,23 +112,113 @@ const transitionVariants = {
 
 const TESTIMONIALS = [
   {
-    quote: "I was unsure if my case was worth pursuing after my accident in Summerlin. ClaimCalculator.ai gave me the confidence to seek legal help, and I ended up settling for 3x what the insurance company initially offered.",
-    name: "Michael S.",
+    quote: "I got rear-ended on I-15 near Flamingo and the adjuster acted like my back pain wasn't even real. ClaimCalculator showed me my case was worth a lot more — I stopped second-guessing myself and got an attorney.",
+    name: "M.R.",
     location: "Las Vegas, NV",
-    initials: "MS"
+    initials: "MR",
+    initial: 12000,
+    final: 85000,
+    type: "Rear-End Collision",
   },
   {
-    quote: "The whole process took less than two minutes. Seeing the upper end of the settlement estimation made me realize I shouldn't accept the first lowball offer from my insurer.",
-    name: "Sarah J.",
+    quote: "I had no idea what my case was actually worth after my motorcycle accident on US-95. The free estimate gave me something real to compare against — what the insurance company was offering didn't even come close.",
+    name: "J.T.",
     location: "Henderson, NV",
-    initials: "SJ"
+    initials: "JT",
+    initial: 25000,
+    final: 175000,
+    type: "Motorcycle Accident",
   },
   {
-    quote: "Fast, easy, and completely free. The attorney they connected me with was incredible and handled all the stress while I focused on recovering.",
-    name: "David T.",
-    location: "Reno, NV",
-    initials: "DT"
-  }
+    quote: "I slipped in a casino parking garage off the Strip and they tried to say it was my own fault. Once I saw the estimate, I knew I had a real case.",
+    name: "D.M.",
+    location: "Las Vegas, NV",
+    initials: "DM",
+    initial: 18000,
+    final: 125000,
+    type: "Premises Liability",
+  },
+  {
+    quote: "The Lyft driver ran a red light on Tropicana and they tried to dodge responsibility. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
+    name: "M.T.",
+    location: "Las Vegas, NV",
+    initials: "MT",
+    initial: 22000,
+    final: 165000,
+    type: "Rideshare Accident",
+  },
+  {
+    quote: "I was hit by an 18-wheeler on I-15 between Vegas and the California border. Getting that estimate gave me the confidence to not back down from the trucking company's lawyers.",
+    name: "P.L.",
+    location: "North Las Vegas, NV",
+    initials: "PL",
+    initial: 35000,
+    final: 210000,
+    type: "Truck Accident",
+  },
+  {
+    quote: "Got doored by a delivery driver near Fremont Street while I was on my bicycle. I had no idea I could go after both the city and the driver — ClaimCalculator opened my eyes.",
+    name: "S.K.",
+    location: "Las Vegas, NV",
+    initials: "SK",
+    initial: 22000,
+    final: 95000,
+    type: "Bicycle Accident",
+  },
+  {
+    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, no warning. After seeing the estimate I realized this wasn't just a fender bender claim.",
+    name: "R.H.",
+    location: "Las Vegas, NV",
+    initials: "RH",
+    initial: 40000,
+    final: 285000,
+    type: "Construction Zone Crash",
+  },
+  {
+    quote: "I tripped on a broken curb outside a casino resort near the Strip. ClaimCalculator showed me premises cases like mine had real value — I kept pushing and it paid off.",
+    name: "J.W.",
+    location: "Paradise, NV",
+    initials: "JW",
+    initial: 15000,
+    final: 78000,
+    type: "Slip & Fall",
+  },
+  {
+    quote: "I was crossing at a marked crosswalk near UNLV and got hit. The driver's insurance only offered enough to cover my ER bill. The estimate showed me the full picture.",
+    name: "M.C.",
+    location: "Las Vegas, NV",
+    initials: "MC",
+    initial: 20000,
+    final: 92000,
+    type: "Pedestrian Accident",
+  },
+  {
+    quote: "Rear-ended in a parking structure at one of the casino resorts. I almost just let it go — then I ran my case through the calculator and completely changed my mind.",
+    name: "L.M.",
+    location: "Summerlin, NV",
+    initials: "LM",
+    initial: 8000,
+    final: 52000,
+    type: "Parking Lot Accident",
+  },
+  {
+    quote: "They tried to use my old shoulder injury against me to lower my payout after a crash on Sahara Ave. My attorney used the estimate as a baseline and proved the accident made everything worse.",
+    name: "C.R.",
+    location: "Henderson, NV",
+    initials: "CR",
+    initial: 30000,
+    final: 145000,
+    type: "Car Accident",
+  },
+  {
+    quote: "I was a passenger in an Uber that got T-boned near Nellis. Both the at-fault driver and Uber's policy were in play — the attorney they matched me with figured it all out.",
+    name: "K.J.",
+    location: "Las Vegas, NV",
+    initials: "KJ",
+    initial: 15000,
+    final: 88000,
+    type: "Uber Accident",
+  },
 ]
 
 function App() {
@@ -515,10 +605,7 @@ function App() {
           </div>
         </section>
 
-        {/* ── SUCCESS STORIES ─────────────────────────────────────────── */}
-        <SuccessStoriesSection />
-
-        {/* ── TESTIMONIALS ─────────────────────────────────────────────── */}
+        {/* ── TESTIMONIALS CAROUSEL ─────────────────────────────────────── */}
         <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
@@ -529,30 +616,74 @@ function App() {
               transition={{ type: 'spring', bounce: 0.2, duration: 1.4 }}
             >
               <span className="material-symbols-outlined text-primary text-5xl absolute -top-7 left-6 bg-[#111318] px-2" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-              
-              {/* Verified badge */}
-              <div className="flex items-center gap-1.5 mb-5">
-                <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                <span className="text-[11px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
+
+              {/* Verified badge + "See all stories" link */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                  <span className="text-[11px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
+                </div>
+                <a
+                  href="/success-stories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-[11px] text-outline hover:text-primary transition-colors duration-200 group"
+                >
+                  See all stories
+                  <span className="material-symbols-outlined text-[13px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                </a>
               </div>
 
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={activeTestimonial}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.4 }}
-                  className="space-y-6"
+                  className="space-y-5"
                 >
-                  <p className="text-lg sm:text-xl lg:text-2xl font-headline font-medium leading-snug italic text-on-background">
-                    &quot;{TESTIMONIALS[activeTestimonial].quote}&quot;
-                  </p>
+                  {/* Before / After numbers */}
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+                      <span className="text-[10px] text-outline uppercase tracking-widest font-semibold">Offered</span>
+                      <span className="text-sm font-headline font-bold text-on-surface-variant line-through decoration-outline/60">
+                        ${TESTIMONIALS[activeTestimonial].initial?.toLocaleString()}
+                      </span>
+                    </div>
+                    <span className="material-symbols-outlined text-outline text-sm">arrow_forward</span>
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#4ADE80]/[0.08] border border-[#4ADE80]/20">
+                      <span className="text-[10px] text-[#4ADE80] uppercase tracking-widest font-semibold">Settled</span>
+                      <span className="text-sm font-headline font-bold text-[#4ADE80]">
+                        ${TESTIMONIALS[activeTestimonial].final?.toLocaleString()}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-bold text-[#4ADE80] px-2 py-0.5 rounded-full bg-[#4ADE80]/10 border border-[#4ADE80]/20">
+                      +{Math.round(((TESTIMONIALS[activeTestimonial].final - TESTIMONIALS[activeTestimonial].initial) / TESTIMONIALS[activeTestimonial].initial) * 100)}%
+                    </span>
+                  </div>
+
+                  {/* Quote — clickable, opens success stories page in new tab */}
+                  <a
+                    href="/success-stories"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group cursor-pointer"
+                    aria-label="Read all success stories"
+                  >
+                    <p className="text-lg sm:text-xl lg:text-2xl font-headline font-medium leading-snug italic text-on-background group-hover:text-primary transition-colors duration-200">
+                      &quot;{TESTIMONIALS[activeTestimonial].quote}&quot;
+                    </p>
+                  </a>
+
+                  {/* Author row */}
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-sm flex-shrink-0">{TESTIMONIALS[activeTestimonial].initials}</div>
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary text-sm flex-shrink-0">
+                      {TESTIMONIALS[activeTestimonial].initials}
+                    </div>
                     <div>
                       <h5 className="font-bold text-on-background text-[13px] sm:text-sm">{TESTIMONIALS[activeTestimonial].name}</h5>
-                      <p className="text-[11px] sm:text-xs text-outline">{TESTIMONIALS[activeTestimonial].location} Resident</p>
+                      <p className="text-[11px] sm:text-xs text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
                     </div>
                     {/* Stars */}
                     <div className="ml-auto flex flex-shrink-0">
@@ -567,8 +698,8 @@ function App() {
               {/* Carousel Indicators */}
               <div className="absolute bottom-5 inset-x-0 flex justify-center gap-1.5">
                 {TESTIMONIALS.map((_, i) => (
-                  <button 
-                    key={i} 
+                  <button
+                    key={i}
                     onClick={() => setActiveTestimonial(i)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${activeTestimonial === i ? 'bg-primary w-5' : 'bg-outline-variant/40 hover:bg-outline-variant w-1.5'}`}
                     aria-label={`Go to slide ${i + 1}`}
