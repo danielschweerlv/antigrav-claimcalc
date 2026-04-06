@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
+import ShineBorder from './components/ui/shine-border'
 import InjuryValuesSection from './components/InjuryValuesSection'
 import WhatIsSection from './components/WhatIsSection'
 
@@ -299,9 +300,9 @@ function App() {
               transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
             >
               <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
-              <div className="relative rounded-2xl border border-white/[0.10] bg-surface-container-low shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+              <ShineBorder borderWidth={2} duration={4} gradient="from-[#a4e6ff] via-white to-[#00d1ff]">
                 <CalculatorForm />
-              </div>
+              </ShineBorder>
             </motion.div>
 
           </div>
