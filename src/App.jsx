@@ -250,7 +250,7 @@ function App() {
             opacity: 0.12,
             pointerEvents: 'none',
             position: 'relative',
-            marginBottom: '-120px',
+            marginBottom: 0,
           }}
           className="lv-skyline-divider"
         >
@@ -303,7 +303,7 @@ function App() {
         </div>
 
         {/* ── TRUST BAR ──────────────────────────────────────────────────── */}
-        <section className="px-4 lg:px-8 -mt-4 lg:-mt-8">
+        <section className="px-4 lg:px-8" style={{ marginTop: '-60px' }}>
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 py-5 border-t border-b border-white/[0.06]">
               {[
