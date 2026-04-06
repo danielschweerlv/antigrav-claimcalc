@@ -3,24 +3,24 @@ import { useNavigate } from 'react-router-dom'
 
 const FEATURES = [
   {
-    icon: 'analytics',
-    title: 'Built on Real Nevada Data',
-    body: 'Your estimate pulls from actual Nevada settlement records, court outcomes, and insurance payouts. Not national averages. Not guesses.',
-  },
-  {
     icon: 'gavel',
-    title: 'Know Before You Decide',
-    body: 'Insurance adjusters already have a number in mind. Now you do too. See what your case may be worth before you sign anything or take a call.',
+    title: 'Know Before You Negotiate',
+    body: 'Most people don\'t know what their case is worth. ClaimCalculator.ai gives you a data-backed number before you talk to an insurance adjuster, sign anything, or accept a lowball offer.',
   },
   {
-    icon: 'lock',
-    title: 'Free and Completely Private',
-    body: 'No account. No credit card. No recorded statement. Your answers stay encrypted and are never shared without your permission.',
+    icon: 'analytics',
+    title: 'Trained on Real Nevada Cases',
+    body: 'Our AI analyzes details from real Nevada injury cases and the settlements they received, enabling it to predict case values specific to Nevada courts and insurers.',
   },
   {
-    icon: 'person_search',
-    title: 'Attorney Match If You Need One',
-    body: 'If your results show your case has real value, we can connect you with a Nevada attorney who handles cases like yours. The call is free.',
+    icon: 'edit_note',
+    title: 'Analyzes Your Specific Case',
+    body: 'A detailed intake form gathers key data points about your accident, injuries, treatment, and liability to build an accurate profile of your case.',
+  },
+  {
+    icon: 'price_check',
+    title: 'Estimates Your Case Value',
+    body: 'Once we understand your case, ClaimCalculator.ai\'s AI cross-references Nevada legal precedents and insurance payout data to generate your estimate.',
   },
 ]
 
@@ -72,7 +72,7 @@ export default function WhatIsSection() {
               maxWidth: '600px',
             }}
           >
-            It's a free AI tool built for Nevada drivers. Answer a few questions about your accident and get a real estimate of what your case may be worth — before you talk to an adjuster or sign anything.
+            Most people have no idea what their case is worth when they sit down with an insurance adjuster. We fix that. In 2 minutes you'll know your number and exactly what kind of representation could get you more of it.
           </p>
         </motion.div>
 
