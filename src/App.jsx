@@ -247,8 +247,10 @@ function App() {
             width: '100%',
             overflow: 'hidden',
             lineHeight: 0,
-            opacity: 0.04,
+            opacity: 0.12,
             pointerEvents: 'none',
+            position: 'relative',
+            marginBottom: '-60px',
           }}
           className="lv-skyline-divider"
         >
