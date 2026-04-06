@@ -114,7 +114,7 @@ const transitionVariants = {
 
 const TESTIMONIALS = [
   {
-    quote: "I got rear-ended on I-15 near Flamingo and the adjuster acted like my back pain wasn't even real. ClaimCalculator showed me my case was worth a lot more — I stopped second-guessing myself and got an attorney.",
+    quote: "I got rear-ended on I-15 near Flamingo and the adjuster acted like my back pain wasn't real. ClaimCalculator showed me my case was worth a lot more. I stopped second-guessing myself and got an attorney.",
     name: "M.R.",
     location: "Las Vegas, NV",
     initials: "MR",
@@ -123,7 +123,7 @@ const TESTIMONIALS = [
     type: "Rear-End Collision",
   },
   {
-    quote: "I had no idea what my case was actually worth after my motorcycle accident on US-95. The free estimate gave me something real to compare against — what the insurance company was offering didn't even come close.",
+    quote: "I had no idea what my case was worth after my motorcycle accident on US-95. The free estimate gave me something real to go off of. What the insurance company offered didn't even come close.",
     name: "J.T.",
     location: "Henderson, NV",
     initials: "JT",
@@ -132,7 +132,7 @@ const TESTIMONIALS = [
     type: "Motorcycle Accident",
   },
   {
-    quote: "I slipped in a casino parking garage off the Strip and they tried to say it was my own fault. Once I saw the estimate, I knew I had a real case.",
+    quote: "I slipped in a casino parking garage and they tried to say it was my fault. Once I saw the estimate, I knew I had a real case. I stopped letting them push me around.",
     name: "D.M.",
     location: "Las Vegas, NV",
     initials: "DM",
@@ -141,16 +141,16 @@ const TESTIMONIALS = [
     type: "Premises Liability",
   },
   {
-    quote: "The Ride Share driver ran a red light on Tropicana and they tried to dodge responsibility. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
+    quote: "The Ride Share driver ran a red light on Tropicana and tried to dodge responsibility. ClaimCalculator pointed me in the right direction. My attorney handled the rest.",
     name: "M.T.",
     location: "Las Vegas, NV",
     initials: "MT",
     initial: 22000,
     final: 165000,
-    type: "Rideshare Accident",
+    type: "Ride Share Accident",
   },
   {
-    quote: "I was hit by an 18-wheeler on I-15 between Vegas and the California border. Getting that estimate gave me the confidence to not back down from the trucking company's lawyers.",
+    quote: "I was hit by an 18-wheeler on I-15 between Vegas and the California border. The trucking company's lawyers were aggressive from day one. That estimate gave me the confidence to not back down.",
     name: "P.L.",
     location: "North Las Vegas, NV",
     initials: "PL",
@@ -159,7 +159,7 @@ const TESTIMONIALS = [
     type: "Truck Accident",
   },
   {
-    quote: "Got doored by a delivery driver near Fremont Street while I was on my bicycle. I had no idea I could go after both the city and the driver — ClaimCalculator opened my eyes.",
+    quote: "Got doored by a delivery driver near Fremont Street while I was on my bicycle. I had no idea I could go after both the city and the driver. ClaimCalculator opened my eyes to that.",
     name: "S.K.",
     location: "Las Vegas, NV",
     initials: "SK",
@@ -168,7 +168,7 @@ const TESTIMONIALS = [
     type: "Bicycle Accident",
   },
   {
-    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, no warning. After seeing the estimate I realized this was a serious case.",
+    quote: "Construction zone on US-95 near the Spaghetti Bowl. Lane shifts, missing signage, no warning. After seeing the estimate I realized this was a serious case and got an attorney involved.",
     name: "R.H.",
     location: "Las Vegas, NV",
     initials: "RH",
@@ -177,7 +177,7 @@ const TESTIMONIALS = [
     type: "Construction Zone Crash",
   },
   {
-    quote: "I tripped on a broken curb outside a casino resort near the Strip. ClaimCalculator showed me premises cases like mine had real value — I kept pushing and it paid off.",
+    quote: "I tripped on a broken curb outside a casino resort near the Strip. ClaimCalculator showed me that premises cases like mine had real value. I kept pushing and it paid off.",
     name: "J.W.",
     location: "Paradise, NV",
     initials: "JW",
@@ -186,7 +186,7 @@ const TESTIMONIALS = [
     type: "Slip & Fall",
   },
   {
-    quote: "I was crossing at a marked crosswalk near UNLV and got hit. The driver's insurance only offered enough to cover my ER bill. The estimate showed me the full picture.",
+    quote: "I was crossing at a marked crosswalk near UNLV and got hit. The driver's insurance only offered enough to cover my ER bill. The estimate showed me the full picture, pain, lost wages, all of it.",
     name: "M.C.",
     location: "Las Vegas, NV",
     initials: "MC",
@@ -195,7 +195,7 @@ const TESTIMONIALS = [
     type: "Pedestrian Accident",
   },
   {
-    quote: "Rear-ended in a parking structure at one of the casino resorts. I almost just let it go — then I ran my case through the calculator and completely changed my mind.",
+    quote: "Rear-ended in a parking structure at one of the casino resorts. I almost let it go. Then I ran my case through the calculator and completely changed my mind.",
     name: "L.M.",
     location: "Summerlin, NV",
     initials: "LM",

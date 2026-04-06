@@ -19,7 +19,7 @@ const STORIES = [
   {
     initial: 12000,
     final: 85000,
-    quote: "I got rear-ended on I-15 near Flamingo and the adjuster acted like my back pain wasn't even real. ClaimCalculator showed me my case was worth a lot more — I stopped second-guessing myself and got an attorney.",
+    quote: "I got rear-ended on I-15 near Flamingo and the adjuster acted like my back pain wasn't real. ClaimCalculator showed me my case was worth a lot more. I stopped second-guessing myself and got an attorney.",
     initials: 'M.R.',
     location: 'Las Vegas, NV',
     weeks: 12,
@@ -29,7 +29,7 @@ const STORIES = [
   {
     initial: 25000,
     final: 175000,
-    quote: "I had no idea what my case was actually worth after my motorcycle accident on US-95. The free estimate gave me something real to compare against — what the insurance company was offering didn't even come close.",
+    quote: "I had no idea what my case was worth after my motorcycle accident on US-95. The free estimate gave me something real to go off of. What the insurance company offered didn't even come close.",
     initials: 'J.T.',
     location: 'Henderson, NV',
     weeks: 16,
@@ -39,7 +39,7 @@ const STORIES = [
   {
     initial: 18000,
     final: 125000,
-    quote: "I slipped in a casino parking garage off the Strip and they tried to say it was my own fault. Once I saw the estimate, I knew I had a real case. Ended up settling for way more than they initially put on the table.",
+    quote: "I slipped in a casino parking garage off the Strip and they tried to say it was my fault. Once I saw the estimate, I knew I had a real case. I ended up settling for way more than they put on the table.",
     initials: 'D.M.',
     location: 'Las Vegas, NV',
     weeks: 14,
@@ -49,17 +49,17 @@ const STORIES = [
   {
     initial: 22000,
     final: 165000,
-    quote: "The Ride Share driver ran a red light on Tropicana and they tried to dodge responsibility. I honestly didn't know who to go after. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
+    quote: "The Ride Share driver ran a red light on Tropicana and tried to dodge responsibility. I didn't know who to go after. ClaimCalculator pointed me in the right direction and my attorney handled the rest.",
     initials: 'M.T.',
     location: 'Las Vegas, NV',
     weeks: 16,
-    type: 'Rideshare Accident',
+    type: 'Ride Share Accident',
     date: 'April 2025',
   },
   {
     initial: 35000,
     final: 210000,
-    quote: "I was hit by an 18-wheeler on I-15 between Vegas and the California border. The trucking company's lawyers were aggressive from day one. Getting that estimate gave me the confidence to not back down.",
+    quote: "I was hit by an 18-wheeler on I-15 between Vegas and the California border. The trucking company's lawyers were aggressive from day one. That estimate gave me the confidence to not back down.",
     initials: 'P.L.',
     location: 'North Las Vegas, NV',
     weeks: 20,
@@ -69,7 +69,7 @@ const STORIES = [
   {
     initial: 22000,
     final: 95000,
-    quote: "Got doored by a delivery driver near Fremont Street while I was on my bicycle. The city and the driver both tried to point fingers at each other. I had no idea I could go after both — ClaimCalculator opened my eyes.",
+    quote: "Got doored by a delivery driver near Fremont Street while I was on my bicycle. The city and the driver both pointed fingers at each other. I had no idea I could go after both. ClaimCalculator opened my eyes.",
     initials: 'S.K.',
     location: 'Las Vegas, NV',
     weeks: 18,
@@ -79,7 +79,7 @@ const STORIES = [
   {
     initial: 40000,
     final: 285000,
-    quote: "Construction zone on US-95 near the Spaghetti Bowl — lane shifts, missing signage, and no warning. After seeing the estimate I realized this was a real case. My attorney got way more than I expected.",
+    quote: "Construction zone on US-95 near the Spaghetti Bowl. Lane shifts, missing signage, no warning at all. After seeing the estimate I realized this was a real case. My attorney got way more than I expected.",
     initials: 'R.H.',
     location: 'Las Vegas, NV',
     weeks: 22,
@@ -89,7 +89,7 @@ const STORIES = [
   {
     initial: 15000,
     final: 78000,
-    quote: "I tripped on a broken curb outside a casino resort near the Strip. Security footage existed but they said it was inconclusive. ClaimCalculator showed me premises cases like mine had real value — I kept pushing.",
+    quote: "I tripped on a broken curb outside a casino resort near the Strip. Security footage existed but they called it inconclusive. ClaimCalculator showed me that premises cases like mine had real value. I kept pushing.",
     initials: 'J.W.',
     location: 'Paradise, NV',
     weeks: 15,
@@ -99,7 +99,7 @@ const STORIES = [
   {
     initial: 20000,
     final: 92000,
-    quote: "I was a pedestrian crossing at a marked crosswalk near UNLV and got hit. The driver's insurance only offered enough to cover my ER bill. The estimate showed me the full picture — pain, lost wages, the whole thing.",
+    quote: "I was crossing at a marked crosswalk near UNLV and got hit. The driver's insurance only offered enough to cover my ER bill. The estimate showed me the full picture, pain, lost wages, all of it.",
     initials: 'M.C.',
     location: 'Las Vegas, NV',
     weeks: 24,
@@ -109,7 +109,7 @@ const STORIES = [
   {
     initial: 8000,
     final: 52000,
-    quote: "Rear-ended in a parking structure at one of the casino resorts. The other driver's insurance offered practically nothing. I almost just let it go — then I ran my case through the calculator and changed my mind.",
+    quote: "Rear-ended in a parking structure at one of the casino resorts. The other driver's insurance offered practically nothing. I almost let it go. Then I ran my case through the calculator and changed my mind.",
     initials: 'L.M.',
     location: 'Summerlin, NV',
     weeks: 10,
@@ -119,7 +119,7 @@ const STORIES = [
   {
     initial: 30000,
     final: 145000,
-    quote: "They tried to use my old shoulder injury against me to lower my payout after a crash on Sahara Ave. My attorney used the calculator estimate as a starting point and proved the accident made everything significantly worse.",
+    quote: "They tried to use my old shoulder injury against me to lower my payout after a crash on Sahara Ave. My attorney used the estimate as a starting point and proved the accident made everything worse.",
     initials: 'C.R.',
     location: 'Henderson, NV',
     weeks: 16,
