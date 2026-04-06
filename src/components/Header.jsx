@@ -175,7 +175,7 @@ const Header = () => {
                         onClick={() => handleNav(item)}
                         className={`w-full text-left px-3 py-2 rounded-lg text-sm font-headline font-medium transition-all duration-200 ${
                           !item.href && location.pathname === item.path
-                            ? 'text-primary bg-primary/[0.08]'
+                            ? 'text-primary'
                             : 'text-on-surface-variant hover:text-on-background hover:bg-white/[0.04]'
                         }`}
                       >
