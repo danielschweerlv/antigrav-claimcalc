@@ -58,7 +58,7 @@ export default function WhatIsSection() {
             className="font-headline font-black text-white mb-5"
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.1 }}
           >
-            What is ClaimCalculator.ai?
+            What is <span className="text-primary">Calculator.ai</span>?
           </h2>
           <p
             className="mx-auto"
