@@ -319,7 +319,6 @@ function App() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="flex items-center shrink-0">
                   {[
-                    { src: '/logos/google-color.png', alt: 'Google' },
                     { src: '/logos/lvmpd-color.png', alt: 'LVMPD' },
                     { src: '/logos/nvcourts-color.png', alt: 'Nevada Courts' },
                     { src: '/logos/bbb-color.svg', alt: 'Better Business Bureau' },
@@ -328,11 +327,11 @@ function App() {
                     { src: '/logos/kbb-color.png', alt: 'Kelley Blue Book' },
                     { src: '/logos/carfax-color.png', alt: 'Carfax' },
                     { src: '/logos/carmax-color.png', alt: 'CarMax' },
-                    { src: '/logos/las-vegas-cvb.png', alt: 'Las Vegas CVB', height: '48px' },
-                    { src: '/logos/reddit-logo.png', alt: 'Reddit', height: '36px' },
-                    { src: '/logos/las-vegas-weekly.png', alt: 'Las Vegas Weekly', height: '32px' },
-                    { src: '/logos/fox5-kvvu.png', alt: 'Fox 5 KVVU-TV', height: '52px' },
-                    { src: '/logos/lv-review-journal.png', alt: 'Las Vegas Review-Journal', height: '36px' },
+                    { src: '/logos/las-vegas-cvb.png', alt: 'Las Vegas CVB', height: '52px' },
+                    { src: '/logos/reddit-logo.png', alt: 'Reddit', height: '44px' },
+                    { src: '/logos/las-vegas-weekly.png', alt: 'Las Vegas Weekly', height: '30px' },
+                    { src: '/logos/fox5-kvvu.png', alt: 'Fox 5 KVVU-TV', height: '58px' },
+                    { src: '/logos/lv-review-journal.png', alt: 'Las Vegas Review-Journal', height: '38px' },
                   ].map(({ src, alt, height }) => (
                     <img
                       key={`${setIdx}-${alt}`}
