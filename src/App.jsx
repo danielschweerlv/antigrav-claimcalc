@@ -455,9 +455,6 @@ function App() {
         {/* ── TRUST STATS ─────────────────────────────────────── */}
         <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            <p className="text-center text-base lg:text-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
-              Most people have no idea what their case is worth when they sit down with an insurance adjuster. We fix that. In 2 minutes you'll know your number and exactly what kind of representation could get you more of it.
-            </p>
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.1 } } }, item: transitionVariants.item }}
               className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
