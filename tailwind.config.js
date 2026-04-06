@@ -57,10 +57,10 @@ export default {
         "primary-container": "#00d1ff"
       },
       fontFamily: {
-        "headline": ["Satoshi", "sans-serif"],
-        "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"],
-        "sans": ["Inter", "sans-serif"]
+        "headline": ["Barlow Condensed", "sans-serif"],
+        "body": ["Barlow Condensed", "sans-serif"],
+        "label": ["Barlow Condensed", "sans-serif"],
+        "sans": ["Barlow Condensed", "sans-serif"]
       },
       borderRadius: {
         "sm": "12px",

@@ -6,7 +6,7 @@
   body {
     background-color: #111318;
     color: #e2e2e8;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     overflow-x: hidden;
     min-height: max(884px, 100dvh);
   }
