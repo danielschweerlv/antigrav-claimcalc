@@ -258,7 +258,7 @@ function App() {
               </div>
 
               {/* Headline — stronger size contrast */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline font-black lg:font-extrabold text-on-background leading-[0.95] tracking-tight lg:mb-7">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline text-on-background leading-[0.95] tracking-tight lg:mb-7">
                 Insurance companies{' '}
                 <br className="hidden lg:block" />
                 already know your number.{' '}
@@ -456,7 +456,7 @@ function App() {
               variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
               className="text-center space-y-4 mb-16"
             >
-              <h2 className="text-3xl lg:text-5xl font-headline font-black">
+              <h2 className="text-3xl lg:text-5xl font-headline ">
                 The Path to <span className="text-primary italic">Recovery.</span>
               </h2>
               <p className="text-on-surface-variant text-[17px] lg:text-lg max-w-xl mx-auto">
@@ -476,7 +476,7 @@ function App() {
                 <div key={num} className="space-y-3 p-6 lg:p-7 rounded-xl border border-white/[0.06] hover:border-primary/15 transition-all duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <div className="flex items-center gap-3">
                     <span className="text-3xl font-headline font-black text-outline/20 leading-none">{num}</span>
-                    <h4 className="text-lg font-headline font-bold text-on-background">{title}</h4>
+                    <h4 className="text-lg font-headline text-on-background">{title}</h4>
                   </div>
                   <p className="text-on-surface-variant text-base leading-relaxed">{body}</p>
                 </div>
@@ -573,7 +573,7 @@ function App() {
                       {TESTIMONIALS[activeTestimonial].initials}
                     </div>
                     <div>
-                      <h5 className="font-bold text-on-background text-sm sm:text-[15px]">{TESTIMONIALS[activeTestimonial].name}</h5>
+                      <h5 className="text-on-background text-sm sm:text-[15px]">{TESTIMONIALS[activeTestimonial].name}</h5>
                       <p className="text-xs sm:text-[13px] text-outline">{TESTIMONIALS[activeTestimonial].location} &middot; {TESTIMONIALS[activeTestimonial].type}</p>
                     </div>
                     {/* Stars */}
@@ -610,7 +610,7 @@ function App() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-headline font-bold">
+            <h2 className="text-3xl lg:text-4xl font-headline ">
               The insurance adjuster <span className="text-primary italic">isn't on your side.</span>
             </h2>
             <p className="text-on-surface-variant text-[17px]">

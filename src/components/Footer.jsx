@@ -37,7 +37,7 @@ export default function Footer() {
 
           {/* Column 1: Company */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Company</h6>
+            <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Company</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Home', path: '/' },
@@ -58,7 +58,7 @@ export default function Footer() {
 
           {/* Column 2: Resources */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Resources</h6>
+            <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Resources</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Injury Values', path: '/injury-values' },
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Column 3: For Attorneys */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">For Attorneys</h6>
+            <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">For Attorneys</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Partner With Us', href: 'mailto:partners@claimcalculator.ai' },
@@ -92,7 +92,7 @@ export default function Footer() {
 
           {/* Column 4: Legal */}
           <div className="space-y-3">
-            <h6 className="text-white font-bold text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Legal</h6>
+            <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Legal</h6>
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Privacy Policy', path: '/privacy-policy' },

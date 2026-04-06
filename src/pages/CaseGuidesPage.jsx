@@ -85,7 +85,7 @@ export default function CaseGuidesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background">
               Nevada <span className="text-primary italic">Case Guides</span>
             </h1>
             <p className="text-on-surface-variant text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
@@ -131,7 +131,7 @@ export default function CaseGuidesPage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-base font-headline font-bold text-on-background group-hover:text-primary transition-colors leading-snug">
+                    <h3 className="text-base font-headline text-on-background group-hover:text-primary transition-colors leading-snug">
                       {title}
                     </h3>
 
@@ -161,7 +161,7 @@ export default function CaseGuidesPage() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h2 className="text-2xl lg:text-4xl font-headline font-bold text-on-background">
+            <h2 className="text-2xl lg:text-4xl font-headline text-on-background">
               Ready to see what your case is worth?
             </h2>
             <p className="text-on-surface-variant text-base lg:text-lg">

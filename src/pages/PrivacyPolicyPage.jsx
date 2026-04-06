@@ -35,7 +35,7 @@ const sections = [
       <div className="space-y-6">
         <p>As a general rule, we limit the Personal Information we collect to that which is adequate, relevant, and reasonably necessary for us to provide our Services to you.</p>
         <div>
-          <h4 className="text-sm font-bold text-on-background mb-3 uppercase tracking-widest text-xs">Information That You Provide to Us</h4>
+          <h4 className="text-sm text-on-background mb-3 uppercase tracking-widest text-xs">Information That You Provide to Us</h4>
           <p className="mb-3">As you interact with our Sites or Services, we may collect some or all of the following Personal Information via webforms and other communications with you:</p>
           <ul className="space-y-2">
             {[
@@ -56,7 +56,7 @@ const sections = [
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold text-on-background mb-3 uppercase tracking-widest text-xs">Information That Is Automatically Collected</h4>
+          <h4 className="text-sm text-on-background mb-3 uppercase tracking-widest text-xs">Information That Is Automatically Collected</h4>
           <p className="mb-3">Like many businesses, we automatically collect certain information when you visit or interact with our Sites ("Usage Information"), including:</p>
           <ul className="space-y-2">
             {[
@@ -76,11 +76,11 @@ const sections = [
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-bold text-on-background mb-3 uppercase tracking-widest text-xs">Information Collected from Third Parties</h4>
+          <h4 className="text-sm text-on-background mb-3 uppercase tracking-widest text-xs">Information Collected from Third Parties</h4>
           <p>Our Sites may include functionality that allows certain interactions between our Sites and your account on a third-party website or application. We also may obtain information about traffic and usage from third parties. We do not have control over the information that is collected, used, and shared by these third parties. We encourage you to review their privacy statements.</p>
         </div>
         <div>
-          <h4 className="text-sm font-bold text-on-background mb-3 uppercase tracking-widest text-xs">Information We Infer</h4>
+          <h4 className="text-sm text-on-background mb-3 uppercase tracking-widest text-xs">Information We Infer</h4>
           <p>We derive information or draw inferences about you based on information we collect. For example, based on your contact information or language spoken, we may infer your interest in certain attorneys or law firms.</p>
         </div>
       </div>
@@ -363,7 +363,7 @@ export default function PrivacyPolicyPage() {
               <span className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Last updated: 2024</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-headline font-bold text-on-background">Privacy <span className="text-primary italic">Policy</span></h1>
+            <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Privacy <span className="text-primary italic">Policy</span></h1>
             <p className="text-on-surface-variant max-w-xl mx-auto text-base leading-relaxed">
               We take your privacy seriously. This policy explains exactly what data we collect, why we collect it, and how you can control it.
             </p>
@@ -409,7 +409,7 @@ export default function PrivacyPolicyPage() {
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-bold text-primary w-7 flex-shrink-0">{section.num}.</span>
-                    <h2 className="text-base font-headline font-bold text-on-background">{section.title}</h2>
+                    <h2 className="text-base font-headline text-on-background">{section.title}</h2>
                   </div>
                   <span className={`material-symbols-outlined text-outline flex-shrink-0 transition-transform duration-300 ${activeSection === section.id ? 'rotate-180' : ''}`}>
                     expand_more

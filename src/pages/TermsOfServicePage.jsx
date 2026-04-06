@@ -167,7 +167,7 @@ export default function TermsOfServicePage() {
               <span className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Last updated: 2024</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-headline font-bold text-on-background">Terms of <span className="text-primary italic">Service</span></h1>
+            <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Terms of <span className="text-primary italic">Service</span></h1>
             <p className="text-on-surface-variant max-w-xl mx-auto text-base leading-relaxed">Please review this page carefully. These Terms constitute a legal contract between you and ClaimCalculator.ai.</p>
           </motion.div>
 
@@ -199,7 +199,7 @@ export default function TermsOfServicePage() {
                 <button className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-surface-container transition-colors" onClick={() => setActiveSection(activeSection === section.id ? null : section.id)}>
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-bold text-primary w-7 flex-shrink-0">{section.num}.</span>
-                    <h2 className="text-base font-headline font-bold text-on-background">{section.title}</h2>
+                    <h2 className="text-base font-headline text-on-background">{section.title}</h2>
                   </div>
                   <span className={`material-symbols-outlined text-outline flex-shrink-0 transition-transform duration-300 ${activeSection === section.id ? 'rotate-180' : ''}`}>expand_more</span>
                 </button>

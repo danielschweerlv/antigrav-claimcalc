@@ -167,7 +167,7 @@ const Header = () => {
 
               {/* Left Column — Nav Links */}
               <div>
-                <h6 className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-3">Navigation</h6>
+                <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">Navigation</h6>
                 <ul className="space-y-1">
                   {NAV_LINKS.map((item) => (
                     <li key={item.label}>
@@ -188,7 +188,7 @@ const Header = () => {
 
               {/* Center Column — Featured Resource Cards */}
               <div>
-                <h6 className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-3">Featured Resources</h6>
+                <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">Featured Resources</h6>
                 <div className="space-y-3">
                   {FEATURED_CARDS.map((card) => (
                     <button
@@ -211,7 +211,7 @@ const Header = () => {
               <div className="space-y-5">
                 {/* Attorney Links */}
                 <div>
-                  <h6 className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-3">For Attorneys</h6>
+                  <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">For Attorneys</h6>
                   <ul className="space-y-1">
                     {ATTORNEY_LINKS.map((item) => (
                       <li key={item.label}>
@@ -228,7 +228,7 @@ const Header = () => {
 
                 {/* Legal Links */}
                 <div className="pt-3 border-t border-white/[0.06]">
-                  <h6 className="text-[10px] font-label font-bold text-outline/60 uppercase tracking-widest mb-3">Legal</h6>
+                  <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">Legal</h6>
                   <ul className="space-y-1">
                     {LEGAL_LINKS.map((item) => (
                       <li key={item.label}>

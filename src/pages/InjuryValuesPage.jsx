@@ -18,7 +18,7 @@ export default function InjuryValuesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background">
               Injury Values <span className="text-primary italic">in Nevada</span>
             </h1>
             <p className="text-on-surface-variant text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
@@ -39,7 +39,7 @@ export default function InjuryValuesPage() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h2 className="text-2xl lg:text-4xl font-headline font-bold text-on-background">
+            <h2 className="text-2xl lg:text-4xl font-headline text-on-background">
               Ready to see what your case is worth?
             </h2>
             <p className="text-on-surface-variant text-base lg:text-lg">

@@ -318,7 +318,7 @@ function CheckItem({ checked, onChange, label }) {
 function StepHeading({ title, sub }) {
   return (
     <div className="mb-6">
-      <h2 className="text-xl md:text-2xl font-headline font-bold text-on-background leading-snug mb-1.5">{title}</h2>
+      <h2 className="text-xl md:text-2xl font-headline text-on-background leading-snug mb-1.5">{title}</h2>
       {sub && <p className="text-sm text-on-surface-variant/80">{sub}</p>}
     </div>
   )
@@ -398,7 +398,7 @@ function ResultScreen({ data }) {
         <div className="bg-error/10 border border-error/30 rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-error text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
-            <h3 className="text-lg font-headline font-bold text-error">Nevada's 51% Rule Applies</h3>
+            <h3 className="text-lg font-headline text-error">Nevada's 51% Rule Applies</h3>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
             Based on your fault assessment, Nevada law (NRS 41.141) may significantly limit your ability to recover damages. When you're more than 50% at fault, your case value is $0 under the state's modified comparative negligence rule.
@@ -457,7 +457,7 @@ function ResultScreen({ data }) {
       {/* Urgency box */}
       <div className="bg-surface-container rounded-xl border border-outline-variant/10 p-5 space-y-4">
         <div>
-          <h3 className="text-lg font-headline font-bold text-on-background mb-1">Wait — you're not done yet.</h3>
+          <h3 className="text-lg font-headline text-on-background mb-1">Wait — you're not done yet.</h3>
           <p className="text-sm text-on-surface-variant">The most important step is next. A case specialist will reach out to:</p>
         </div>
         <ul className="space-y-2">

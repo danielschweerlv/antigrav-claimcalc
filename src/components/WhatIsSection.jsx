@@ -103,7 +103,7 @@ export default function WhatIsSection() {
                     {icon}
                   </span>
                 </div>
-                <h4 className="font-headline font-bold text-white text-[17px] leading-tight">
+                <h4 className="font-headline text-white text-[17px] leading-tight">
                   {title}
                 </h4>
               </div>

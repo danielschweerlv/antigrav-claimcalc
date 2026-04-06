@@ -62,7 +62,7 @@ export default function CalculatorPage() {
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse flex-shrink-0" />
             <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Free · 2 min · No obligation</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-headline font-bold text-on-background leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-headline text-on-background leading-tight">
             What is your case <span className="text-primary italic">worth?</span>
           </h1>
           <p className="text-sm text-on-surface-variant max-w-sm mx-auto">
@@ -93,7 +93,7 @@ export default function CalculatorPage() {
             {/* Our Case Valuation */}
             <div className="rounded-2xl bg-surface-container-low border border-[#4ADE80]/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center shadow-[0_4px_30px_rgba(74,222,128,0.03)] hover:shadow-[0_4px_30px_rgba(74,222,128,0.08)] transition-shadow">
               <span className="material-symbols-outlined text-5xl text-[#4ADE80] mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-              <h3 className="text-xl sm:text-2xl font-headline font-bold text-on-background mb-6">Our Case <span className="text-[#4ADE80] italic">Valuation</span></h3>
+              <h3 className="text-xl sm:text-2xl font-headline text-on-background mb-6">Our Case <span className="text-[#4ADE80] italic">Valuation</span></h3>
               <ul className="space-y-4 text-left w-full max-w-xs">
                 {[
                   "Assesses total compensation available",
@@ -112,7 +112,7 @@ export default function CalculatorPage() {
             {/* Typical Insurance Offer */}
             <div className="rounded-2xl bg-surface-container-highest border border-error/20 overflow-hidden flex flex-col items-center p-6 sm:p-8 text-center opacity-80 hover:opacity-100 transition-opacity">
               <span className="material-symbols-outlined text-5xl text-error mb-4" style={{ fontVariationSettings: "'FILL' 1" }}>cancel</span>
-              <h3 className="text-xl sm:text-2xl font-headline font-bold text-on-background mb-6">Typical Insurance <span className="text-error italic">Offer</span></h3>
+              <h3 className="text-xl sm:text-2xl font-headline text-on-background mb-6">Typical Insurance <span className="text-error italic">Offer</span></h3>
               <ul className="space-y-4 text-left w-full max-w-xs">
                 {[
                   "Only offers compensation for property damage",
@@ -139,7 +139,7 @@ export default function CalculatorPage() {
           transition={{ duration: 0.8 }}
         >
           <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-headline font-bold text-on-background mb-3">Frequently Asked <span className="text-primary italic">Questions</span></h2>
+            <h2 className="text-2xl sm:text-3xl font-headline text-on-background mb-3">Frequently Asked <span className="text-primary italic">Questions</span></h2>
             <p className="text-sm font-body text-on-surface-variant">Everything you need to know about your case and what to expect from the process.</p>
           </div>
           

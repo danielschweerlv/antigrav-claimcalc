@@ -80,7 +80,7 @@ export default function YourRightsPage() {
               <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse flex-shrink-0" />
               <span className="text-xs font-label font-semibold text-tertiary uppercase tracking-widest">Nevada Policyholder Rights</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background leading-tight max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background leading-tight max-w-3xl mx-auto">
               Understand the Tactics Insurance Companies Use That May{' '}
               <span className="text-tertiary italic">Impact Case Settlements</span>
             </h1>
@@ -135,7 +135,7 @@ export default function YourRightsPage() {
                     <span className="text-xs font-label font-bold text-tertiary uppercase tracking-widest">Right {right.num}</span>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant/10 text-outline uppercase tracking-widest">{right.tag}</span>
                   </div>
-                  <h2 className="text-lg lg:text-xl font-headline font-bold text-on-background leading-snug">{right.title}</h2>
+                  <h2 className="text-lg lg:text-xl font-headline text-on-background leading-snug">{right.title}</h2>
                   <p className="text-sm text-primary font-semibold italic">{right.summary}</p>
                   <p className="text-sm text-on-surface-variant leading-relaxed">{right.body}</p>
                 </div>
@@ -164,7 +164,7 @@ export default function YourRightsPage() {
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
               <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
-              <h3 className="text-2xl lg:text-3xl font-headline font-bold text-on-background">
+              <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Knowledge is your first line of defense.
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">

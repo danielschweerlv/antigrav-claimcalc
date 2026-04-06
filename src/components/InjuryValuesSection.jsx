@@ -107,7 +107,7 @@ export default function InjuryValuesSection() {
           variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
           className="text-center space-y-4 mb-16"
         >
-          <h2 className="text-3xl lg:text-5xl font-headline font-bold">
+          <h2 className="text-3xl lg:text-5xl font-headline ">
             What Is Your Injury Worth{' '}
             <span className="text-primary italic">in Nevada?</span>
           </h2>
@@ -141,7 +141,7 @@ export default function InjuryValuesSection() {
               >
                 {/* Top row: name + severity pill */}
                 <div className="flex items-start justify-between gap-3">
-                  <h4 className="text-[15px] font-headline font-bold text-white leading-snug">
+                  <h4 className="text-[15px] font-headline text-white leading-snug">
                     {name}
                   </h4>
                   <span

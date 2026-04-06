@@ -166,7 +166,7 @@ export default function SuccessStoriesSection() {
             <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Real Nevada Results</span>
           </div>
-          <h2 className="text-3xl lg:text-5xl font-headline font-bold">
+          <h2 className="text-3xl lg:text-5xl font-headline ">
             What Nevada Residents{' '}
             <span className="text-primary italic">Actually Recovered</span>
           </h2>

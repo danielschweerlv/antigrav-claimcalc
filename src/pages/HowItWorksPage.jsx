@@ -60,7 +60,7 @@ export default function HowItWorksPage() {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse flex-shrink-0" />
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">The Process</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-bold text-on-background leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline text-on-background leading-tight">
               How Our Service <span className="text-primary italic">Works</span>
             </h1>
             <p className="text-base lg:text-lg text-on-surface-variant max-w-xl mx-auto leading-relaxed">
@@ -96,7 +96,7 @@ export default function HowItWorksPage() {
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#4ADE80]/15 text-[#4ADE80] border border-[#4ADE80]/20">Start here</span>
                     )}
                   </div>
-                  <h2 className="text-xl lg:text-2xl font-headline font-bold text-on-background leading-snug">{step.title}</h2>
+                  <h2 className="text-xl lg:text-2xl font-headline text-on-background leading-snug">{step.title}</h2>
                   <p className="text-on-surface-variant leading-relaxed text-sm lg:text-base">{step.body}</p>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
               <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
-              <h3 className="text-2xl lg:text-3xl font-headline font-bold text-on-background">
+              <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Ready to find out what your case is worth?
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">

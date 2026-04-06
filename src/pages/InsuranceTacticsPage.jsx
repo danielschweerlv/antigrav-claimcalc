@@ -62,7 +62,7 @@ export default function InsuranceTacticsPage() {
               <span className="w-2 h-2 rounded-full bg-error animate-pulse flex-shrink-0" />
               <span className="text-xs font-label font-semibold text-error uppercase tracking-widest">Know Your Rights</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline font-bold text-on-background leading-tight max-w-3xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background leading-tight max-w-3xl mx-auto">
               Understand the Tactics Insurance Companies Use That May{' '}
               <span className="text-error italic">Impact Case Settlements</span>
             </h1>
@@ -93,7 +93,7 @@ export default function InsuranceTacticsPage() {
 
                 {/* Text */}
                 <div className="space-y-3">
-                  <h2 className="text-lg font-headline font-bold text-on-background leading-snug">{tactic.title}</h2>
+                  <h2 className="text-lg font-headline text-on-background leading-snug">{tactic.title}</h2>
                   <p className="text-sm text-on-surface-variant leading-relaxed">{tactic.body}</p>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default function InsuranceTacticsPage() {
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
               <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>shield</span>
-              <h3 className="text-2xl lg:text-3xl font-headline font-bold text-on-background">
+              <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Don't face these tactics alone.
               </h3>
               <p className="text-on-surface-variant text-sm lg:text-base max-w-md mx-auto">

@@ -17,7 +17,7 @@ export default function FaqAccordion({ items }) {
             className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-surface-container transition-colors group"
             onClick={() => setActiveFaq(activeFaq === i ? null : i)}
           >
-            <h3 className="text-[15px] font-headline font-bold text-on-background leading-snug pr-4 transition-colors group-hover:text-primary">
+            <h3 className="text-[15px] font-headline text-on-background leading-snug pr-4 transition-colors group-hover:text-primary">
               {faq.q}
             </h3>
             <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 border transition-all duration-300 ${activeFaq === i ? 'bg-primary border-primary text-on-primary-fixed' : 'bg-surface-container-high border-outline-variant/20 text-on-surface-variant hover:border-primary/40'}`}>

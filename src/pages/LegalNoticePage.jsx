@@ -54,7 +54,7 @@ export default function LegalNoticePage() {
               <span className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Paid Attorney Advertising</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-headline font-bold text-on-background">Legal <span className="text-primary italic">Notice</span></h1>
+            <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Legal <span className="text-primary italic">Notice</span></h1>
             <p className="text-on-surface-variant max-w-xl mx-auto text-base leading-relaxed">
               While this website is generally prepared and maintained pursuant to applicable laws, the following legal notice applies to all users who access this website, regardless of jurisdiction.
             </p>
@@ -102,7 +102,7 @@ export default function LegalNoticePage() {
                   <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>{item.icon}</span>
                 </div>
                 <div className="space-y-1.5">
-                  <h2 className="text-base font-headline font-bold text-on-background">{item.title}</h2>
+                  <h2 className="text-base font-headline text-on-background">{item.title}</h2>
                   <p className="text-sm text-on-surface-variant leading-relaxed">{item.body}</p>
                 </div>
               </div>
@@ -117,7 +117,7 @@ export default function LegalNoticePage() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
-            <h2 className="text-xl font-headline font-bold text-on-background mb-6 flex items-center gap-2">
+            <h2 className="text-xl font-headline text-on-background mb-6 flex items-center gap-2">
               <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>public</span>
               State-Specific Notices
             </h2>
@@ -128,7 +128,7 @@ export default function LegalNoticePage() {
               >
                 <div className="flex items-center gap-3 mb-3">
                   {notice.highlight && <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>}
-                  <h3 className={`text-base font-headline font-bold ${notice.highlight ? 'text-primary' : 'text-on-background'}`}>{notice.state}</h3>
+                  <h3 className={`text-base font-headline ${notice.highlight ? 'text-primary' : 'text-on-background'}`}>{notice.state}</h3>
                   {notice.highlight && <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/20 uppercase tracking-widest">Primary Jurisdiction</span>}
                 </div>
                 <p className="text-sm text-on-surface-variant leading-relaxed">{notice.content}</p>
