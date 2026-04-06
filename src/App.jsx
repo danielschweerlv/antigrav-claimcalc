@@ -543,7 +543,7 @@ function App() {
         </section>
 
         {/* ── HOW IT WORKS ──────────────────────────────────────────────── */}
-        <section className="py-20 lg:py-32 px-4 lg:px-8">
+        <section className="py-20 lg:py-32 px-4 lg:px-8 bg-transparent">
           <div className="max-w-7xl mx-auto">
             <AnimatedGroup
               variants={{ container: { visible: { transition: { staggerChildren: 0.12 } } }, item: transitionVariants.item }}
