@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import AIChipLogo from './ui/AIChipLogo'
+import { CpuArchitecture } from './ui/cpu-architecture'
 import AnimatedCross from './ui/AnimatedCross'
 
 export default function Footer() {
@@ -36,7 +36,14 @@ export default function Footer() {
           {/* AI Microchip Logo */}
           <div className="flex flex-shrink-0 items-center justify-center">
             <div className="p-4 sm:p-6 rounded-[2rem]">
-              <AIChipLogo className="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44" />
+              <CpuArchitecture
+                className="w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44"
+                text="AI"
+                animateText={true}
+                animateLines={true}
+                animateMarkers={true}
+                showCpuConnections={true}
+              />
             </div>
           </div>
         </div>
