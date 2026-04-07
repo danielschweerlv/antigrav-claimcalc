@@ -85,14 +85,46 @@ const Header = () => {
 
         {/* Logo Section */}
         <div className="flex items-center gap-3">
-          {/* Sparkling + sign — clickable dropdown trigger */}
+          {/* Caret + Plus — clickable dropdown trigger */}
           <button
             ref={buttonRef}
             onClick={() => setIsOpen((v) => !v)}
-            className="relative flex-shrink-0 group"
+            className="relative flex-shrink-0 group flex items-center gap-1.5"
             aria-label="Open menu"
             aria-expanded={isOpen}
           >
+            {/* Spectrum caret */}
+            <svg
+              viewBox="0 0 12 8"
+              className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0"
+              style={{
+                transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
+                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                filter: 'drop-shadow(0 0 4px rgba(0,209,255,0.6))',
+              }}
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="caretSpectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#ff0080" />
+                  <stop offset="20%" stopColor="#ff6a00" />
+                  <stop offset="40%" stopColor="#ffe600" />
+                  <stop offset="60%" stopColor="#00ff94" />
+                  <stop offset="80%" stopColor="#00d1ff" />
+                  <stop offset="100%" stopColor="#a855f7" />
+                </linearGradient>
+              </defs>
+              <polyline
+                points="1,1 6,7 11,1"
+                fill="none"
+                stroke="url(#caretSpectrum)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
+            {/* AnimatedCross + sign */}
             <div className="w-9 h-9 sm:w-[42px] sm:h-[42px] lg:w-12 lg:h-12 relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
               <AnimatedCross className="w-full h-full" />
             </div>
