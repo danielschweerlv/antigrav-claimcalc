@@ -12,7 +12,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="py-8 px-4 lg:px-6 relative z-[60]">
+    <footer className="py-8 px-4 lg:px-6 relative z-0">
       <div className="max-w-7xl mx-auto space-y-8">
 
         {/* Top row: Logo */}
