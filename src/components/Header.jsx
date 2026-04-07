@@ -184,12 +184,14 @@ const Header = () => {
       {/* Mega-Menu Dropdown */}
       <div
         ref={dropdownRef}
-        className={`fixed top-[58px] left-0 right-0 bottom-0 z-40 transition-all duration-300 ease-out origin-top overflow-y-auto ${
-          isOpen
-            ? 'opacity-100 scale-y-100 pointer-events-auto'
-            : 'opacity-0 scale-y-0 pointer-events-none'
-        }`}
-        style={{ transformOrigin: 'top center' }}
+        className="fixed top-[58px] left-0 right-0 bottom-0 z-40 overflow-y-auto"
+        style={{
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? 'visible' : 'hidden',
+          transform: isOpen ? 'translateY(0)' : 'translateY(-8px)',
+          transition: 'opacity 0.25s ease, transform 0.25s ease, visibility 0.25s',
+          pointerEvents: isOpen ? 'auto' : 'none',
+        }}
       >
         <div className="bg-[#111318] backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 py-6">
