@@ -32,8 +32,8 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* 4-Column Footer Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
+        {/* 3-Column Footer Links */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10">
 
           {/* Column 1: Company */}
           <div className="space-y-3">
@@ -62,7 +62,7 @@ export default function Footer() {
             <ul className="space-y-2 mt-2">
               {[
                 { label: 'Injury Values', path: '/injury-values' },
-                { label: 'Case Guides', path: '/case-guides' },
+                { label: 'Nevada Case by Case Play Book', path: '/case-guides' },
                 { label: 'Insurance Tactics', path: '/insurance-tactics' },
                 { label: 'Your Rights', path: '/your-rights' },
                 { label: 'Free Evaluation', path: '/calculator' },
@@ -74,23 +74,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: For Attorneys */}
-          <div className="space-y-3">
-            <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">For Attorneys</h6>
-            <ul className="space-y-2 mt-2">
-              {[
-                { label: 'Partner With Us', href: 'mailto:partners@claimcalculator.ai' },
-                { label: 'Submit a Case', href: 'mailto:results@claimcalculator.ai' },
-                { label: 'Login', href: '#' },
-              ].map(({ label, href }) => (
-                <li key={label}>
-                  <a className="text-outline hover:text-[#00d1ff] transition-colors text-sm font-body" href={href}>{label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Legal */}
+          {/* Column 3: Legal */}
           <div className="space-y-3">
             <h6 className="text-white text-[11px] uppercase tracking-widest bg-white/5 inline-block px-2 py-1 rounded">Legal</h6>
             <ul className="space-y-2 mt-2">

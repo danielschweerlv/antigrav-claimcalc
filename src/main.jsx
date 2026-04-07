@@ -13,6 +13,7 @@ import LegalNoticePage from './pages/LegalNoticePage.jsx'
 import SuccessStoriesPage from './pages/SuccessStoriesPage.jsx'
 import InjuryValuesPage from './pages/InjuryValuesPage.jsx'
 import CaseGuidesPage from './pages/CaseGuidesPage.jsx'
+import CaseGuideDetailPage from './pages/CaseGuideDetailPage.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import { CanvasRevealEffect } from './components/ui/canvas-reveal-effect'
@@ -56,6 +57,7 @@ function Layout() {
           <Route path="/success-stories" element={<SuccessStoriesPage />} />
           <Route path="/injury-values" element={<InjuryValuesPage />} />
           <Route path="/case-guides" element={<CaseGuidesPage />} />
+          <Route path="/case-guides/:slug" element={<CaseGuideDetailPage />} />
         </Routes>
       </div>
       <Footer />

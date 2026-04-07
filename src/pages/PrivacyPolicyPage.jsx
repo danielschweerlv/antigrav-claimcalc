@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 
 const sections = [
   {
@@ -346,19 +345,11 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-transparent">
 
-      {/* Nav */}
-      
-
       <main className="pt-20 pb-24 px-4 lg:px-6">
         <div className="max-w-4xl mx-auto">
 
           {/* Header */}
-          <motion.div
-            className="text-center pt-12 pb-10 space-y-4"
-            initial={{ opacity: 0, y: 16, filter: 'blur(12px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 1.4 }}
-          >
+          <div className="text-center pt-12 pb-10 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15">
               <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>lock</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Last updated: 2024</span>
@@ -367,15 +358,10 @@ export default function PrivacyPolicyPage() {
             <p className="text-on-surface-variant max-w-xl mx-auto text-base leading-relaxed">
               We take your privacy seriously. This policy explains exactly what data we collect, why we collect it, and how you can control it.
             </p>
-          </motion.div>
+          </div>
 
           {/* Table of contents */}
-          <motion.div
-            className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.3 }}
-          >
+          <div className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10">
             <p className="text-xs font-label font-bold text-outline uppercase tracking-widest mb-4">Table of Contents</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
               {sections.map(s => (
@@ -389,19 +375,15 @@ export default function PrivacyPolicyPage() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Sections */}
           <div className="space-y-4">
-            {sections.map((section, i) => (
-              <motion.div
+            {sections.map((section) => (
+              <div
                 key={section.id}
                 id={section.id}
                 className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ type: 'spring', bounce: 0.2, duration: 1.1, delay: Math.min(i * 0.05, 0.3) }}
               >
                 <button
                   className="w-full flex items-center justify-between gap-4 p-5 lg:p-6 text-left hover:bg-surface-container transition-colors"
@@ -417,31 +399,20 @@ export default function PrivacyPolicyPage() {
                 </button>
 
                 {activeSection === section.id && (
-                  <motion.div
-                    className="px-5 lg:px-6 pb-6 pt-2 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/10"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="px-5 lg:px-6 pb-6 pt-2 text-sm text-on-surface-variant leading-relaxed border-t border-outline-variant/10">
                     <div className="pt-4">{section.content}</div>
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Disclaimer */}
-          <motion.div
-            className="mt-10 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/5"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
+          <div className="mt-10 p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/5">
             <p className="text-[11px] text-outline leading-relaxed">
               ClaimCalculator.ai is not a law firm or an attorney referral service. This advertisement is not legal advice and is not a guarantee or prediction of the outcome of your legal matter. Every case is different. The settlement estimate provided by ClaimCalculator.ai is for informational and illustrative purposes only and does not constitute legal advice, a valuation, or a guarantee of results. Use of this tool does not create an attorney-client relationship.
             </p>
-          </motion.div>
+          </div>
 
         </div>
       </main>
