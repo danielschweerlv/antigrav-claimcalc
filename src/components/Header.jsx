@@ -64,6 +64,16 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   // Close on route change
   useEffect(() => {
     setIsOpen(false);
@@ -174,7 +184,7 @@ const Header = () => {
       {/* Mega-Menu Dropdown */}
       <div
         ref={dropdownRef}
-        className={`absolute top-[58px] left-0 right-0 z-40 transition-all duration-300 ease-out origin-top ${
+        className={`fixed top-[58px] left-0 right-0 bottom-0 z-40 transition-all duration-300 ease-out origin-top overflow-y-auto ${
           isOpen
             ? 'opacity-100 scale-y-100 pointer-events-auto'
             : 'opacity-0 scale-y-0 pointer-events-none'
