@@ -14,14 +14,25 @@ const defaultItemVariants = {
   visible: { opacity: 1 },
 }
 
-export function AnimatedGroup({ children, className, variants, preset }) {
+export function AnimatedGroup({ children, className, variants, preset, disableAnimation = false }) {
   const containerVariants = variants?.container ?? defaultContainerVariants
   const itemVariants = variants?.item ?? defaultItemVariants
+
+  if (disableAnimation) {
+    return (
+      <div className={className}>
+        {React.Children.map(children, (child, index) => (
+          <div key={index}>{child}</div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <motion.div
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
       variants={containerVariants}
       className={className}
     >

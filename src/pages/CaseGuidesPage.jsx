@@ -22,42 +22,42 @@ const GUIDES = [
     tag: 'Fault',
     title: 'Comparative Fault in Nevada',
     desc: 'What comparative fault means and how it affects your case.',
-    path: '/your-rights',
+    path: '/case-guides/comparative-fault',
   },
   {
     icon: 'checklist',
     tag: 'Steps',
     title: 'What to Do After an Accident',
     desc: 'The steps you should take right after an accident in Nevada.',
-    path: '/how-it-works',
+    path: '/case-guides/what-to-do-after-accident',
   },
   {
     icon: 'timer',
     tag: 'Deadline',
     title: "Nevada's 2-Year Deadline",
     desc: 'Why the 2-year statute of limitations matters for your case.',
-    path: '/your-rights',
+    path: '/case-guides/2-year-deadline',
   },
   {
     icon: 'visibility',
     tag: 'Tactics',
     title: 'Insurance Tactics to Watch For',
     desc: 'The tricks insurers use and how to spot them.',
-    path: '/insurance-tactics',
+    path: '/case-guides/insurance-tactics',
   },
   {
     icon: 'apartment',
     tag: 'Liability',
     title: 'Casino & Premise Liability',
     desc: "How liability works when an accident happens on someone's property.",
-    path: '/your-rights',
+    path: '/case-guides/casino-premise-liability',
   },
   {
     icon: 'local_hospital',
     tag: 'Medical',
     title: 'Medical Bills & Your Case',
     desc: 'How your medical costs factor into what your case is worth.',
-    path: '/how-it-works',
+    path: '/case-guides/medical-bills',
   },
 ]
 
@@ -86,7 +86,7 @@ export default function CaseGuidesPage() {
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background">
-              Nevada <span className="text-primary italic">Case Guides</span>
+              Nevada <span className="text-primary italic">Case by Case Play Book</span>
             </h1>
             <p className="text-on-surface-variant text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
               Straightforward guides on fault rules, deadlines, and how Nevada law affects your injury case.

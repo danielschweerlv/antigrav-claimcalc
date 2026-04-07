@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 
 const sections = [
   {
@@ -158,29 +157,28 @@ export default function TermsOfServicePage() {
 
   return (
     <div className="min-h-screen bg-transparent">
-      
 
       <main className="pt-20 pb-24 px-4 lg:px-6">
         <div className="max-w-4xl mx-auto">
-          <motion.div className="text-center pt-12 pb-10 space-y-4" initial={{ opacity: 0, y: 16, filter: 'blur(12px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ type: 'spring', bounce: 0.2, duration: 1.4 }}>
+          <div className="text-center pt-12 pb-10 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15">
               <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Last updated: 2024</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Terms of <span className="text-primary italic">Service</span></h1>
             <p className="text-on-surface-variant max-w-xl mx-auto text-base leading-relaxed">Please review this page carefully. These Terms constitute a legal contract between you and ClaimCalculator.ai.</p>
-          </motion.div>
+          </div>
 
           {/* Important notice banner */}
-          <motion.div className="mb-8 p-4 rounded-2xl border border-error/30 bg-error/8 flex gap-3 items-start" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
+          <div className="mb-8 p-4 rounded-2xl border border-error/30 bg-error/8 flex gap-3 items-start">
             <span className="material-symbols-outlined text-error flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>warning</span>
             <p className="text-sm text-on-surface-variant leading-relaxed">
               <span className="font-bold text-error">IMPORTANT NOTICE:</span> These Terms of Use are subject to binding arbitration and a waiver of class action and jury trial rights as detailed in Section 20 below.
             </p>
-          </motion.div>
+          </div>
 
           {/* Table of contents */}
-          <motion.div className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.3 }}>
+          <div className="mb-10 p-5 rounded-2xl bg-surface-container-low border border-outline-variant/10">
             <p className="text-xs font-label font-bold text-outline uppercase tracking-widest mb-4">Table of Contents</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
               {sections.map(s => (
@@ -190,12 +188,12 @@ export default function TermsOfServicePage() {
                 </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Sections */}
           <div className="space-y-3">
-            {sections.map((section, i) => (
-              <motion.div key={section.id} id={section.id} className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-40px' }} transition={{ type: 'spring', bounce: 0.2, duration: 1.1, delay: Math.min(i * 0.04, 0.25) }}>
+            {sections.map((section) => (
+              <div key={section.id} id={section.id} className="rounded-2xl bg-surface-container-low border border-outline-variant/10 overflow-hidden">
                 <button className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-surface-container transition-colors" onClick={() => setActiveSection(activeSection === section.id ? null : section.id)}>
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-bold text-primary w-7 flex-shrink-0">{section.num}.</span>
@@ -205,7 +203,7 @@ export default function TermsOfServicePage() {
                 </button>
 
                 {activeSection === section.id && (
-                  <motion.div className="px-5 pb-6 pt-2 border-t border-outline-variant/10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
+                  <div className="px-5 pb-6 pt-2 border-t border-outline-variant/10">
                     <div className="pt-4 space-y-3">
                       {section.isContact ? (
                         <div className="space-y-3">
@@ -234,9 +232,9 @@ export default function TermsOfServicePage() {
                         <p className={`text-sm leading-relaxed ${section.isLegal ? 'text-on-surface-variant/70 font-label text-[11px] bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/10' : 'text-on-surface-variant'}`}>{section.content}</p>
                       )}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

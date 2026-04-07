@@ -13,52 +13,52 @@ const transitionVariants = {
 
 const rights = [
   {
-    icon: 'verified_user',
+    icon: 'gavel',
     num: '01',
-    title: 'Right to Have Your Valid Case Honored',
-    summary: 'Case denials should reflect the facts — not internal performance goals.',
-    body: 'According to the AAJ report, some insurers have allegedly denied valid cases and implemented internal performance metrics tied to case denials. If your case was denied without a clear, documented reason, you have the right to challenge that decision with the help of a licensed attorney.',
-    tag: 'Case Denial',
+    title: 'You Can Hire an Attorney Before You Speak to Anyone',
+    summary: 'Get legal advice first. It costs you nothing upfront.',
+    body: 'You have the right to hire an attorney before talking to any insurance adjuster. Nevada law does not require you to speak to the other driver\'s insurance company without one. Getting legal advice first costs you nothing upfront. Most personal injury attorneys work on contingency.',
+    tag: 'Representation',
+  },
+  {
+    icon: 'mic_off',
+    num: '02',
+    title: 'You Do Not Have to Give a Recorded Statement',
+    summary: 'You are not legally required to give one.',
+    body: 'The opposing insurance company may ask for a recorded statement to "process your case." You are not legally required to give one. Saying the wrong thing, even unintentionally, can reduce your payout. Decline politely. Consult an attorney first.',
+    tag: 'Recorded Statement',
+  },
+  {
+    icon: 'request_page',
+    num: '03',
+    title: 'You Can Request the At-Fault Driver\'s Policy Limits',
+    summary: 'Know what is actually available for your case.',
+    body: 'Under Nevada law, you can request the at-fault driver\'s insurance policy limits in writing. If the insurer has reasonable notice of your case, they must respond within 30 days. Knowing the policy limits helps you understand what is actually available for your case.',
+    tag: 'Policy Limits',
   },
   {
     icon: 'timer',
-    num: '02',
-    title: 'Right to Timely Case Processing',
-    summary: 'You should not be financially harmed by deliberate delays.',
-    body: "Many insurance companies have been reported to take significant time to review and process cases. Some investigations suggest these delays are not always accidental. Nevada law sets expectations for how quickly insurers must acknowledge and act on cases — you have the right to hold them to that standard.",
-    tag: 'Case Delay',
-  },
-  {
-    icon: 'menu_book',
-    title: 'Right to Clear, Understandable Policy Terms',
-    num: '03',
-    summary: "Complexity is not an excuse. You deserve to understand what you paid for.",
-    body: "Insurance policies can contain highly technical language that few consumers can interpret without assistance. Several states have enacted 'plain-language' requirements to help address this. An attorney can review your policy and explain exactly what coverage you're entitled to before the insurer tells you otherwise.",
-    tag: 'Policy Language',
-  },
-  {
-    icon: 'credit_score',
     num: '04',
-    title: 'Right to Know How Your Premiums Are Determined',
-    summary: 'Your credit score can affect your insurance — and you may not know it.',
-    body: 'Some insurers use credit-based scoring to influence your premiums and insurability, even when it has no direct connection to your driving record or accident history. You have the right to understand why you are being charged what you are — and to dispute factors that seem unfair or unrelated to your risk profile.',
-    tag: 'Credit Scoring',
+    title: 'Insurers Must Handle Your Case on a Timeline',
+    summary: 'Dragging their feet may be a violation.',
+    body: 'Nevada Administrative Code 686A requires insurance companies to acknowledge your case within 10 working days of notice. They must also accept or deny your case within 30 working days of receiving proof of loss. If they are dragging their feet, that may be a violation.',
+    tag: 'Timeline',
   },
   {
-    icon: 'cancel',
+    icon: 'undo',
     num: '05',
-    title: 'Right to Policy Security When You Need It Most',
-    summary: "Filing a case shouldn't put your coverage at risk.",
-    body: "Some insurers have been known to rescind (cancel) policies under certain circumstances when case costs increase. While insurers have limited legal grounds to do this, it can leave you in a vulnerable position at exactly the wrong moment. An attorney can help you understand whether a rescission is legally justified.",
-    tag: 'Rescission',
+    title: 'A Denial Is Not the Final Word',
+    summary: 'You have options when your case is denied.',
+    body: 'If your case is denied, you have the right to request a written explanation. You can dispute the denial directly with the insurer. You can also file a complaint with the Nevada Division of Insurance. A denial does not mean you have no options.',
+    tag: 'Appeals',
   },
   {
-    icon: 'policy',
+    icon: 'paid',
     num: '06',
-    title: 'Right to Continued Coverage Without Retaliation',
-    summary: 'Asking questions about your policy should not cost you your coverage.',
-    body: "The AAJ report highlights cases where insurers have chosen not to renew policies in the period following a case inquiry — even before a formal case was filed. In Nevada, this type of retaliation may be actionable. You have the right to ask questions without fear of losing your coverage.",
-    tag: 'Non-Renewal',
+    title: 'Nevada Law Allows You to Recover More Than Just Medical Bills',
+    summary: 'Know the full scope of what you can recover.',
+    body: 'Nevada law allows recovery for medical bills, lost wages, future medical expenses, pain and suffering, and loss of enjoyment of life. You do not have to accept a settlement that only covers your immediate bills. Know the full scope of what you can recover before you settle.',
+    tag: 'Full Recovery',
   },
 ]
 
@@ -81,35 +81,29 @@ export default function YourRightsPage() {
               <span className="text-xs font-label font-semibold text-tertiary uppercase tracking-widest">Nevada Policyholder Rights</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-headline text-on-background leading-tight max-w-3xl mx-auto">
-              Understand the Tactics Insurance Companies Use That May{' '}
-              <span className="text-tertiary italic">Impact Case Settlements</span>
+              Your Rights as an Injured Person in{' '}
+              <span className="text-tertiary italic">Nevada</span>
             </h1>
             <p className="text-base text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
-              The following rights are drawn from documented research and industry analysis. Knowing them can change the outcome of your case.
+              Nevada law gives you specific rights as an injured person. Most people do not know these rights exist. The insurance company is counting on that. Here is what you are actually entitled to.
             </p>
           </AnimatedGroup>
 
-          {/* AAJ Source callout */}
-          <motion.div
-            className="mb-12 p-5 lg:p-6 rounded-2xl border border-tertiary/20 bg-tertiary/5 flex flex-col sm:flex-row gap-4 items-start"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.5 }}
-          >
+          {/* Nevada law source callout */}
+          <div className="mb-12 p-5 lg:p-6 rounded-2xl border border-tertiary/20 bg-tertiary/5 flex flex-col sm:flex-row gap-4 items-start">
             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-tertiary/15 border border-tertiary/25 flex items-center justify-center">
-              <span className="material-symbols-outlined text-tertiary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>library_books</span>
+              <span className="material-symbols-outlined text-tertiary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
             </div>
             <div className="space-y-1">
-              <p className="text-xs font-label font-bold text-tertiary uppercase tracking-widest">Source Document</p>
+              <p className="text-xs font-label font-bold text-tertiary uppercase tracking-widest">Based on Nevada Law</p>
               <p className="text-sm text-on-surface font-medium leading-relaxed">
-                American Association for Justice (AAJ) —{' '}
-                <span className="italic text-on-surface-variant">"Tricks of the Trade: How Insurance Companies Deny, Delay, Confuse, and Refuse"</span>
+                These rights come from Nevada statutes, administrative codes, and established case law.
               </p>
               <p className="text-xs text-outline leading-relaxed">
-                This report identifies patterns and alleged practices within the insurance industry that may negatively impact policyholders. The six rights below are based directly on its findings.
+                Knowing your rights changes how you handle adjusters, deadlines, and settlement offers.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Rights list */}
           <AnimatedGroup
@@ -144,15 +138,9 @@ export default function YourRightsPage() {
           </AnimatedGroup>
 
           {/* Disclaimer */}
-          <motion.p
-            className="mt-8 text-[11px] text-outline leading-relaxed text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            The information on this page is for general educational purposes only and does not constitute legal advice. The practices described are based on reported allegations and documented research, not conclusions of wrongdoing by any specific insurer. Consult a licensed Nevada attorney for advice specific to your situation.
-          </motion.p>
+          <p className="mt-8 text-[11px] text-outline leading-relaxed text-center max-w-3xl mx-auto">
+            The information on this page is for general educational purposes only and does not constitute legal advice. Consult a licensed Nevada attorney for advice specific to your situation.
+          </p>
 
           {/* Bottom CTA */}
           <motion.div

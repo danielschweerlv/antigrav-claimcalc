@@ -18,7 +18,7 @@ const FEATURED_CARDS = [
     path: '/injury-values',
   },
   {
-    title: 'Nevada Case Guides',
+    title: 'Nevada Case by Case Play Book',
     desc: 'Straightforward guides on fault rules, deadlines, and insurance tactics in Nevada.',
     path: '/case-guides',
   },
@@ -27,12 +27,6 @@ const FEATURED_CARDS = [
     desc: 'Get your personalized estimate in about two minutes. No cost, no strings.',
     path: '/calculator',
   },
-];
-
-const ATTORNEY_LINKS = [
-  { label: 'Partner With Us', href: 'mailto:partners@claimcalculator.ai' },
-  { label: 'Submit a Case', href: 'mailto:results@claimcalculator.ai' },
-  { label: 'Attorney Login', href: '#' },
 ];
 
 const LEGAL_LINKS = [
@@ -241,27 +235,10 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Right Column — Attorney + Legal */}
+              {/* Right Column — Legal */}
               <div className="space-y-5">
-                {/* Attorney Links */}
-                <div>
-                  <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">For Attorneys</h6>
-                  <ul className="space-y-1">
-                    {ATTORNEY_LINKS.map((item) => (
-                      <li key={item.label}>
-                        <a
-                          href={item.href}
-                          className="block px-3 py-2 rounded-lg text-sm font-headline font-medium text-on-surface-variant hover:text-on-background hover:bg-white/[0.04] transition-all duration-200"
-                        >
-                          {item.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
                 {/* Legal Links */}
-                <div className="pt-3 border-t border-white/[0.06]">
+                <div>
                   <h6 className="text-[10px] font-label text-outline/60 uppercase tracking-widest mb-3">Legal</h6>
                   <ul className="space-y-1">
                     {LEGAL_LINKS.map((item) => (

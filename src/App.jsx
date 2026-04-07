@@ -457,7 +457,7 @@ function App() {
               className="text-center space-y-4 mb-16"
             >
               <h2 className="text-3xl lg:text-5xl font-headline ">
-                The Path to <span className="text-primary italic">Recovery.</span>
+                Your Roadmap to a <span className="text-primary italic">Fair Settlement</span>
               </h2>
               <p className="text-on-surface-variant text-[19px] lg:text-lg max-w-xl mx-auto">
                 Three simple steps between you and the compensation you deserve.
