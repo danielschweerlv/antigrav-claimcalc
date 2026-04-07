@@ -104,20 +104,10 @@ const Header = () => {
               }}
               aria-hidden="true"
             >
-              <defs>
-                <linearGradient id="caretSpectrum" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ff0080" />
-                  <stop offset="20%" stopColor="#ff6a00" />
-                  <stop offset="40%" stopColor="#ffe600" />
-                  <stop offset="60%" stopColor="#00ff94" />
-                  <stop offset="80%" stopColor="#00d1ff" />
-                  <stop offset="100%" stopColor="#a855f7" />
-                </linearGradient>
-              </defs>
               <polyline
                 points="1,1 6,7 11,1"
                 fill="none"
-                stroke="url(#caretSpectrum)"
+                stroke="white"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
