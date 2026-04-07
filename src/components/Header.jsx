@@ -125,7 +125,7 @@ const Header = () => {
             </svg>
 
             {/* AnimatedCross + sign */}
-            <div className="w-7 h-7 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
+            <div className="w-8 h-8 sm:w-[38px] sm:h-[38px] lg:w-[42px] lg:h-[42px] relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
               <AnimatedCross className="w-full h-full" />
             </div>
           </button>
