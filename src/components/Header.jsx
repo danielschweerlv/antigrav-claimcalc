@@ -90,7 +90,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#111318] border-b border-white/[0.06]">
+    <header className="fixed top-0 left-0 w-full z-[100] bg-[#111318] border-b border-white/[0.06]">
       <nav className="flex justify-between items-center w-full px-4 lg:px-8 h-[58px] max-w-7xl mx-auto">
 
         {/* Logo Section */}
