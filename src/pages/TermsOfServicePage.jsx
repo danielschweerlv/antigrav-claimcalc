@@ -153,7 +153,7 @@ const sections = [
 
 export default function TermsOfServicePage() {
   const navigate = useNavigate()
-  const [activeSection, setActiveSection] = useState(null)
+  const [activeSection, setActiveSection] = useState('introduction') 
 
   return (
     <div className="min-h-screen bg-transparent">
