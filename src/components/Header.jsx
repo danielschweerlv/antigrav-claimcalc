@@ -159,7 +159,7 @@ const Header = () => {
             <button
               key={path}
               onClick={() => navigate(path)}
-              className={`nav-link-animated font-headline transition-colors text-[15px] font-medium ${
+              className={`nav-link-animated font-headline transition-colors text-[19px] font-medium ${
                 location.pathname === path
                   ? 'text-primary font-bold'
                   : 'text-[#bbc9cf] hover:text-on-background'
@@ -174,7 +174,7 @@ const Header = () => {
         {location.pathname !== '/calculator' && (
           <button
             onClick={() => navigate('/calculator')}
-            className="cta-gradient cta-shimmer text-on-primary-fixed px-4 sm:px-6 py-2 sm:py-2.5 rounded-[12px] font-headline font-bold text-xs sm:text-sm active:scale-95 duration-200 shadow-[0_0_20px_rgba(164,230,255,0.15)] hover:shadow-[0_0_30px_rgba(164,230,255,0.3)] transition-all hover:-translate-y-0.5 flex-shrink-0"
+            className="cta-gradient cta-shimmer text-on-primary-fixed px-4 sm:px-6 py-2 sm:py-2.5 rounded-[12px] font-headline font-bold text-sm sm:text-base active:scale-95 duration-200 shadow-[0_0_20px_rgba(164,230,255,0.15)] hover:shadow-[0_0_30px_rgba(164,230,255,0.3)] transition-all hover:-translate-y-0.5 flex-shrink-0"
           >
             Free Evaluation
           </button>
