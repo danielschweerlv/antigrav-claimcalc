@@ -285,7 +285,7 @@ function App() {
                   className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 sm:py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
                 >
                   See What Your Case Is Worth
-                  <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+                  <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
                 </button>
                 <p className="text-sm text-outline self-center text-center">No cost. No obligation. Built for Nevada injury cases.</p>
               </div>
@@ -346,7 +346,7 @@ function App() {
                 { icon: 'shield', text: 'Your Info Stays Private' },
               ].map(({ icon, text }) => (
                 <div key={text} className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[#4ADE80] text-base" style={{ fontVariationSettings: "'FILL' 1, 'wght' 400" }}>{icon}</span>
+                  <span className="material-symbols-outlined text-[#4ADE80] text-lg" style={{ fontVariationSettings: "'FILL' 1, 'wght' 400" }}>{icon}</span>
                   <span className="text-[13px] text-on-surface-variant/50 font-medium">{text}</span>
                 </div>
               ))}
@@ -440,7 +440,7 @@ function App() {
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
                 <div key={label} className="p-5 lg:p-7 rounded-xl border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
-                  <span className="material-symbols-outlined text-2xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
+                  <span className="material-symbols-outlined text-3xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
                   <p className="text-2xl lg:text-4xl font-headline font-black text-on-background">{stat}</p>
                   <p className="text-sm text-on-surface-variant leading-snug">{label}</p>
                 </div>
@@ -511,7 +511,7 @@ function App() {
               {/* Verified badge + "See all stories" link */}
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                  <span className="material-symbols-outlined text-[#4ADE80] text-base" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
                   <span className="text-[13px] font-semibold text-[#4ADE80] uppercase tracking-widest">Verified ClaimCalculator User</span>
                 </div>
                 <a
@@ -521,7 +521,7 @@ function App() {
                   className="flex items-center gap-1 text-[15px] text-outline hover:text-primary transition-colors duration-200 group"
                 >
                   See all stories
-                  <span className="material-symbols-outlined text-[13px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
+                  <span className="material-symbols-outlined text-[15px] group-hover:translate-x-0.5 transition-transform">open_in_new</span>
                 </a>
               </div>
 
@@ -542,7 +542,7 @@ function App() {
                         ${TESTIMONIALS[activeTestimonial].initial?.toLocaleString()}
                       </span>
                     </div>
-                    <span className="material-symbols-outlined text-outline text-sm">arrow_forward</span>
+                    <span className="material-symbols-outlined text-outline text-base">arrow_forward</span>
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#4ADE80]/[0.08] border border-[#4ADE80]/20">
                       <span className="text-[10px] text-[#4ADE80] uppercase tracking-widest font-semibold">Settled</span>
                       <span className="text-sm font-headline font-bold text-[#4ADE80]">
@@ -579,7 +579,7 @@ function App() {
                     {/* Stars */}
                     <div className="ml-auto flex flex-shrink-0">
                       {[...Array(5)].map((_, i) => (
-                        <span key={i} className="material-symbols-outlined text-yellow-400 text-sm sm:text-base -mx-0.5 sm:mx-0" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                        <span key={i} className="material-symbols-outlined text-yellow-400 text-base sm:text-lg -mx-0.5 sm:mx-0" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                       ))}
                     </div>
                   </div>
@@ -621,7 +621,7 @@ function App() {
               className="cta-gradient cta-shimmer text-on-primary-fixed w-full sm:w-auto px-10 py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_50px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
             >
               See What Your Case Is Worth
-              <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+              <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
             </button>
             <p className="text-sm text-outline">No cost. No commitment. SSL encrypted.</p>
           </motion.div>

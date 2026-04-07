@@ -113,7 +113,7 @@ export default function CaseGuidesPage() {
                     {/* Icon + Tag row */}
                     <div className="flex items-center justify-between">
                       <span
-                        className="material-symbols-outlined text-2xl text-primary"
+                        className="material-symbols-outlined text-3xl text-primary"
                         style={{ fontVariationSettings: "'FILL' 1" }}
                       >
                         {icon}
@@ -143,7 +143,7 @@ export default function CaseGuidesPage() {
                     {/* Read Guide link */}
                     <div className="flex items-center gap-1 text-sm font-headline font-semibold text-primary mt-auto pt-2 border-t border-white/[0.06]">
                       Read Guide
-                      <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+                      <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
                     </div>
                   </div>
                 )
@@ -172,7 +172,7 @@ export default function CaseGuidesPage() {
               className="cta-gradient cta-shimmer text-on-primary-fixed px-10 py-5 rounded-[16px] font-headline font-bold text-lg inline-flex items-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
             >
               Get My Free Estimate
-              <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+              <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
             </button>
           </motion.div>
         </section>

@@ -164,7 +164,7 @@ export default function TermsOfServicePage() {
         <div className="max-w-4xl mx-auto">
           <motion.div className="text-center pt-12 pb-10 space-y-4" initial={{ opacity: 0, y: 16, filter: 'blur(12px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ type: 'spring', bounce: 0.2, duration: 1.4 }}>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15">
-              <span className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
+              <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Last updated: 2024</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Terms of <span className="text-primary italic">Service</span></h1>
@@ -213,7 +213,7 @@ export default function TermsOfServicePage() {
                           <div className="p-4 rounded-xl bg-surface-container-high border border-outline-variant/10 space-y-2 text-sm">
                             <p className="font-bold text-on-background">ClaimCalculator.ai</p>
                             <p className="text-on-surface-variant flex items-center gap-2">
-                              <span className="material-symbols-outlined text-primary text-base">mail</span>
+                              <span className="material-symbols-outlined text-primary text-lg">mail</span>
                               <a href="mailto:privacy@claimcalculator.ai" className="text-primary hover:underline">privacy@claimcalculator.ai</a>
                             </p>
                           </div>

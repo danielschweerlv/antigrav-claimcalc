@@ -102,7 +102,7 @@ export default function CalculatorPage() {
                   "Helps you receive the maximum compensation for your case"
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-sm text-on-surface-variant items-start">
-                    <span className="material-symbols-outlined text-[#4ADE80] text-lg flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+                    <span className="material-symbols-outlined text-[#4ADE80] text-xl flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
                     <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}
@@ -121,7 +121,7 @@ export default function CalculatorPage() {
                   "Won't assess your car's diminished value"
                 ].map((item, i) => (
                   <li key={i} className="flex gap-3 text-sm text-on-surface-variant items-start">
-                    <span className="material-symbols-outlined text-error text-lg flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>close</span>
+                    <span className="material-symbols-outlined text-error text-xl flex-shrink-0 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>close</span>
                     <span className="leading-relaxed">{item}</span>
                   </li>
                 ))}

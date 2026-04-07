@@ -51,7 +51,7 @@ export default function LegalNoticePage() {
           {/* Header */}
           <AnimatedGroup variants={transitionVariants} className="text-center pt-12 pb-10 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/15">
-              <span className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
+              <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
               <span className="text-xs font-label font-semibold text-primary uppercase tracking-widest">Paid Attorney Advertising</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-headline text-on-background">Legal <span className="text-primary italic">Notice</span></h1>
@@ -99,7 +99,7 @@ export default function LegalNoticePage() {
             ].map(item => (
               <div key={item.title} className="flex flex-col sm:flex-row gap-4 p-6 rounded-2xl bg-surface-container-low border border-outline-variant/10 hover:border-primary/15 transition-colors">
                 <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>{item.icon}</span>
+                  <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>{item.icon}</span>
                 </div>
                 <div className="space-y-1.5">
                   <h2 className="text-base font-headline text-on-background">{item.title}</h2>
@@ -127,7 +127,7 @@ export default function LegalNoticePage() {
                 className={`p-6 rounded-2xl border ${notice.highlight ? 'border-primary/25 bg-primary/5' : 'border-outline-variant/10 bg-surface-container-low'}`}
               >
                 <div className="flex items-center gap-3 mb-3">
-                  {notice.highlight && <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>}
+                  {notice.highlight && <span className="material-symbols-outlined text-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>}
                   <h3 className={`text-base font-headline ${notice.highlight ? 'text-primary' : 'text-on-background'}`}>{notice.state}</h3>
                   {notice.highlight && <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/20 uppercase tracking-widest">Primary Jurisdiction</span>}
                 </div>

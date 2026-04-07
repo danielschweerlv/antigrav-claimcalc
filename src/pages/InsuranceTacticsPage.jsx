@@ -84,7 +84,7 @@ export default function InsuranceTacticsPage() {
                 {/* Icon badge */}
                 <div className="w-12 h-12 rounded-full bg-error/15 border border-error/20 flex items-center justify-center flex-shrink-0 group-hover:bg-error/20 transition-colors">
                   <span
-                    className="material-symbols-outlined text-error text-2xl"
+                    className="material-symbols-outlined text-error text-3xl"
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     {tactic.icon}
@@ -109,7 +109,7 @@ export default function InsuranceTacticsPage() {
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
-              <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>shield</span>
+              <span className="material-symbols-outlined text-primary text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>shield</span>
               <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Don't face these tactics alone.
               </h3>

@@ -163,7 +163,7 @@ export default function SuccessStoriesSection() {
           className="text-center space-y-4 mb-14"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 mb-2">
-            <span className="material-symbols-outlined text-[#4ADE80] text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+            <span className="material-symbols-outlined text-[#4ADE80] text-base" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Real Nevada Results</span>
           </div>
           <h2 className="text-3xl lg:text-5xl font-headline ">
@@ -201,7 +201,7 @@ export default function SuccessStoriesSection() {
                       <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">Initial Offer</p>
                       <p className="text-lg font-headline font-bold text-on-surface-variant line-through decoration-outline/50">{fmt(s.initial)}</p>
                     </div>
-                    <span className="material-symbols-outlined text-outline text-base mt-3">arrow_forward</span>
+                    <span className="material-symbols-outlined text-outline text-lg mt-3">arrow_forward</span>
                     <div className="space-y-0.5 text-right">
                       <p className="text-[10px] text-outline uppercase tracking-widest font-semibold">Final Settlement</p>
                       <p className="text-lg font-headline font-black text-[#4ADE80]">{fmt(s.final)}</p>
@@ -229,7 +229,7 @@ export default function SuccessStoriesSection() {
                     <div className="text-right space-y-0.5">
                       <p className="text-[11px] text-outline">{s.type}</p>
                       <div className="flex items-center gap-1 justify-end">
-                        <span className="material-symbols-outlined text-outline text-[12px]" style={{ fontVariationSettings: "'FILL' 0" }}>schedule</span>
+                        <span className="material-symbols-outlined text-outline text-[14px]" style={{ fontVariationSettings: "'FILL' 0" }}>schedule</span>
                         <p className="text-[11px] text-outline">{s.weeks} weeks · {s.date}</p>
                       </div>
                     </div>
@@ -248,7 +248,7 @@ export default function SuccessStoriesSection() {
               disabled={page === 0}
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/[0.08] text-sm text-on-surface-variant hover:border-primary/30 hover:text-on-background disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
             >
-              <span className="material-symbols-outlined text-base">chevron_left</span>
+              <span className="material-symbols-outlined text-lg">chevron_left</span>
               Previous
             </button>
 
@@ -269,7 +269,7 @@ export default function SuccessStoriesSection() {
               className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-white/[0.08] text-sm text-on-surface-variant hover:border-primary/30 hover:text-on-background disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
             >
               Next
-              <span className="material-symbols-outlined text-base">chevron_right</span>
+              <span className="material-symbols-outlined text-lg">chevron_right</span>
             </button>
           </div>
         )}
@@ -282,7 +282,7 @@ export default function SuccessStoriesSection() {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
         >
-          <span className="material-symbols-outlined text-primary text-4xl flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
+          <span className="material-symbols-outlined text-primary text-5xl flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
           <div className="flex-1">
             <p className="text-base font-headline font-bold text-on-background">
               People who hire an attorney in Nevada recover an average of <span className="text-primary">3.2× more</span> than those who don't.
@@ -296,7 +296,7 @@ export default function SuccessStoriesSection() {
             className="cta-gradient cta-shimmer text-on-primary-fixed px-6 py-3 rounded-[14px] font-headline font-bold text-sm flex items-center gap-2 flex-shrink-0 shadow-[0_0_20px_rgba(164,230,255,0.15)] hover:shadow-[0_6px_30px_rgba(164,230,255,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
           >
             Get My Free Estimate
-            <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+            <span className="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
           </a>
         </motion.div>
 

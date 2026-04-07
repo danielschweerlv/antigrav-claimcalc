@@ -85,7 +85,7 @@ export default function HowItWorksPage() {
 
                 {/* Icon */}
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>{step.icon}</span>
+                  <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>{step.icon}</span>
                 </div>
 
                 {/* Content */}
@@ -114,7 +114,7 @@ export default function HowItWorksPage() {
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
-              <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
+              <span className="material-symbols-outlined text-primary text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>rocket_launch</span>
               <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Ready to find out what your case is worth?
               </h3>

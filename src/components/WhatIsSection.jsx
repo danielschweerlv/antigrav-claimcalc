@@ -97,7 +97,7 @@ export default function WhatIsSection() {
                   style={{ background: 'rgba(164,230,255,0.10)' }}
                 >
                   <span
-                    className="material-symbols-outlined text-primary text-xl"
+                    className="material-symbols-outlined text-primary text-2xl"
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     {icon}

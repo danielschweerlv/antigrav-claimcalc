@@ -307,7 +307,7 @@ function CheckItem({ checked, onChange, label }) {
       <div className={`w-4 h-4 rounded border-2 flex-shrink-0 flex items-center justify-center transition-all
         ${checked ? 'bg-primary border-primary' : 'border-outline/40'}`}>
         {checked && (
-          <span className="material-symbols-outlined text-on-primary" style={{ fontSize: '11px', fontVariationSettings: "'wght' 700" }}>check</span>
+          <span className="material-symbols-outlined text-on-primary" style={{ fontSize: '13px', fontVariationSettings: "'wght' 700" }}>check</span>
         )}
       </div>
       <span className={`text-sm ${checked ? 'text-on-surface font-medium' : 'text-on-surface-variant'}`}>{label}</span>
@@ -346,7 +346,7 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step, disabled = f
           onClick={onBack}
           className="w-full py-2 text-sm text-outline hover:text-on-surface transition-colors flex items-center justify-center gap-1"
         >
-          <span className="material-symbols-outlined text-base">chevron_left</span>
+          <span className="material-symbols-outlined text-lg">chevron_left</span>
           Go Back
         </button>
       )}
@@ -357,7 +357,7 @@ function NavButtons({ onNext, onBack, nextLabel = 'Continue', step, disabled = f
       )}
       {/* Privacy reassurance microcopy */}
       <div className="flex items-start gap-2 pt-1">
-        <span className="material-symbols-outlined text-[#4ADE80]/60 flex-shrink-0" style={{ fontSize: '14px', marginTop: '1px', fontVariationSettings: "'FILL' 1" }}>lock</span>
+        <span className="material-symbols-outlined text-[#4ADE80]/60 flex-shrink-0" style={{ fontSize: '16px', marginTop: '1px', fontVariationSettings: "'FILL' 1" }}>lock</span>
         <span className="text-[11px] text-on-surface-variant/40 leading-relaxed">Your information is encrypted and never shared without your permission.</span>
       </div>
     </div>
@@ -397,7 +397,7 @@ function ResultScreen({ data }) {
       {res.faultBarred && (
         <div className="bg-error/10 border border-error/30 rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-error text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
+            <span className="material-symbols-outlined text-error text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
             <h3 className="text-lg font-headline text-error">Nevada's 51% Rule Applies</h3>
           </div>
           <p className="text-sm text-on-surface-variant leading-relaxed">
@@ -468,7 +468,7 @@ function ResultScreen({ data }) {
             "Show you how to file for every dollar you're entitled to",
           ].map(item => (
             <li key={item} className="flex gap-2 text-sm text-on-surface-variant">
-              <span className="material-symbols-outlined text-primary flex-shrink-0" style={{ fontSize: '16px', marginTop: '2px' }}>arrow_forward</span>
+              <span className="material-symbols-outlined text-primary flex-shrink-0" style={{ fontSize: '18px', marginTop: '2px' }}>arrow_forward</span>
               {item}
             </li>
           ))}
@@ -483,7 +483,7 @@ function ResultScreen({ data }) {
             href="tel:+17025550100"
             className="flex items-center justify-center gap-2 py-3.5 bg-primary/10 border border-primary/30 hover:bg-primary/20 rounded-xl text-primary font-headline font-bold text-base tracking-wide transition-all"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>call</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>call</span>
             Call Now
           </a>
           <button
@@ -491,7 +491,7 @@ function ResultScreen({ data }) {
             onClick={() => setShowCallback(v => !v)}
             className="flex items-center justify-center gap-2 py-3.5 bg-surface-container-highest border border-outline-variant/20 hover:border-primary/30 rounded-xl text-on-surface font-headline font-bold text-base tracking-wide transition-all"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>mail</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>mail</span>
             Callback
           </button>
         </div>
@@ -679,7 +679,7 @@ export default function CalculatorForm() {
             <div className="grid grid-cols-1 gap-3">
               {CASE_TYPES.map(({ value, label, icon }) => (
                 <OptionBtn key={value} selected={data.caseType === value} onClick={() => set('caseType', value)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{icon}</span>
                   {label}
                 </OptionBtn>
               ))}
@@ -696,7 +696,7 @@ export default function CalculatorForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {ACCIDENT_TYPES.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.type === label} onClick={() => set('type', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{icon}</span>
                   {label}
                 </OptionBtn>
               ))}
@@ -748,7 +748,7 @@ export default function CalculatorForm() {
             <div className="grid gap-3">
               {EV_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.evInvolved === o.value} onClick={() => set('evInvolved', o.value)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{o.icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{o.icon}</span>
                   {o.label}
                 </OptionBtn>
               ))}
@@ -765,7 +765,7 @@ export default function CalculatorForm() {
             <div className="grid gap-3">
               {COMMERCIAL_VEHICLE_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.commercialVehicle === o.value} onClick={() => set('commercialVehicle', o.value)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{o.icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{o.icon}</span>
                   {o.label}
                 </OptionBtn>
               ))}
@@ -782,7 +782,7 @@ export default function CalculatorForm() {
             <div className="grid gap-3">
               {DATE_OPTIONS.map(o => (
                 <OptionBtn key={o.value} selected={data.when === o.value} onClick={() => set('when', o.value)}>
-                  <span className="material-symbols-outlined text-sm opacity-50 flex-shrink-0">schedule</span>
+                  <span className="material-symbols-outlined text-base opacity-50 flex-shrink-0">schedule</span>
                   {o.label}
                 </OptionBtn>
               ))}
@@ -799,7 +799,7 @@ export default function CalculatorForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {MY_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.myInsurer === label} onClick={() => set('myInsurer', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{icon}</span>
                   <span className="text-xs leading-tight">{label}</span>
                 </OptionBtn>
               ))}
@@ -816,14 +816,14 @@ export default function CalculatorForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {OTHER_INSURERS.map(({ label, icon }) => (
                 <OptionBtn key={label} selected={data.otherInsurer === label} onClick={() => set('otherInsurer', label)}>
-                  <span className="material-symbols-outlined text-base opacity-60 flex-shrink-0">{icon}</span>
+                  <span className="material-symbols-outlined text-lg opacity-60 flex-shrink-0">{icon}</span>
                   <span className="text-xs leading-tight">{label}</span>
                 </OptionBtn>
               ))}
             </div>
             {data.otherInsurer && LOW_OFFER_INSURERS.includes(data.otherInsurer) && (
               <div className="bg-secondary/5 border border-secondary/20 rounded-xl p-4 mt-3 text-sm text-on-surface-variant leading-relaxed">
-                <span className="material-symbols-outlined text-secondary text-base align-middle mr-1" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+                <span className="material-symbols-outlined text-secondary text-lg align-middle mr-1" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
                 {data.otherInsurer} is known for making initial offers well below case value. An attorney experienced with {data.otherInsurer} cases in Nevada can typically negotiate a significantly higher settlement.
               </div>
             )}

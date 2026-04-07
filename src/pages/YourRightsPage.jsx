@@ -97,7 +97,7 @@ export default function YourRightsPage() {
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2, delay: 0.5 }}
           >
             <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-tertiary/15 border border-tertiary/25 flex items-center justify-center">
-              <span className="material-symbols-outlined text-tertiary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>library_books</span>
+              <span className="material-symbols-outlined text-tertiary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>library_books</span>
             </div>
             <div className="space-y-1">
               <p className="text-xs font-label font-bold text-tertiary uppercase tracking-widest">Source Document</p>
@@ -126,7 +126,7 @@ export default function YourRightsPage() {
 
                 {/* Icon */}
                 <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center group-hover:bg-tertiary/15 transition-colors">
-                  <span className="material-symbols-outlined text-tertiary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>{right.icon}</span>
+                  <span className="material-symbols-outlined text-tertiary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>{right.icon}</span>
                 </div>
 
                 {/* Content */}
@@ -163,7 +163,7 @@ export default function YourRightsPage() {
             transition={{ type: 'spring', bounce: 0.2, duration: 1.2 }}
           >
             <div className="p-6 lg:p-10 rounded-2xl bg-primary/5 border border-primary/15 space-y-4 max-w-2xl mx-auto">
-              <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
+              <span className="material-symbols-outlined text-primary text-5xl" style={{ fontVariationSettings: "'FILL' 1" }}>balance</span>
               <h3 className="text-2xl lg:text-3xl font-headline text-on-background">
                 Knowledge is your first line of defense.
               </h3>
