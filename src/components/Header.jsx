@@ -184,7 +184,7 @@ const Header = () => {
       {/* Mega-Menu Dropdown */}
       <div
         ref={dropdownRef}
-        className="fixed top-[58px] left-0 right-0 bottom-0 z-40 overflow-y-auto"
+        className="fixed top-[58px] left-0 right-0 z-40 h-[calc(100vh-58px)] w-full overflow-y-auto bg-[#111318] pb-20"
         style={{
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? 'visible' : 'hidden',
@@ -193,7 +193,7 @@ const Header = () => {
           pointerEvents: isOpen ? 'auto' : 'none',
         }}
       >
-        <div className="bg-[#111318] backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+        <div className="backdrop-blur-2xl border-b border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
           <div className="max-w-7xl mx-auto px-4 lg:px-8 py-6">
 
             {/* 3-Column Mega-Menu */}
