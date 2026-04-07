@@ -125,7 +125,7 @@ const Header = () => {
             </svg>
 
             {/* AnimatedCross + sign */}
-            <div className="w-9 h-9 sm:w-[42px] sm:h-[42px] lg:w-12 lg:h-12 relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
+            <div className="w-7 h-7 sm:w-[34px] sm:h-[34px] lg:w-[38px] lg:h-[38px] relative transition-transform duration-300 group-hover:scale-110" style={{ filter: 'drop-shadow(0 0 10px rgba(0, 209, 255, 0.5))' }}>
               <AnimatedCross className="w-full h-full" />
             </div>
           </button>
@@ -138,12 +138,12 @@ const Header = () => {
             <img
               src="/logos/claimcalculator-wordmark.png"
               alt="ClaimCalculator.ai"
-              className="hidden sm:inline h-[30px] lg:h-9 w-auto object-contain"
+              className="hidden sm:inline h-[24px] lg:h-7 w-auto object-contain"
             />
             <img
               src="/logos/claimcalculator-wordmark.png"
               alt="ClaimCalculator.ai"
-              className="sm:hidden h-[18px] w-auto object-contain"
+              className="sm:hidden h-[14px] w-auto object-contain"
               style={{ maxWidth: 'calc(100vw - 170px)' }}
             />
           </div>
