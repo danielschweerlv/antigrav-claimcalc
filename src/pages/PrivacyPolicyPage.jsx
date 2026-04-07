@@ -158,7 +158,8 @@ const sections = [
             'As part of any actual or threatened legal proceedings, disclosing only the information necessary',
             'During a review of our practices under authorization of a state or national licensing board',
             'In conjunction with a prospective purchase, sale, or merger of all or part of our company',
-            'To provide information to affiliates and nonaffiliated third parties who perform services for us under a contractual agreement',
+            'To provide information to service providers and vendors who process information on our behalf',
+            'To other parties with your consent',
           ].map(item => (
             <li key={item} className="flex gap-2.5 text-sm text-on-surface-variant">
               <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
@@ -166,79 +167,111 @@ const sections = [
             </li>
           ))}
         </ul>
-        <p>We may also share your information with affiliates and other third parties for direct marketing purposes, as disclosed at the time you provide your information.</p>
+        <p>We do not sell, rent, or lease your personal information to unaffiliated third parties for their own marketing purposes without your consent.</p>
       </div>
     ),
   },
   {
-    id: 'ads',
+    id: 'third-party',
     num: '8',
-    title: 'Ads and Information About You',
-    content: (
-      <div className="space-y-4">
-        <p>You may see certain ads because we participate in advertising networks administered by third parties. These networks track your online activities over time and across third party websites to show you advertisements tailored to your individual interests.</p>
-        <p>You can opt out of targeted advertising on some platforms:</p>
-        <div className="flex flex-wrap gap-2">
-          {[
-            { name: 'Meta', url: 'https://www.facebook.com/settings/?tab=ads' },
-            { name: 'Google', url: 'https://adssettings.google.com/' },
-            { name: 'Bing', url: 'https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads' },
-            { name: 'LinkedIn', url: 'https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out' },
-          ].map(({ name, url }) => (
-            <a key={name} href={url} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant/10 text-xs text-primary hover:border-primary/30 transition-colors">
-              {name}
-              <span className="material-symbols-outlined text-xs">open_in_new</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'children',
-    num: '9',
-    title: "Children's Privacy",
-    content: (
-      <p>Our Sites are not intended for use by children under the age of 18. We do not request, or knowingly collect, any personally identifiable information from children under the age of 18. If you are the parent or guardian of a child under 18 who you believe has provided their information to us, please contact us using the information in the Contact Us section below to request the deletion of that information.</p>
-    ),
-  },
-  {
-    id: 'outside-us',
-    num: '10',
-    title: 'Visitors to the Sites Outside of the United States',
-    content: (
-      <p>Our Sites are not intended for visitors outside of the United States. If you are visiting from a location outside of the U.S., your connection will be through and to servers located in the U.S. By using the Sites or providing us with any information, you consent to the transfer to, and processing, usage, sharing and storage of your information in the United States.</p>
-    ),
-  },
-  {
-    id: 'third-party-links',
-    num: '11',
     title: 'Third-Party Links',
     content: (
       <p>For your convenience, the Sites and this Policy may contain links to other websites not controlled by us. We are not responsible for the privacy practices, advertising, products, services, or the content of such other websites. The use of third-party links on our Sites should not be deemed to imply that we endorse or have any affiliation with the links.</p>
     ),
   },
   {
+    id: 'opt-out',
+    num: '9',
+    title: 'Opt-Out of Electronic Communications',
+    content: (
+      <div className="space-y-4">
+        <p>If you would like to opt out of receiving future promotional emails or other commercial electronic communications from us, you may do so at any time by:</p>
+        <ul className="space-y-2">
+          {[
+            'Clicking the "unsubscribe" link within the email',
+            'Contacting us directly at privacy@claimcalculator.ai',
+          ].map(item => (
+            <li key={item} className="flex gap-2.5 text-sm text-on-surface-variant">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p>Please note that even after you opt out of all commercial messages, we may still send you administrative messages regarding the Services.</p>
+      </div>
+    ),
+  },
+  {
+    id: 'third-party-tracking',
+    num: '10',
+    title: 'Third-Party Tracking and Advertising',
+    content: (
+      <div className="space-y-4">
+        <p>We may use third-party service providers who may use tracking technologies to serve you advertisements and offers based on your interests, browsing history, and other data. You may opt out of interest-based advertising from some providers below:</p>
+        <ul className="space-y-2">
+          {[
+            { name: 'Google', url: 'https://adssettings.google.com/authenticated' },
+            { name: 'Meta', url: 'https://www.facebook.com/settings/?tab=ads' },
+            { name: 'Network Advertising Initiative', url: 'https://optout.networkadvertising.org/' },
+            { name: 'Digital Advertising Alliance', url: 'https://optout.aboutads.info/' },
+          ].map(item => (
+            <li key={item.name} className="flex gap-2.5 text-sm text-on-surface-variant">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
+              <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ),
+  },
+  {
+    id: 'do-not-sell',
+    num: '11',
+    title: 'Do Not Sell My Personal Information',
+    content: (
+      <div className="space-y-4">
+        <p>Certain state privacy laws give residents the right to opt out of the "sale" of their personal information. We do not sell personal information in the traditional sense. However, to the extent our use of third-party advertising partners constitutes a "sale" under applicable state law, you may opt out by contacting us at privacy@claimcalculator.ai.</p>
+      </div>
+    ),
+  },
+  {
     id: 'security',
     num: '12',
-    title: 'Security',
+    title: 'Security of Your Information',
     content: (
-      <p>We incorporate commercially reasonable safeguards to help protect and secure your Personal Information. However, no data transmission over the Internet, mobile networks, wireless transmission, or electronic storage of information can be guaranteed 100% secure. As a result, we cannot guarantee or warrant the security of any information you transmit to or from the Sites, and you provide us with your information at your own risk.</p>
+      <p>We take commercially reasonable security measures to help protect personal information from loss, misuse, unauthorized access, disclosure, alteration, and destruction. However, no internet transmission or electronic storage is ever fully secure or error-free. We therefore cannot guarantee absolute security.</p>
     ),
   },
   {
     id: 'retention',
     num: '13',
-    title: 'Retention of Personal Information',
+    title: 'Retention of Information',
+    content: (
+      <p>We retain personal information for as long as necessary to fulfill the purposes for which it was collected and to comply with applicable legal, regulatory, tax, or accounting requirements. When we no longer need personal information, we take reasonable steps to destroy or de-identify it.</p>
+    ),
+  },
+  {
+    id: 'children',
+    num: '14',
+    title: 'Children\'s Privacy',
+    content: (
+      <p>Our Sites are not directed at children under the age of 13, and we do not knowingly collect personal information from children under 13. If you believe we may have collected information from a child under 13, please contact us at privacy@claimcalculator.ai.</p>
+    ),
+  },
+  {
+    id: 'your-choices',
+    num: '15',
+    title: 'Your Choices and Rights',
     content: (
       <div className="space-y-4">
-        <p>We will retain your Personal Information only for as long as is necessary for the purposes set out in this Policy. When deciding how long to keep your information, we consider:</p>
+        <p>Depending on your jurisdiction, you may have certain rights regarding your personal information, including:</p>
         <ul className="space-y-2">
           {[
-            'How long we have had a relationship with you or provided our Services to you',
-            'Whether we are subject to any legal obligations requiring us to keep transaction records for a certain period',
-            'Whether we have taken any legal positions in connection with statutes of limitation',
+            'To obtain a portable copy of your personal data',
+            'To request deletion of personal information we hold about you',
+            'To request correction of inaccurate personal information',
+            'To request that we restrict how we use your personal information',
+            'To object to certain processing of your personal information',
           ].map(item => (
             <li key={item} className="flex gap-2.5 text-sm text-on-surface-variant">
               <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
@@ -246,77 +279,28 @@ const sections = [
             </li>
           ))}
         </ul>
+        <p>To exercise any of these rights, please contact us using the information in the Contact Us section below. We will respond to your request in accordance with applicable law.</p>
       </div>
     ),
   },
   {
-    id: 'privacy-choices',
-    num: '14',
-    title: 'Your Privacy Choices',
+    id: 'california',
+    num: '16',
+    title: 'California Privacy Rights',
     content: (
       <div className="space-y-4">
-        <p><strong className="text-on-background">Updating Your Personal Information:</strong> If you would like to change your contact information, please contact us using the information in the Contact Us section below. We will make good faith efforts to make requested changes in our then active databases as soon as reasonably practicable.</p>
-        <p><strong className="text-on-background">Communications Preferences:</strong> You can opt out of receiving emails or text messages from us at any time. To manage your preferences — or to opt out entirely — please unsubscribe at the bottom of our emails, reply "STOP" to our text messages, or contact us directly.</p>
-        <p><strong className="text-on-background">Do Not Track:</strong> Do Not Track ("DNT") is a web browser setting that requests that a web application disable its tracking of an individual user. Currently, we do not monitor or take any action with respect to these signals or other mechanisms.</p>
-        <p><strong className="text-on-background">Analytics:</strong> We use Google Analytics to help us understand how visitors use the Sites. You can opt out of Google Analytics by using <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Google's opt-out tool</a>.</p>
+        <p>California residents may have additional rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), including the right to know, delete, correct, and opt out of the sale or sharing of personal information. To submit a request, please contact us at privacy@claimcalculator.ai.</p>
       </div>
     ),
   },
   {
     id: 'nevada',
-    num: '15',
-    title: 'Your Nevada Privacy Rights',
-    content: (
-      <div className="space-y-4">
-        <p>This section applies solely to Nevada residents and is adopted to comply with Nevada Revised Statutes (NRS) Chapter 603A, including Senate Bill 220 and Senate Bill 260. Nevada residents have the following rights regarding their covered information:</p>
-        <ul className="space-y-2">
-          {[
-            'To be informed of the categories of covered information collected and the third parties with whom it is shared',
-            'To review and request changes to any of your covered information that has been collected',
-            'To opt out of the "sale" of your covered information (as defined under NRS 603A.333), directing us not to sell your data to third parties who will license or sell it to others',
-            'To be notified of any material changes to this Privacy Policy',
-          ].map(item => (
-            <li key={item} className="flex gap-2.5 text-sm text-on-surface-variant">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
-              {item}
-            </li>
-          ))}
-        </ul>
-        <p>Because ClaimCalculator.ai caters specifically to Nevada residents, we prioritize your rights under NRS 603A. To exercise your right to opt out of the sale of your covered information or to review your data, please contact us at <a href="mailto:privacy@claimcalculator.ai" className="text-primary hover:underline">privacy@claimcalculator.ai</a> with the subject line "Nevada Privacy Rights Request". We will verify your identity and process your request within 60 days of receipt.</p>
-      </div>
-    ),
-  },
-  {
-    id: 'other-states',
-    num: '16',
-    title: 'Your Privacy Rights under Other US State Laws',
-    content: (
-      <div className="space-y-4">
-        <p>If you live in certain U.S. states — including California, Colorado, Connecticut, Oregon, Texas, Virginia, and others — you may have rights under applicable privacy laws, including:</p>
-        <ul className="space-y-2">
-          {[
-            'To confirm whether or not we are processing your personal data and to access such data',
-            'To correct inaccuracies in your personal data',
-            'To delete your personal data',
-            'To obtain a portable copy of your personal data',
-            'To opt out of the processing of your personal data for targeted advertising or the sale of personal data',
-            'Not to be discriminated against for exercising these rights',
-          ].map(item => (
-            <li key={item} className="flex gap-2.5 text-sm text-on-surface-variant">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ),
-  },
-  {
-    id: 'changes',
     num: '17',
-    title: 'Changes to This Privacy Policy',
+    title: 'Nevada Privacy Rights',
     content: (
-      <p>We may change this Privacy Policy at any time. We will post all changes to this Policy on this page and indicate at the top of the page the modified policy's effective date. We encourage you to refer to this page on an ongoing basis so that you are aware of our current privacy policy. By continuing to use the Sites or Services following any update, you agree to be bound by the Privacy Policy as changed.</p>
+      <div className="space-y-4">
+        <p>Nevada residents may opt out of the sale of covered information by sending a request to privacy@claimcalculator.ai. We will respond within 60 days of receipt of a verified request.</p>
+      </div>
     ),
   },
   {
@@ -340,7 +324,7 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   const navigate = useNavigate()
-  const [activeSection, setActiveSection] = useState(null)
+  const [activeSection, setActiveSection] = useState('introduction')
 
   return (
     <div className="min-h-screen bg-transparent">
