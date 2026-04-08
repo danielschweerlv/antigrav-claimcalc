@@ -285,7 +285,7 @@ export default function SuccessStoriesSection() {
           <span className="material-symbols-outlined text-primary text-5xl flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
           <div className="flex-1">
             <p className="text-base font-headline font-bold text-on-background">
-              People who hire an attorney in Nevada recover an average of <span className="text-primary">3.2× more</span> than those who don't.
+              People who hire an attorney in Nevada recover an average of <span className="text-primary">4.5× more</span> than those who don't.
             </p>
             <p className="text-sm text-on-surface-variant mt-1">
               Don't leave money on the table. Your free estimate takes under 2 minutes.

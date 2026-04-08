@@ -436,7 +436,7 @@ function App() {
               {[
                 { stat: '67%', label: 'Avg. Case Undervalued', icon: 'verified' },
                 { stat: '2,400+', label: 'Cases Evaluated', icon: 'groups' },
-                { stat: '3.2x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
+                { stat: '4.5x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
                 <div key={label} className="p-5 lg:p-7 rounded-xl border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
@@ -614,7 +614,7 @@ function App() {
               The insurance adjuster <span className="text-primary italic">isn't on your side.</span>
             </h2>
             <p className="text-on-surface-variant text-[19px]">
-              Nevadans who hire an attorney recover an average of <span className="text-on-background font-bold">3.2× more</span> than those who don't. See where you stand — free.
+              Nevadans who hire an attorney recover an average of <span className="text-on-background font-bold">4.5× more</span> than those who don't. See where you stand — free.
             </p>
             <button
               onClick={() => navigate('/calculator')}
