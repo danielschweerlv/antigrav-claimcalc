@@ -237,8 +237,8 @@ function calcSettlement(data) {
     faultBarred,
     withLow: faultBarred ? 0 : Math.max(Math.round(base * 1.4), 5000),
     withHigh: faultBarred ? 0 : Math.round(base * 2.8),
-    withoutLow: faultBarred ? 0 : Math.max(Math.round(base * 0.18), 500),
-    withoutHigh: faultBarred ? 0 : Math.round(base * 0.38),
+    withoutLow: faultBarred ? 0 : Math.max(Math.round(base * 0.30), 500),
+    withoutHigh: faultBarred ? 0 : Math.round(base * 0.64),
   }
 }
 
