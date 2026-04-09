@@ -120,24 +120,23 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* Data Sources Disclaimer */}
+          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: '12px' }}>
+            <p style={{
+              fontSize: '11px',
+              color: 'rgba(255, 255, 255, 0.28)',
+              textAlign: 'center',
+              maxWidth: '720px',
+              margin: '0 auto',
+              lineHeight: 1.6,
+            }}>
+              Data sources referenced by ClaimCalculator.ai include publicly available records from Nevada state and local government agencies. ClaimCalculator.ai is not affiliated with, endorsed by, or sponsored by any government agency, law enforcement organization, or third-party entity referenced on this site. This tool provides general estimates only and does not constitute legal advice.
+            </p>
+          </div>
+
           {/* Copyright */}
           <p className="text-[#bbc9cf] font-bold text-[10px] sm:text-[11px] font-body opacity-40 pt-2 border-t border-outline-variant/5 mt-3 text-center">
             &copy; {new Date().getFullYear()} ClaimCalculator.ai. All Rights Reserved.
-          </p>
-        </div>
-
-        {/* Data sources disclaimer */}
-        <div style={{ marginTop: '16px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
-          <p style={{
-            fontSize: '11px',
-            color: 'rgba(255, 255, 255, 0.28)',
-            textAlign: 'center',
-            maxWidth: '720px',
-            margin: '0 auto',
-            padding: '12px 24px 20px',
-            lineHeight: 1.6,
-          }}>
-            Data sources referenced by ClaimCalculator.ai include publicly available records from Nevada state and local government agencies. ClaimCalculator.ai is not affiliated with, endorsed by, or sponsored by any government agency, law enforcement organization, or third-party entity referenced on this site. This tool provides general estimates only and does not constitute legal advice.
           </p>
         </div>
       </div>
