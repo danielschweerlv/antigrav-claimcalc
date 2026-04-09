@@ -98,7 +98,7 @@ function App() {
               transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
             >
               <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
-              <ShineBorder borderWidth={2} duration={6} gradient="from-[#ffffff] via-[#14b8a6] to-[#06b6d4]">
+              <ShineBorder borderWidth={2} duration={6} gradient="from-[#a855f7] via-[#3b82f6] via-[#06b6d4] to-[#ffffff]">
                 <CalculatorForm />
               </ShineBorder>
             </motion.div>
