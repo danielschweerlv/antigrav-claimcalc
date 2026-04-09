@@ -65,7 +65,7 @@ export default function LegalNoticePage() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent relative z-10">
 
       <main className="pt-20 pb-24 px-4 lg:px-6">
         <div className="max-w-4xl mx-auto">
