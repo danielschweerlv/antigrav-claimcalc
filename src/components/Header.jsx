@@ -132,12 +132,7 @@ const Header = () => {
             <img
               src="/logos/claimcalculator-wordmark.png"
               alt="ClaimCalculator.ai"
-              className="hidden sm:inline h-[24px] lg:h-7 w-auto object-contain"
-            />
-            <img
-              src="/logos/claimcalculator-wordmark.png"
-              alt="ClaimCalculator.ai"
-              className="sm:hidden h-[16px] w-auto object-contain"
+              className="h-[16px] sm:h-[24px] lg:h-7 w-auto object-contain"
               style={{ maxWidth: 'calc(100vw - 170px)' }}
             />
           </div>

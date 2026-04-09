@@ -1,22 +1,23 @@
-import { StrictMode, useEffect } from 'react'
+import { StrictMode, useEffect, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './index.css'
-import App from './App.jsx'
-import CalculatorPage from './pages/CalculatorPage.jsx'
-import HowItWorksPage from './pages/HowItWorksPage.jsx'
-import InsuranceTacticsPage from './pages/InsuranceTacticsPage.jsx'
-import YourRightsPage from './pages/YourRightsPage.jsx'
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage.jsx'
-import TermsOfServicePage from './pages/TermsOfServicePage.jsx'
-import LegalNoticePage from './pages/LegalNoticePage.jsx'
-import SuccessStoriesPage from './pages/SuccessStoriesPage.jsx'
-import InjuryValuesPage from './pages/InjuryValuesPage.jsx'
-import CaseGuidesPage from './pages/CaseGuidesPage.jsx'
-import CaseGuideDetailPage from './pages/CaseGuideDetailPage.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import { CanvasRevealEffect } from './components/ui/canvas-reveal-effect'
+
+const App                 = lazy(() => import('./App.jsx'))
+const CalculatorPage      = lazy(() => import('./pages/CalculatorPage.jsx'))
+const HowItWorksPage      = lazy(() => import('./pages/HowItWorksPage.jsx'))
+const InsuranceTacticsPage = lazy(() => import('./pages/InsuranceTacticsPage.jsx'))
+const YourRightsPage      = lazy(() => import('./pages/YourRightsPage.jsx'))
+const PrivacyPolicyPage   = lazy(() => import('./pages/PrivacyPolicyPage.jsx'))
+const TermsOfServicePage  = lazy(() => import('./pages/TermsOfServicePage.jsx'))
+const LegalNoticePage     = lazy(() => import('./pages/LegalNoticePage.jsx'))
+const SuccessStoriesPage  = lazy(() => import('./pages/SuccessStoriesPage.jsx'))
+const InjuryValuesPage    = lazy(() => import('./pages/InjuryValuesPage.jsx'))
+const CaseGuidesPage      = lazy(() => import('./pages/CaseGuidesPage.jsx'))
+const CaseGuideDetailPage = lazy(() => import('./pages/CaseGuideDetailPage.jsx'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -45,6 +46,7 @@ function Layout() {
       <ScrollToTop />
       <Header />
       <div className="flex-1">
+        <Suspense fallback={<div className="min-h-screen bg-[#111318]" />}>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/calculator" element={<CalculatorPage />} />
@@ -59,6 +61,7 @@ function Layout() {
           <Route path="/case-guides" element={<CaseGuidesPage />} />
           <Route path="/case-guides/:slug" element={<CaseGuideDetailPage />} />
         </Routes>
+        </Suspense>
       </div>
       <Footer />
     </div>
