@@ -85,10 +85,9 @@ export default function WhatIsSection() {
             <motion.div
               key={title}
               variants={itemVariants}
-              className="flex flex-col gap-3 p-6 rounded-xl border transition-all duration-300 hover:border-primary/25 group"
+              className="gradient-border flex flex-col gap-3 p-6 rounded-xl transition-all duration-300 group"
               style={{
                 background: 'rgba(255,255,255,0.03)',
-                borderColor: 'rgba(255,255,255,0.07)',
               }}
             >
               <div className="flex items-center gap-3">

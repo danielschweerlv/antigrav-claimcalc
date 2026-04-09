@@ -202,6 +202,26 @@
   .scale-y-0 { transform: scaleY(0); }
   .scale-y-100 { transform: scaleY(1); }
 
+  /* ── Gradient border utility (purple → blue → cyan) ──────────────── */
+  .gradient-border {
+    position: relative;
+    background-clip: padding-box;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 50%, #06b6d4 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
   /* Nevada watermark & LV skyline divider — mobile adjustments */
   .nevada-watermark { opacity: 0.04; }
   .lv-skyline-divider { opacity: 0.12; height: 70px; }

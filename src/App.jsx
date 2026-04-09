@@ -98,7 +98,7 @@ function App() {
               transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
             >
               <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
-              <ShineBorder borderWidth={2} duration={4} gradient="from-[#a4e6ff] via-white to-[#00d1ff]">
+              <ShineBorder borderWidth={2} duration={6} gradient="from-[#a855f7] via-[#3b82f6] to-[#06b6d4]">
                 <CalculatorForm />
               </ShineBorder>
             </motion.div>
@@ -238,7 +238,7 @@ function App() {
                 { stat: '4.5x', label: 'Avg. Attorney Boost', icon: 'trending_up' },
                 { stat: '$0', label: 'Cost to Evaluate', icon: 'payments' },
               ].map(({ stat, label, icon }) => (
-                <div key={label} className="p-5 lg:p-7 rounded-xl border border-white/[0.06] text-center space-y-2 hover:border-primary/20 transition-colors duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div key={label} className="gradient-border p-5 lg:p-7 rounded-xl text-center space-y-2 transition-colors duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <span className="material-symbols-outlined text-3xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
                   <p className="text-2xl lg:text-4xl font-headline font-black text-on-background">{stat}</p>
                   <p className="text-sm text-on-surface-variant leading-snug">{label}</p>
@@ -272,7 +272,7 @@ function App() {
                 { num: '02', title: 'AI Valuation', body: 'Our engine cross-references your case with current Nevada legal precedents and insurance payouts.' },
                 { num: '03', title: 'Expert Match', body: 'Get connected with top Nevada attorneys who specialize in maximizing your specific case type.' },
               ].map(({ num, title, body }) => (
-                <div key={num} className="space-y-3 p-6 lg:p-7 rounded-xl border border-white/[0.06] hover:border-primary/15 transition-all duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
+                <div key={num} className="gradient-border space-y-3 p-6 lg:p-7 rounded-xl transition-all duration-300" style={{ background: 'rgba(255,255,255,0.03)' }}>
                   <div className="flex items-center gap-3">
                     <span className="text-3xl font-headline font-black text-outline/20 leading-none">{num}</span>
                     <h4 className="text-lg font-headline text-on-background">{title}</h4>
@@ -299,7 +299,7 @@ function App() {
         <section className="py-20 lg:py-28 px-4 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <motion.div
-              className="relative p-8 lg:p-12 pb-14 glass-card rounded-xl border border-white/[0.08] min-h-[300px] flex flex-col justify-center"
+              className="gradient-border relative p-8 lg:p-12 pb-14 glass-card rounded-xl min-h-[300px] flex flex-col justify-center"
               initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, margin: '-60px' }}
