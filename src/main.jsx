@@ -6,6 +6,7 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import { CanvasRevealEffect } from './components/ui/canvas-reveal-effect'
 
+// Public pages (lazy loaded)
 const App                 = lazy(() => import('./App.jsx'))
 const CalculatorPage      = lazy(() => import('./pages/CalculatorPage.jsx'))
 const HowItWorksPage      = lazy(() => import('./pages/HowItWorksPage.jsx'))
@@ -19,6 +20,14 @@ const InjuryValuesPage    = lazy(() => import('./pages/InjuryValuesPage.jsx'))
 const CaseGuidesPage      = lazy(() => import('./pages/CaseGuidesPage.jsx'))
 const CaseGuideDetailPage = lazy(() => import('./pages/CaseGuideDetailPage.jsx'))
 
+// Admin pages (lazy loaded)
+const LoginFormPage = lazy(() => import('./components/auth/LoginForm.jsx').then(m => ({ default: m.LoginForm })))
+const AdminDashboard = lazy(() => import('./components/admin/Dashboard.jsx').then(m => ({ default: m.Dashboard })))
+const AdminLeadList = lazy(() => import('./components/admin/LeadList.jsx').then(m => ({ default: m.LeadList })))
+const AdminLeadDetail = lazy(() => import('./components/admin/LeadDetail.jsx').then(m => ({ default: m.LeadDetail })))
+const AdminLayoutModule = lazy(() => import('./components/admin/AdminLayout.jsx').then(m => ({ default: m.AdminLayout })))
+const ProtectedRouteModule = lazy(() => import('./components/auth/ProtectedRoute.jsx').then(m => ({ default: m.ProtectedRoute })))
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
@@ -27,7 +36,20 @@ function ScrollToTop() {
   return null
 }
 
-function Layout() {
+// Wrapper to compose ProtectedRoute + AdminLayout (lazy)
+function AdminShell({ children }) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#111318]" />}>
+      <ProtectedRouteModule>
+        <AdminLayoutModule>
+          {children}
+        </AdminLayoutModule>
+      </ProtectedRouteModule>
+    </Suspense>
+  )
+}
+
+function PublicLayout() {
   return (
     <div className="flex flex-col min-h-screen bg-[#111318]">
       <div className="fixed inset-0 z-0 pointer-events-none">
@@ -68,10 +90,31 @@ function Layout() {
   )
 }
 
+function Root() {
+  const location = useLocation()
+  const isAdmin = location.pathname.startsWith('/admin')
+
+  if (isAdmin) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-[#111318]" />}>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/admin/login" element={<LoginFormPage />} />
+          <Route path="/admin" element={<AdminShell><AdminDashboard /></AdminShell>} />
+          <Route path="/admin/leads" element={<AdminShell><AdminLeadList /></AdminShell>} />
+          <Route path="/admin/leads/:id" element={<AdminShell><AdminLeadDetail /></AdminShell>} />
+        </Routes>
+      </Suspense>
+    )
+  }
+
+  return <PublicLayout />
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Layout />
+      <Root />
     </BrowserRouter>
   </StrictMode>,
 )
