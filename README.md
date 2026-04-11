@@ -2,6 +2,26 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Backend
+
+The calculator form submits to a Supabase edge function. To run locally:
+
+1. Copy `.env.example` to `.env.local` and fill in the Supabase URL and anon key from the [project API settings](https://app.supabase.com/project/uawtkzzyeydfgnpiaqfb/settings/api).
+2. `npm run dev`
+
+### Deploying backend changes
+
+Migrations live in `supabase/migrations/` and edge functions in `supabase/functions/`. To deploy:
+
+```bash
+supabase db push                           # apply new migrations
+supabase functions deploy submit-lead      # redeploy the edge function
+```
+
+### Vercel environment
+
+Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the Vercel project's environment variables for both Preview and Production environments.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
