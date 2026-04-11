@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { calcSettlement } from '../lib/calc-settlement'
+import { submitLead } from '../lib/submit-lead'
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
 const CASE_TYPES = [
   { value: 'Motor Vehicle Accident', label: 'Motor Vehicle Accident', icon: 'directions_car' },
-  { value: 'Premises Liability/Slip and Fall', label: 'Premises Liability/Slip and Fall', icon: 'falling' },
-  { value: 'Work-Related Injury', label: 'Work-Related Injury', icon: 'construction' },
+  { value: 'Premises Liability', label: 'Premises Liability / Slip and Fall', icon: 'falling' },
+  { value: 'Work Injury', label: 'Work-Related Injury', icon: 'construction' },
   { value: 'Product Liability', label: 'Product Liability', icon: 'package_2' },
   { value: 'Other', label: 'Other', icon: 'more_horiz' },
 ]
@@ -178,71 +180,6 @@ const NON_MOTOR_VEHICLE_STEPS = [
   'contact',         // 12
 ]
 
-// ─── CALCULATION ────────────────────────────────────────────────────────────
-
-function calcSettlement(data) {
-  const injuries = data.injuries ?? []
-  let injScore = 0
-
-  injuries.forEach(inj => {
-    if (['Body aches & pain', 'Cuts, scrapes & bruises'].includes(inj)) injScore = Math.max(injScore, 1)
-    if (['Broken or fractured bones', 'Scarring', 'Internal bleeding', 'Memory loss'].includes(inj)) injScore = Math.max(injScore, 3)
-    if (['Surgery required', 'Brain injury', 'Loss of internal organs', 'Coma', 'Paralysis', 'Amputation'].includes(inj)) injScore = Math.max(injScore, 6)
-  })
-  if (injuries.includes('I was not injured')) injScore = 0
-  if (injScore === 0 && injuries.length === 0) injScore = 1
-
-  // Fault: use categorical options (motor vehicle path)
-  const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
-  // For non-motor-vehicle, use faultAtFault field
-  let fM = 0.8
-  if (data.caseType === 'Motor Vehicle Accident') {
-    fM = faultMap[data.fault] ?? 0.8
-  } else {
-    fM = data.faultAtFault === 'Yes' ? 0.4 : 1.0
-  }
-  const faultBarred = data.caseType === 'Motor Vehicle Accident' && fM <= 0.25 && data.fault === 'Mostly me'
-
-  const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
-
-  // Uninsured other party = UIM claim = harder to collect, slightly lower range
-  const otherInsM = (data.otherInsurer === "They Have No Insurance / I Don't Know") ? 0.7 : 1.0
-
-  // EV modifier
-  const evM = data.evInvolved === 'Yes' ? 1.12 : 1.0
-
-  // Commercial vehicle modifier
-  const commM = data.commercialVehicle === 'Yes' ? 1.18 : 1.0
-
-  // Non-motor-vehicle modifiers
-  const onJobM = data.onTheJob === 'Yes' ? 1.15 : 1.0
-  const cameraM = data.cameras === 'Yes' ? 1.08 : 1.0
-  const witnessM = data.witnesses === 'Yes' ? 1.08 : 1.0
-  const surfaceM = data.surface === 'No, it was uneven or sloped' ? 1.1 : 1.0
-  const lightingM = data.lighting === 'No, it was poorly lit' ? 1.1 : 1.0
-
-  const tM = whenMap[data.when] ?? 1.0
-  const baseMed = injScore * 8000 + 4000
-  const pain = baseMed * (injScore || 1.5)
-  const prop = Math.round(baseMed * 0.35)
-
-  let base
-  if (data.caseType === 'Motor Vehicle Accident') {
-    base = (baseMed + pain + prop) * fM * tM * otherInsM * evM * commM
-  } else {
-    base = (baseMed + pain + prop) * fM * tM * onJobM * cameraM * witnessM * surfaceM * lightingM
-  }
-
-  return {
-    faultBarred,
-    withLow: faultBarred ? 0 : Math.max(Math.round(base * 1.4), 5000),
-    withHigh: faultBarred ? 0 : Math.round(base * 2.8),
-    withoutLow: faultBarred ? 0 : Math.max(Math.round(base * 0.30), 500),
-    withoutHigh: faultBarred ? 0 : Math.round(base * 0.64),
-  }
-}
-
-
 // ─── HELPERS ────────────────────────────────────────────────────────────────
 
 const fmt = n => '$' + n.toLocaleString()
@@ -376,11 +313,15 @@ function RequiredLabel({ children }) {
 
 // ─── RESULT SCREEN ──────────────────────────────────────────────────────────
 
-function ResultScreen({ data }) {
+function ResultScreen({ data, serverEstimate }) {
   const [showCallback, setShowCallback] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [cb, setCb] = useState({ name: '', phone: '', time: 'Morning (8am \u2013 12pm)' })
-  const res = calcSettlement(data)
+  const localRes = calcSettlement(data)
+  const res = serverEstimate ?? localRes
+  const isBarred = serverEstimate
+    ? (serverEstimate.withLow === 0 && serverEstimate.withHigh === 0)
+    : (localRes.faultBarred ?? false)
   const withAvg = Math.round((res.withLow + res.withHigh) / 2)
   const withoutAvg = Math.round((res.withoutLow + res.withoutHigh) / 2)
   const difference = withAvg - withoutAvg
@@ -394,7 +335,7 @@ function ResultScreen({ data }) {
       transition={{ type: 'spring', bounce: 0.2, duration: 0.9 }}
     >
       {/* Fault barred warning */}
-      {res.faultBarred && (
+      {isBarred && (
         <div className="bg-error/10 border border-error/30 rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-error text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
@@ -550,7 +491,10 @@ export default function CalculatorForm() {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [contactTouched, setContactTouched] = useState({})
+  const [serverEstimate, setServerEstimate] = useState(null)
+  const [submitError, setSubmitError] = useState(null)
   const [data, setData] = useState({
+    website: '',
     caseType: '',
     type: '',
     injuries: [],
@@ -650,16 +594,28 @@ export default function CalculatorForm() {
     setStepIndex(idx)
   }
 
-  const showResult = () => {
+  const showResult = async () => {
     setContactTouched({ firstName: true, lastName: true, email: true, phone: true })
     if (!contactComplete) return
-    setDirection(1)
-    setStepIndex(-1)
+    if (loading) return
+    setSubmitError(null)
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
+    try {
+      const result = await submitLead(data)
+      setServerEstimate(result.estimate)
+      setDirection(1)
+      setStepIndex(-1)
       setDone(true)
-    }, 2200)
+    } catch (err) {
+      console.error('submit-lead failed', err)
+      if (err.status === 429) {
+        setSubmitError('Too many attempts. Please try again later or call us.')
+      } else {
+        setSubmitError('Something went wrong. Please try again or call us.')
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   // ─── RENDER STEP ─────────────────────────────────────────────────────────
@@ -961,7 +917,12 @@ export default function CalculatorForm() {
                 )}
               </div>
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => goTo(stepIndex - 1)} disabled={!contactComplete} />
+            {submitError && (
+              <div className="mb-3 p-3 rounded-xl bg-error/10 border border-error/30 text-error text-sm">
+                {submitError}
+              </div>
+            )}
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => goTo(stepIndex - 1)} disabled={!contactComplete || loading} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>
@@ -1109,7 +1070,19 @@ export default function CalculatorForm() {
       )}
 
       {/* Result */}
-      {done && <ResultScreen data={data} />}
+      {done && <ResultScreen data={data} serverEstimate={serverEstimate} />}
+
+      {/* Honeypot — hidden from humans AND autofill via display:none wrapper */}
+      <div aria-hidden="true" style={{ display: 'none' }}>
+        <input
+          type="text"
+          name="hp_website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={data.website}
+          onChange={(e) => set('website', e.target.value)}
+        />
+      </div>
 
       {/* Step content — card-stack spring animation */}
       {!loading && !done && (
