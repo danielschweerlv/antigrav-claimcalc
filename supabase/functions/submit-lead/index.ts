@@ -30,7 +30,10 @@ Deno.serve(async (req) => {
 
   const parsed = submitLeadSchema.safeParse(raw);
   if (!parsed.success) {
-    return json({ error: "invalid submission" }, 400);
+    return json(
+      { error: "invalid submission", issues: parsed.error.issues },
+      400,
+    );
   }
   const body = parsed.data;
 

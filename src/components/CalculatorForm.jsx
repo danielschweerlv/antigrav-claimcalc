@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { calcSettlement } from '../lib/calc-settlement'
+import { submitLead } from '../lib/submit-lead'
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
 const CASE_TYPES = [
   { value: 'Motor Vehicle Accident', label: 'Motor Vehicle Accident', icon: 'directions_car' },
-  { value: 'Premises Liability/Slip and Fall', label: 'Premises Liability/Slip and Fall', icon: 'falling' },
-  { value: 'Work-Related Injury', label: 'Work-Related Injury', icon: 'construction' },
+  { value: 'Premises Liability', label: 'Premises Liability / Slip and Fall', icon: 'falling' },
+  { value: 'Work Injury', label: 'Work-Related Injury', icon: 'construction' },
   { value: 'Product Liability', label: 'Product Liability', icon: 'package_2' },
   { value: 'Other', label: 'Other', icon: 'more_horiz' },
 ]
@@ -312,11 +313,15 @@ function RequiredLabel({ children }) {
 
 // ─── RESULT SCREEN ──────────────────────────────────────────────────────────
 
-function ResultScreen({ data }) {
+function ResultScreen({ data, serverEstimate }) {
   const [showCallback, setShowCallback] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [cb, setCb] = useState({ name: '', phone: '', time: 'Morning (8am \u2013 12pm)' })
-  const res = calcSettlement(data)
+  const localRes = calcSettlement(data)
+  const res = serverEstimate ?? localRes
+  const isBarred = serverEstimate
+    ? (serverEstimate.withLow === 0 && serverEstimate.withHigh === 0)
+    : (localRes.faultBarred ?? false)
   const withAvg = Math.round((res.withLow + res.withHigh) / 2)
   const withoutAvg = Math.round((res.withoutLow + res.withoutHigh) / 2)
   const difference = withAvg - withoutAvg
@@ -330,7 +335,7 @@ function ResultScreen({ data }) {
       transition={{ type: 'spring', bounce: 0.2, duration: 0.9 }}
     >
       {/* Fault barred warning */}
-      {res.faultBarred && (
+      {isBarred && (
         <div className="bg-error/10 border border-error/30 rounded-xl p-5 space-y-3">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-error text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
@@ -486,7 +491,10 @@ export default function CalculatorForm() {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [contactTouched, setContactTouched] = useState({})
+  const [serverEstimate, setServerEstimate] = useState(null)
+  const [submitError, setSubmitError] = useState(null)
   const [data, setData] = useState({
+    website: '',
     caseType: '',
     type: '',
     injuries: [],
@@ -586,16 +594,28 @@ export default function CalculatorForm() {
     setStepIndex(idx)
   }
 
-  const showResult = () => {
+  const showResult = async () => {
     setContactTouched({ firstName: true, lastName: true, email: true, phone: true })
     if (!contactComplete) return
-    setDirection(1)
-    setStepIndex(-1)
+    if (loading) return
+    setSubmitError(null)
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
+    try {
+      const result = await submitLead(data)
+      setServerEstimate(result.estimate)
+      setDirection(1)
+      setStepIndex(-1)
       setDone(true)
-    }, 2200)
+    } catch (err) {
+      console.error('submit-lead failed', err)
+      if (err.status === 429) {
+        setSubmitError('Too many attempts. Please try again later or call us.')
+      } else {
+        setSubmitError('Something went wrong. Please try again or call us.')
+      }
+    } finally {
+      setLoading(false)
+    }
   }
 
   // ─── RENDER STEP ─────────────────────────────────────────────────────────
@@ -897,7 +917,12 @@ export default function CalculatorForm() {
                 )}
               </div>
             </div>
-            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => goTo(stepIndex - 1)} disabled={!contactComplete} />
+            {submitError && (
+              <div className="mb-3 p-3 rounded-xl bg-error/10 border border-error/30 text-error text-sm">
+                {submitError}
+              </div>
+            )}
+            <NavButtons nextLabel="Get My Results" onNext={showResult} onBack={() => goTo(stepIndex - 1)} disabled={!contactComplete || loading} />
             <p className="text-[10px] text-center text-outline leading-tight mt-2">
               By clicking "Get My Results" you agree to be contacted by a licensed Nevada attorney. No obligation. Your info is never sold.
             </p>
@@ -1045,7 +1070,19 @@ export default function CalculatorForm() {
       )}
 
       {/* Result */}
-      {done && <ResultScreen data={data} />}
+      {done && <ResultScreen data={data} serverEstimate={serverEstimate} />}
+
+      {/* Honeypot — hidden from humans AND autofill via display:none wrapper */}
+      <div aria-hidden="true" style={{ display: 'none' }}>
+        <input
+          type="text"
+          name="hp_website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={data.website}
+          onChange={(e) => set('website', e.target.value)}
+        />
+      </div>
 
       {/* Step content — card-stack spring animation */}
       {!loading && !done && (
