@@ -119,6 +119,30 @@ Deno.serve(async (req) => {
     details: { utm: body.utm, referrer: body.referrer, ip_hash: ipHash },
   });
 
+  // Fire-and-forget email notification — never blocks lead response
+  try {
+    const notifyUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/notify-new-lead`;
+    fetch(notifyUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+      },
+      body: JSON.stringify({
+        lead_id: leadRow.id,
+        contact_name: row.contact_name,
+        contact_email: row.contact_email,
+        contact_phone: row.contact_phone,
+        case_type: row.case_type,
+        estimated_value_low: row.estimated_value_low,
+        estimated_value_high: row.estimated_value_high,
+        zip_code: row.zip_code,
+      }),
+    }).catch((err) => console.error("notify-new-lead fire-and-forget error:", err));
+  } catch (err) {
+    console.error("notify-new-lead setup error:", err);
+  }
+
   return json({
     leadId: leadRow.id,
     estimate: {
