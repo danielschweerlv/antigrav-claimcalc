@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { calcSettlement } from '../lib/calc-settlement'
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
@@ -177,71 +178,6 @@ const NON_MOTOR_VEHICLE_STEPS = [
   'zip',             // 11
   'contact',         // 12
 ]
-
-// ─── CALCULATION ────────────────────────────────────────────────────────────
-
-function calcSettlement(data) {
-  const injuries = data.injuries ?? []
-  let injScore = 0
-
-  injuries.forEach(inj => {
-    if (['Body aches & pain', 'Cuts, scrapes & bruises'].includes(inj)) injScore = Math.max(injScore, 1)
-    if (['Broken or fractured bones', 'Scarring', 'Internal bleeding', 'Memory loss'].includes(inj)) injScore = Math.max(injScore, 3)
-    if (['Surgery required', 'Brain injury', 'Loss of internal organs', 'Coma', 'Paralysis', 'Amputation'].includes(inj)) injScore = Math.max(injScore, 6)
-  })
-  if (injuries.includes('I was not injured')) injScore = 0
-  if (injScore === 0 && injuries.length === 0) injScore = 1
-
-  // Fault: use categorical options (motor vehicle path)
-  const faultMap = { 'Not my fault': 1.0, 'Mostly other driver': 0.8, 'Shared / unclear': 0.6, 'Mostly me': 0.25 }
-  // For non-motor-vehicle, use faultAtFault field
-  let fM = 0.8
-  if (data.caseType === 'Motor Vehicle Accident') {
-    fM = faultMap[data.fault] ?? 0.8
-  } else {
-    fM = data.faultAtFault === 'Yes' ? 0.4 : 1.0
-  }
-  const faultBarred = data.caseType === 'Motor Vehicle Accident' && fM <= 0.25 && data.fault === 'Mostly me'
-
-  const whenMap = { 'Less than 30 days ago': 1.1, '1\u20136 months ago': 1.0, '6\u201312 months ago': 0.95, 'Over a year ago': 0.85 }
-
-  // Uninsured other party = UIM claim = harder to collect, slightly lower range
-  const otherInsM = (data.otherInsurer === "They Have No Insurance / I Don't Know") ? 0.7 : 1.0
-
-  // EV modifier
-  const evM = data.evInvolved === 'Yes' ? 1.12 : 1.0
-
-  // Commercial vehicle modifier
-  const commM = data.commercialVehicle === 'Yes' ? 1.18 : 1.0
-
-  // Non-motor-vehicle modifiers
-  const onJobM = data.onTheJob === 'Yes' ? 1.15 : 1.0
-  const cameraM = data.cameras === 'Yes' ? 1.08 : 1.0
-  const witnessM = data.witnesses === 'Yes' ? 1.08 : 1.0
-  const surfaceM = data.surface === 'No, it was uneven or sloped' ? 1.1 : 1.0
-  const lightingM = data.lighting === 'No, it was poorly lit' ? 1.1 : 1.0
-
-  const tM = whenMap[data.when] ?? 1.0
-  const baseMed = injScore * 8000 + 4000
-  const pain = baseMed * (injScore || 1.5)
-  const prop = Math.round(baseMed * 0.35)
-
-  let base
-  if (data.caseType === 'Motor Vehicle Accident') {
-    base = (baseMed + pain + prop) * fM * tM * otherInsM * evM * commM
-  } else {
-    base = (baseMed + pain + prop) * fM * tM * onJobM * cameraM * witnessM * surfaceM * lightingM
-  }
-
-  return {
-    faultBarred,
-    withLow: faultBarred ? 0 : Math.max(Math.round(base * 1.4), 5000),
-    withHigh: faultBarred ? 0 : Math.round(base * 2.8),
-    withoutLow: faultBarred ? 0 : Math.max(Math.round(base * 0.30), 500),
-    withoutHigh: faultBarred ? 0 : Math.round(base * 0.64),
-  }
-}
-
 
 // ─── HELPERS ────────────────────────────────────────────────────────────────
 
