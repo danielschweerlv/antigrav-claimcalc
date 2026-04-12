@@ -4,8 +4,9 @@ import { supabase } from '@/lib/supabase'
 import { LeadStatusBadge } from './LeadStatusBadge'
 import { ActivityLog } from './ActivityLog'
 import { AssignLeadModal } from './AssignLeadModal'
+import { generateInvoice } from '@/lib/generate-invoice'
 import { format } from 'date-fns'
-import { ArrowLeft, Mail, Phone, MapPin, Calendar, UserCheck } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, MapPin, Calendar, UserCheck, FileText, DollarSign } from 'lucide-react'
 
 export function LeadDetail() {
   const { id } = useParams()
@@ -43,7 +44,7 @@ export function LeadDetail() {
   const fetchAssignment = async () => {
     const { data } = await supabase
       .from('lead_assignments')
-      .select('*, attorney_partners(name, firm_name, email, phone)')
+      .select('*, attorney_partners(name, firm_name, email, phone, price_per_lead)')
       .eq('lead_id', id)
       .order('assigned_at', { ascending: false })
       .limit(1)
@@ -52,6 +53,82 @@ export function LeadDetail() {
     if (data) {
       setAssignment(data)
     }
+  }
+
+  const updateOutcome = async (newOutcome) => {
+    if (!assignment) return
+    setUpdating(true)
+
+    const { error } = await supabase
+      .from('lead_assignments')
+      .update({ outcome: newOutcome, outcome_updated_at: new Date().toISOString() })
+      .eq('id', assignment.id)
+
+    if (!error) {
+      const { data: { session } } = await supabase.auth.getSession()
+      await supabase.from('lead_activity').insert({
+        lead_id: id,
+        action: 'outcome_changed',
+        performed_by: session?.user?.id ?? null,
+        details: { from: assignment.outcome, to: newOutcome },
+      })
+
+      if (newOutcome === 'converted' && lead.status !== 'converted') {
+        await supabase.from('leads').update({ status: 'converted' }).eq('id', id)
+        setLead({ ...lead, status: 'converted' })
+      }
+
+      setAssignment({ ...assignment, outcome: newOutcome, outcome_updated_at: new Date().toISOString() })
+      setActivityKey((k) => k + 1)
+    }
+
+    setUpdating(false)
+  }
+
+  const updatePayoutStatus = async (newStatus) => {
+    if (!assignment) return
+    setUpdating(true)
+
+    const update = { payout_status: newStatus }
+    if (newStatus === 'paid') {
+      update.payout_date = new Date().toISOString().split('T')[0]
+      if (!assignment.payout_amount) {
+        update.payout_amount = assignment.attorney_partners?.price_per_lead || 200000
+      }
+    }
+
+    const { error } = await supabase
+      .from('lead_assignments')
+      .update(update)
+      .eq('id', assignment.id)
+
+    if (!error) {
+      const { data: { session } } = await supabase.auth.getSession()
+      await supabase.from('lead_activity').insert({
+        lead_id: id,
+        action: 'payout_status_changed',
+        performed_by: session?.user?.id ?? null,
+        details: { from: assignment.payout_status, to: newStatus },
+      })
+
+      setAssignment({ ...assignment, ...update })
+      setActivityKey((k) => k + 1)
+    }
+
+    setUpdating(false)
+  }
+
+  const handleGenerateInvoice = () => {
+    if (!assignment || !lead) return
+    generateInvoice({
+      assignment: {
+        id: assignment.id,
+        assigned_at: assignment.assigned_at,
+        payout_amount: assignment.payout_amount || assignment.attorney_partners?.price_per_lead || 200000,
+      },
+      lead: { contact_name: lead.contact_name, case_type: lead.case_type },
+      attorney: assignment.attorney_partners || {},
+    })
   }
 
   const handleAssigned = () => {
@@ -313,7 +390,7 @@ export function LeadDetail() {
               <h2 className="text-lg font-bold text-[#e2e2e8] font-['Space_Grotesk'] mb-4">
                 Assignment
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <div className="text-[#e2e2e8] font-['Manrope'] font-medium">
                   {assignment.attorney_partners?.name || 'Unknown Attorney'}
                 </div>
@@ -322,18 +399,86 @@ export function LeadDetail() {
                     {assignment.attorney_partners.firm_name}
                   </div>
                 )}
-                {assignment.attorney_partners?.email && (
-                  <div className="text-[#bbc9cf] text-sm font-['Manrope']">
-                    {assignment.attorney_partners.email}
-                  </div>
-                )}
-                {assignment.attorney_partners?.phone && (
-                  <div className="text-[#bbc9cf] text-sm font-['Manrope']">
-                    {assignment.attorney_partners.phone}
-                  </div>
-                )}
-                <div className="text-[#bbc9cf] text-xs font-['Manrope'] mt-2">
+                <div className="text-[#bbc9cf] text-xs font-['Manrope']">
                   Assigned {format(new Date(assignment.assigned_at), 'MMM d, yyyy h:mm a')}
+                </div>
+
+                {/* Outcome */}
+                <div className="pt-2 border-t border-[#333539]">
+                  <div className="text-[#bbc9cf] text-xs font-['Inter'] mb-2">Outcome</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['pending', 'accepted', 'rejected', 'converted'].map((o) => (
+                      <button
+                        key={o}
+                        onClick={() => updateOutcome(o)}
+                        disabled={updating || assignment.outcome === o}
+                        className={`px-2.5 py-1 rounded-lg text-xs font-['Manrope'] transition-colors ${
+                          assignment.outcome === o
+                            ? o === 'rejected'
+                              ? 'bg-[#ffb4ab]/20 text-[#ffb4ab] border border-[#ffb4ab]/40'
+                              : o === 'accepted' || o === 'converted'
+                                ? 'bg-[#4ADE80]/20 text-[#4ADE80] border border-[#4ADE80]/40'
+                                : 'bg-[#a4e6ff]/20 text-[#a4e6ff] border border-[#a4e6ff]/40'
+                            : 'bg-[#333539] text-[#bbc9cf] border border-[#333539] hover:border-[#bbc9cf]/40'
+                        } disabled:cursor-default`}
+                      >
+                        {o.charAt(0).toUpperCase() + o.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Payout */}
+                <div className="pt-2 border-t border-[#333539]">
+                  <div className="text-[#bbc9cf] text-xs font-['Inter'] mb-2">Payout</div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-['Inter'] font-medium ${
+                      assignment.payout_status === 'paid'
+                        ? 'text-[#4ADE80] bg-[#4ADE80]/15'
+                        : assignment.payout_status === 'invoiced'
+                          ? 'text-[#a4e6ff] bg-[#a4e6ff]/15'
+                          : 'text-[#ffb4ab] bg-[#ffb4ab]/15'
+                    }`}>
+                      {assignment.payout_status?.charAt(0).toUpperCase() + assignment.payout_status?.slice(1)}
+                    </span>
+                    <span className="text-[#a4e6ff] font-bold font-['Space_Grotesk'] text-sm">
+                      ${((assignment.payout_amount || assignment.attorney_partners?.price_per_lead || 200000) / 100).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    </span>
+                  </div>
+                  {assignment.payout_date && (
+                    <div className="text-[#bbc9cf] text-xs font-['Manrope'] mb-2">
+                      Paid {format(new Date(assignment.payout_date + 'T00:00:00'), 'MMM d, yyyy')}
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1.5">
+                    {assignment.payout_status === 'unpaid' && (
+                      <button
+                        onClick={() => updatePayoutStatus('invoiced')}
+                        disabled={updating}
+                        className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#333539] text-[#a4e6ff] rounded-lg hover:bg-[#a4e6ff]/20 transition-colors disabled:opacity-50 text-sm font-['Manrope']"
+                      >
+                        <FileText size={14} />
+                        Mark as Invoiced
+                      </button>
+                    )}
+                    {(assignment.payout_status === 'unpaid' || assignment.payout_status === 'invoiced') && (
+                      <button
+                        onClick={() => updatePayoutStatus('paid')}
+                        disabled={updating}
+                        className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#4ADE80] text-[#111318] rounded-lg hover:bg-[#4ADE80]/80 transition-colors disabled:opacity-50 text-sm font-medium font-['Manrope']"
+                      >
+                        <DollarSign size={14} />
+                        Mark as Paid
+                      </button>
+                    )}
+                    <button
+                      onClick={handleGenerateInvoice}
+                      className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#333539] text-[#e2e2e8] rounded-lg hover:bg-[#333539]/80 transition-colors text-sm font-['Manrope']"
+                    >
+                      <FileText size={14} />
+                      Download Invoice PDF
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
