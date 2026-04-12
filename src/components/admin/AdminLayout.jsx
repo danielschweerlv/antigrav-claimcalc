@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Users, Settings, LogOut } from 'lucide-react'
+import { LayoutDashboard, Users, Briefcase, Settings, LogOut } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/leads', label: 'Leads', icon: Users },
+  { href: '/admin/attorneys', label: 'Attorneys', icon: Briefcase },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 

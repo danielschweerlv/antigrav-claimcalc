@@ -3,8 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
 import { LeadStatusBadge } from './LeadStatusBadge'
 import { ActivityLog } from './ActivityLog'
+import { AssignLeadModal } from './AssignLeadModal'
 import { format } from 'date-fns'
-import { ArrowLeft, Mail, Phone, MapPin, Calendar } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, MapPin, Calendar, UserCheck } from 'lucide-react'
 
 export function LeadDetail() {
   const { id } = useParams()
@@ -13,10 +14,13 @@ export function LeadDetail() {
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
   const [activityKey, setActivityKey] = useState(0)
+  const [showAssignModal, setShowAssignModal] = useState(false)
+  const [assignment, setAssignment] = useState(null)
 
   useEffect(() => {
     if (id) {
       fetchLead()
+      fetchAssignment()
       logView()
     }
   }, [id])
@@ -34,6 +38,27 @@ export function LeadDetail() {
       setLead(data)
     }
     setLoading(false)
+  }
+
+  const fetchAssignment = async () => {
+    const { data } = await supabase
+      .from('lead_assignments')
+      .select('*, attorney_partners(name, firm_name, email, phone)')
+      .eq('lead_id', id)
+      .order('assigned_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    if (data) {
+      setAssignment(data)
+    }
+  }
+
+  const handleAssigned = () => {
+    setShowAssignModal(false)
+    fetchLead()
+    fetchAssignment()
+    setActivityKey((k) => k + 1)
   }
 
   const logView = async () => {
@@ -247,13 +272,14 @@ export function LeadDetail() {
               )}
               {lead.status === 'qualified' && (
                 <button
-                  onClick={() => updateStatus('sent_to_attorney')}
+                  onClick={() => setShowAssignModal(true)}
                   disabled={updating}
-                  className="w-full py-2 px-4 bg-[#a4e6ff] text-[#111318] rounded-lg
+                  className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-[#a4e6ff] text-[#111318] rounded-lg
                              hover:bg-[#a4e6ff]/80 transition-colors
                              disabled:opacity-50 font-medium font-['Manrope']"
                 >
-                  Send to Attorney
+                  <UserCheck size={16} />
+                  Assign to Attorney
                 </button>
               )}
               {lead.status === 'sent_to_attorney' && (
@@ -281,6 +307,38 @@ export function LeadDetail() {
             </div>
           </div>
 
+          {/* Assignment info */}
+          {assignment && (
+            <div className="bg-[#1e2024] rounded-xl p-6">
+              <h2 className="text-lg font-bold text-[#e2e2e8] font-['Space_Grotesk'] mb-4">
+                Assignment
+              </h2>
+              <div className="space-y-2">
+                <div className="text-[#e2e2e8] font-['Manrope'] font-medium">
+                  {assignment.attorney_partners?.name || 'Unknown Attorney'}
+                </div>
+                {assignment.attorney_partners?.firm_name && (
+                  <div className="text-[#bbc9cf] text-sm font-['Manrope']">
+                    {assignment.attorney_partners.firm_name}
+                  </div>
+                )}
+                {assignment.attorney_partners?.email && (
+                  <div className="text-[#bbc9cf] text-sm font-['Manrope']">
+                    {assignment.attorney_partners.email}
+                  </div>
+                )}
+                {assignment.attorney_partners?.phone && (
+                  <div className="text-[#bbc9cf] text-sm font-['Manrope']">
+                    {assignment.attorney_partners.phone}
+                  </div>
+                )}
+                <div className="text-[#bbc9cf] text-xs font-['Manrope'] mt-2">
+                  Assigned {format(new Date(assignment.assigned_at), 'MMM d, yyyy h:mm a')}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Activity log */}
           <div className="bg-[#1e2024] rounded-xl p-6">
             <h2 className="text-lg font-bold text-[#e2e2e8] font-['Space_Grotesk'] mb-4">
@@ -290,6 +348,15 @@ export function LeadDetail() {
           </div>
         </div>
       </div>
+
+      {/* Assign Lead Modal */}
+      {showAssignModal && (
+        <AssignLeadModal
+          lead={lead}
+          onAssigned={handleAssigned}
+          onClose={() => setShowAssignModal(false)}
+        />
+      )}
     </div>
   )
 }
