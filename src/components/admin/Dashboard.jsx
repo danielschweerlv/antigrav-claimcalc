@@ -12,6 +12,7 @@ export function Dashboard() {
     qualifiedLeads: 0,
     convertedLeads: 0,
     revenue: 0,
+    outstanding: 0,
   })
   const [recentLeads, setRecentLeads] = useState([])
   const [loading, setLoading] = useState(true)
@@ -43,12 +44,33 @@ export function Dashboard() {
       .select('*', { count: 'exact', head: true })
       .eq('status', 'converted')
 
+    // Real revenue from paid payouts
+    const { data: paidAssignments } = await supabase
+      .from('lead_assignments')
+      .select('payout_amount')
+      .eq('payout_status', 'paid')
+
+    const revenue = (paidAssignments || []).reduce(
+      (sum, a) => sum + (a.payout_amount || 200000), 0
+    ) / 100
+
+    // Outstanding: unpaid + invoiced for converted/sent leads
+    const { data: outstandingAssignments } = await supabase
+      .from('lead_assignments')
+      .select('payout_amount, attorney_partners(price_per_lead)')
+      .in('payout_status', ['unpaid', 'invoiced'])
+
+    const outstanding = (outstandingAssignments || []).reduce(
+      (sum, a) => sum + (a.payout_amount || a.attorney_partners?.price_per_lead || 200000), 0
+    ) / 100
+
     setStats({
       totalLeads: totalLeads || 0,
       newLeads: newLeads || 0,
       qualifiedLeads: qualifiedLeads || 0,
       convertedLeads: convertedLeads || 0,
-      revenue: (convertedLeads || 0) * 2000,
+      revenue,
+      outstanding,
     })
   }
 
@@ -68,6 +90,7 @@ export function Dashboard() {
     { label: 'New (7 days)', value: stats.newLeads, icon: Clock, color: '#a4e6ff' },
     { label: 'Qualified', value: stats.qualifiedLeads, icon: TrendingUp, color: '#4ADE80' },
     { label: 'Revenue', value: `$${stats.revenue.toLocaleString()}`, icon: DollarSign, color: '#4ADE80' },
+    { label: 'Outstanding', value: `$${stats.outstanding.toLocaleString()}`, icon: DollarSign, color: '#ffb4ab' },
   ]
 
   const formatCaseType = (type) => {

@@ -26,6 +26,7 @@ const AdminDashboard = lazy(() => import('./components/admin/Dashboard.jsx').the
 const AdminLeadList = lazy(() => import('./components/admin/LeadList.jsx').then(m => ({ default: m.LeadList })))
 const AdminLeadDetail = lazy(() => import('./components/admin/LeadDetail.jsx').then(m => ({ default: m.LeadDetail })))
 const AdminAttorneyList = lazy(() => import('./components/admin/AttorneyList.jsx').then(m => ({ default: m.AttorneyList })))
+const AdminPayoutList = lazy(() => import('./components/admin/PayoutList.jsx').then(m => ({ default: m.PayoutList })))
 const AdminLayoutModule = lazy(() => import('./components/admin/AdminLayout.jsx').then(m => ({ default: m.AdminLayout })))
 const ProtectedRouteModule = lazy(() => import('./components/auth/ProtectedRoute.jsx').then(m => ({ default: m.ProtectedRoute })))
 
@@ -105,6 +106,7 @@ function Root() {
           <Route path="/admin/leads" element={<AdminShell><AdminLeadList /></AdminShell>} />
           <Route path="/admin/leads/:id" element={<AdminShell><AdminLeadDetail /></AdminShell>} />
           <Route path="/admin/attorneys" element={<AdminShell><AdminAttorneyList /></AdminShell>} />
+          <Route path="/admin/payouts" element={<AdminShell><AdminPayoutList /></AdminShell>} />
         </Routes>
       </Suspense>
     )
