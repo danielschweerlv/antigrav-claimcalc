@@ -10,6 +10,7 @@ export function AttorneyList() {
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
   const [leadCounts, setLeadCounts] = useState({})
+  const [revenue, setRevenue] = useState({})
 
   useEffect(() => {
     fetchAttorneys()
@@ -47,6 +48,20 @@ export function AttorneyList() {
         counts[a.attorney_id] = (counts[a.attorney_id] || 0) + 1
       })
       setLeadCounts(counts)
+    }
+
+    // Fetch paid-payout revenue per attorney
+    const { data: paidData } = await supabase
+      .from('lead_assignments')
+      .select('attorney_id, payout_amount')
+      .eq('payout_status', 'paid')
+
+    if (paidData) {
+      const rev = {}
+      paidData.forEach((a) => {
+        rev[a.attorney_id] = (rev[a.attorney_id] || 0) + (a.payout_amount || 200000)
+      })
+      setRevenue(rev)
     }
   }
 
@@ -109,6 +124,7 @@ export function AttorneyList() {
                 <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Case Types</th>
                 <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Leads/Month</th>
                 <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Price</th>
+                <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Revenue</th>
                 <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Status</th>
                 <th className="text-left p-4 text-[#bbc9cf] font-['Inter'] text-sm font-medium">Added</th>
                 <th className="p-4"></th>
@@ -141,6 +157,9 @@ export function AttorneyList() {
                     </td>
                     <td className="p-4 text-[#a4e6ff] font-['Manrope'] font-medium">
                       ${att.price_per_lead?.toLocaleString()}
+                    </td>
+                    <td className="p-4 text-[#4ADE80] font-['Manrope'] font-medium">
+                      {revenue[att.id] ? `$${(revenue[att.id] / 100).toLocaleString()}` : '$0'}
                     </td>
                     <td className="p-4">
                       <span

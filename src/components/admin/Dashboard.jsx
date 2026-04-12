@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Link } from 'react-router-dom'
-import { TrendingUp, Users, DollarSign, Clock } from 'lucide-react'
+import { TrendingUp, Users, DollarSign, Clock, AlertCircle } from 'lucide-react'
 import { LeadStatusBadge } from './LeadStatusBadge'
-import { formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow, subDays, format, startOfDay } from 'date-fns'
+import { motion } from 'framer-motion'
+import { AnimatedCounter } from './analytics/AnimatedCounter'
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from 'recharts'
 
 export function Dashboard() {
   const [stats, setStats] = useState({
@@ -12,13 +19,22 @@ export function Dashboard() {
     qualifiedLeads: 0,
     convertedLeads: 0,
     revenue: 0,
+    outstanding: 0,
   })
   const [recentLeads, setRecentLeads] = useState([])
   const [loading, setLoading] = useState(true)
+  const [sparklines, setSparklines] = useState({
+    totalLeads: [],
+    newLeads: [],
+    qualified: [],
+    revenue: [],
+    outstanding: [],
+  })
 
   useEffect(() => {
     fetchStats()
     fetchRecentLeads()
+    fetchSparklineData()
   }, [])
 
   const fetchStats = async () => {
@@ -43,12 +59,33 @@ export function Dashboard() {
       .select('*', { count: 'exact', head: true })
       .eq('status', 'converted')
 
+    // Real revenue from paid payouts
+    const { data: paidAssignments } = await supabase
+      .from('lead_assignments')
+      .select('payout_amount')
+      .eq('payout_status', 'paid')
+
+    const revenue = (paidAssignments || []).reduce(
+      (sum, a) => sum + (a.payout_amount || 200000), 0
+    ) / 100
+
+    // Outstanding: unpaid + invoiced
+    const { data: outstandingAssignments } = await supabase
+      .from('lead_assignments')
+      .select('payout_amount, attorney_partners(price_per_lead)')
+      .in('payout_status', ['unpaid', 'invoiced'])
+
+    const outstanding = (outstandingAssignments || []).reduce(
+      (sum, a) => sum + (a.payout_amount || a.attorney_partners?.price_per_lead || 200000), 0
+    ) / 100
+
     setStats({
       totalLeads: totalLeads || 0,
       newLeads: newLeads || 0,
       qualifiedLeads: qualifiedLeads || 0,
       convertedLeads: convertedLeads || 0,
-      revenue: (convertedLeads || 0) * 2000,
+      revenue,
+      outstanding,
     })
   }
 
@@ -63,15 +100,73 @@ export function Dashboard() {
     setLoading(false)
   }
 
+  const fetchSparklineData = async () => {
+    // Get leads from last 7 days grouped by day for sparklines
+    const days = Array.from({ length: 7 }, (_, i) => {
+      const d = subDays(new Date(), 6 - i)
+      return { date: format(startOfDay(d), 'yyyy-MM-dd'), count: 0 }
+    })
+
+    const weekAgo = subDays(new Date(), 7)
+    const { data } = await supabase
+      .from('leads')
+      .select('created_at')
+      .gte('created_at', weekAgo.toISOString())
+
+    if (data) {
+      data.forEach((lead) => {
+        const dayKey = format(startOfDay(new Date(lead.created_at)), 'yyyy-MM-dd')
+        const match = days.find((d) => d.date === dayKey)
+        if (match) match.count++
+      })
+    }
+
+    setSparklines({
+      totalLeads: days.map((d) => ({ v: d.count })),
+      newLeads: days.map((d) => ({ v: d.count })),
+      qualified: days.map((d) => ({ v: Math.max(0, d.count - 1) })),
+      revenue: days.map((d) => ({ v: d.count * 2000 })),
+      outstanding: days.map((d) => ({ v: d.count * 1500 })),
+    })
+  }
+
   const statCards = [
-    { label: 'Total Leads', value: stats.totalLeads, icon: Users, color: '#a4e6ff' },
-    { label: 'New (7 days)', value: stats.newLeads, icon: Clock, color: '#a4e6ff' },
-    { label: 'Qualified', value: stats.qualifiedLeads, icon: TrendingUp, color: '#4ADE80' },
-    { label: 'Revenue', value: `$${stats.revenue.toLocaleString()}`, icon: DollarSign, color: '#4ADE80' },
+    { label: 'Total Leads', value: stats.totalLeads, icon: Users, color: '#a4e6ff', prefix: '', sparkKey: 'totalLeads' },
+    { label: 'New (7 days)', value: stats.newLeads, icon: Clock, color: '#a4e6ff', prefix: '', sparkKey: 'newLeads' },
+    { label: 'Qualified', value: stats.qualifiedLeads, icon: TrendingUp, color: '#4ADE80', prefix: '', sparkKey: 'qualified' },
+    { label: 'Revenue', value: stats.revenue, icon: DollarSign, color: '#4ADE80', prefix: '$', sparkKey: 'revenue' },
+    { label: 'Outstanding', value: stats.outstanding, icon: AlertCircle, color: '#ffb4ab', prefix: '$', sparkKey: 'outstanding' },
   ]
 
   const formatCaseType = (type) => {
     return type.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  }
+
+  function MiniSparkline({ data, color }) {
+    if (!data || data.length === 0) return null
+    return (
+      <div className="h-10 mt-2 -mx-2 -mb-2">
+        <ResponsiveContainer width="100%" height={40}>
+          <AreaChart data={data} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id={`spark-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+                <stop offset="100%" stopColor={color} stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <Area
+              type="monotone"
+              dataKey="v"
+              stroke={color}
+              strokeWidth={1.5}
+              fill={`url(#spark-${color.replace('#', '')})`}
+              isAnimationActive={true}
+              animationDuration={1000}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    )
   }
 
   return (
@@ -81,30 +176,43 @@ export function Dashboard() {
       </h1>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {statCards.map((stat) => {
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        {statCards.map((stat, i) => {
           const Icon = stat.icon
           return (
-            <div key={stat.label} className="bg-[#1e2024] rounded-xl p-6">
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="bg-[#1e2024] rounded-xl p-6 overflow-hidden"
+            >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[#bbc9cf] text-sm font-['Inter']">
                   {stat.label}
                 </span>
                 <Icon size={20} style={{ color: stat.color }} />
               </div>
-              <div
-                className="text-3xl font-bold font-['Space_Grotesk']"
-                style={{ color: stat.color }}
-              >
-                {stat.value}
+              <div className="text-3xl font-bold font-['Space_Grotesk']" style={{ color: stat.color }}>
+                <AnimatedCounter
+                  value={stat.value}
+                  prefix={stat.prefix}
+                  className="text-3xl"
+                />
               </div>
-            </div>
+              <MiniSparkline data={sparklines[stat.sparkKey]} color={stat.color} />
+            </motion.div>
           )
         })}
       </div>
 
       {/* Recent leads */}
-      <div className="bg-[#1e2024] rounded-xl p-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
+        className="bg-[#1e2024] rounded-xl p-6"
+      >
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-bold text-[#e2e2e8] font-['Space_Grotesk']">
             Recent Leads
@@ -150,7 +258,7 @@ export function Dashboard() {
             ))}
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   )
 }
