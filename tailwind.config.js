@@ -39,7 +39,7 @@ export default {
         "outline": "#859399",
         "tertiary-fixed-dim": "#bec2ff",
         "primary-fixed": "#b7eaff",
-        "primary": "#a4e6ff",
+        "primary": "#c9a84c",
         "inverse-surface": "#e2e2e8",
         "on-tertiary-fixed": "#050962",
         "on-tertiary-fixed-variant": "#383e8e",
