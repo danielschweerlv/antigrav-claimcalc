@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
+import WhatIsSection from './components/WhatIsSection'
 import { TESTIMONIALS } from './data/testimonials'
 
 const transitionVariants = {
