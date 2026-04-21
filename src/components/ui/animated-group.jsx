@@ -14,7 +14,7 @@ const defaultItemVariants = {
   visible: { opacity: 1 },
 }
 
-export function AnimatedGroup({ children, className, variants, preset, disableAnimation = false }) {
+export function AnimatedGroup({ children, className, variants, preset, disableAnimation = false, animateOnMount = false }) {
   const containerVariants = variants?.container ?? defaultContainerVariants
   const itemVariants = variants?.item ?? defaultItemVariants
 
@@ -25,6 +25,25 @@ export function AnimatedGroup({ children, className, variants, preset, disableAn
           <div key={index}>{child}</div>
         ))}
       </div>
+    )
+  }
+
+  // animateOnMount: use animate instead of whileInView — needed for above-the-fold elements
+  // where IntersectionObserver may miss the initial trigger (React 19 StrictMode + lazy loading)
+  if (animateOnMount) {
+    return (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className={className}
+      >
+        {React.Children.map(children, (child, index) => (
+          <motion.div key={index} variants={itemVariants}>
+            {child}
+          </motion.div>
+        ))}
+      </motion.div>
     )
   }
 
