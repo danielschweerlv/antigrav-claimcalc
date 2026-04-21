@@ -30,6 +30,7 @@ Deno.serve(async (req) => {
 
   const parsed = submitLeadSchema.safeParse(raw);
   if (!parsed.success) {
+    console.error("schema validation failed", JSON.stringify(parsed.error.issues));
     return json({ error: "invalid submission" }, 400);
   }
   const body = parsed.data;
@@ -118,6 +119,37 @@ Deno.serve(async (req) => {
     action: "created",
     details: { utm: body.utm, referrer: body.referrer, ip_hash: ipHash },
   });
+
+  const resendKey = Deno.env.get("RESEND_API_KEY");
+  if (resendKey) {
+    const emailBody = [
+      `New lead submitted on ClaimCalculator.ai`,
+      ``,
+      `Name:    ${body.firstName} ${body.lastName}`,
+      `Email:   ${body.email}`,
+      `Phone:   ${body.phone}`,
+      `Case:    ${body.caseType}`,
+      `Zip:     ${body.zipCode ?? "—"}`,
+      `Est. value: $${withoutAvg.toLocaleString()} – $${withAvg.toLocaleString()}`,
+      body.caseDescription ? `\nDescription: ${body.caseDescription}` : "",
+      ``,
+      `Lead ID: ${leadRow.id}`,
+    ].join("\n");
+
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${resendKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "ClaimCalculator.ai <frontdesk@claimcalculator.ai>",
+        to: ["frontdesk@claimcalculator.ai", "danielschweer@gmail.com"],
+        subject: `New Lead: ${body.firstName} ${body.lastName} — ${body.caseType}`,
+        text: emailBody,
+      }),
+    }).catch((e) => console.error("resend error", e));
+  }
 
   return json({
     leadId: leadRow.id,

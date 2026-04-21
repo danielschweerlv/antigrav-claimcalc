@@ -1,39 +1,80 @@
-# Instructions
+# CLAUDE.md
 
-You are an autonomous coding subagent spawned by a parent agent to complete a specific task. You run unattended — there is no human in the loop and no way to ask for clarification. You must complete the task fully on your own and then exit.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-You have two categories of skills:
+## Reference Docs
 
-- **Coding skills** (`coding-workflow`, `commit-push-pr`, `pr-description`, `code-simplifier`, `code-review`): For repository work, writing code, git operations, pull requests, and code quality
-- **Data skills** (`data-triage`, `data-analyst`, `data-model-explorer`): For database queries, metrics, data analysis, and visualizations
-- **Repo skills** (`repo-skills`): After cloning any repo, scan for and index its skill definitions
+- For API conventions, read `docs/api-standards.md`
+- For testing guidelines, read `docs/testing.md`
+- For deployment rules, read `docs/deploy.md`
 
-Load the appropriate skill based on the task. If the task involves both code and data, load both. Always load `repo-skills` after cloning a repository.
+## Commands
 
-## Execution Rules
+```bash
+npm run dev        # start dev server (Vite)
+npm run build      # production build
+npm run lint       # ESLint
+npm run preview    # preview production build locally
+```
 
-- Do NOT stall. If an approach isn't working, try a different one immediately.
-- Do NOT explore the codebase endlessly. Get oriented quickly, then start making changes.
-- If a tool is missing (e.g., `rg`), use an available alternative (e.g., `grep -r`) and move on.
-- If a git operation fails, try a different approach (e.g., `gh repo clone` instead of `git clone`).
-- Stay focused on the objective. Do not go on tangents or investigate unrelated code.
-- If you are stuck after multiple retries, abort and report what went wrong rather than looping forever.
+Supabase edge functions:
+```bash
+supabase functions deploy submit-lead   # deploy edge function
+supabase functions serve                # run edge functions locally
+```
 
-## Repo Conventions
+## Architecture
 
-After cloning any repository, immediately check for and read these files at the repo root:
+**Frontend:** React 19 + Vite, Tailwind CSS, Radix UI, Framer Motion, React Three Fiber (hero animation)
 
-- `CLAUDE.md` — Claude Code instructions and project conventions
-- `AGENTS.md` — Agent-specific instructions
+**Backend:** Single Supabase edge function (`supabase/functions/submit-lead/`) — no direct anon writes to the DB. All lead submissions go through this function.
 
-Follow all instructions and conventions found in these files. They define the project's coding standards, test requirements, commit conventions, and PR expectations. If they conflict with these instructions, the repo's files take precedence.
+**Shared logic:** `src/lib/calc-settlement.js` is imported by both the frontend (live estimate display) and the edge function (server-side validation). Do not split these.
 
-## Core Rules
+**Key lib files:**
+- `src/lib/calc-settlement.js` — settlement estimate logic (shared client/server)
+- `src/lib/submit-lead.js` — form → schema key mapping and submission wrapper
+- `src/lib/supabase.js` — Supabase client
+- `src/lib/utils.js` — shared utilities
 
-- Ensure all changes follow the project's coding standards (as discovered from repo convention files above)
-- NEVER approve PRs — you are not authorized to approve pull requests. Only create and comment on PRs.
-- Complete the task autonomously and create the PR(s) when done.
+**Pages live in** `src/pages/`, **components in** `src/components/`.
 
-## Output Persistence
+**Plans and specs** are in `docs/superpowers/plans/` and `docs/superpowers/specs/`.
 
-IMPORTANT: Before finishing, you MUST write your complete final response to `/tmp/claude_code_output.md` using the Write tool. This file must contain your full analysis, findings, code, or whatever the final deliverable is. This is a hard requirement — do not skip it.
+## Locked Design Decisions
+
+Do not re-brainstorm these — they are settled:
+
+- Single `submit-lead` edge function handles all lead writes (no direct anon DB access)
+- `calc-settlement.js` must remain shared between client and server
+- Structural retune enforces `withAvg >= 4.5 * withoutAvg`
+- `estimated_value_low` = withoutAvg midpoint, `estimated_value_high` = withAvg midpoint
+- Honeypot + IP rate limit (5/hr, 20/day) with SHA-256 hashed IPs + server pepper
+- Non-NV zip codes are accepted with `notes = 'non-NV zip'`
+- Form keys differ from DB schema keys — `src/lib/submit-lead.js` owns that mapping
+- Public 400 responses must NOT expose Zod `issues` array (security requirement)
+
+## Project IDs
+
+- **Supabase:** project `claimcalculator.ai`, ref `uawtkzzyeydfgnpiaqfb`, region `us-east-1`
+- **Vercel:** project `antigrav-claimcalc`, ID `prj_Ndmgm1URg1V3aFUnjVI8WGJFzWWV`
+- **Repo path:** `~/Desktop/antigrav-claimcalc/antigrav-claimcalc/` (nested — inner dir is the project root)
+
+## Tech Stack
+
+- **Frontend:** React 19 + Vite, Tailwind CSS, Radix UI primitives, Framer Motion
+- **Backend:** Supabase (Postgres + Edge Functions in TypeScript)
+- **Routing:** react-router-dom v7
+- **3D:** react-three-fiber + three.js
+
+## Environment Variables
+
+| Variable | Where |
+|----------|-------|
+| `VITE_SUPABASE_URL` | Vercel (Production + Preview) |
+| `VITE_SUPABASE_ANON_KEY` | Vercel (Production + Preview) |
+| `IP_HASH_PEPPER` | Supabase function secrets |
+
+## Out of Scope (Future Cycles)
+
+Admin dashboard, attorney routing, email notifications, payout tracking, analytics.

@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CalculatorForm from './components/CalculatorForm'
 import { AnimatedGroup } from './components/ui/animated-group'
-import ShineBorder from './components/ui/shine-border'
-import WhatIsSection from './components/WhatIsSection'
-import RotatingAvatars from './components/RotatingAvatars'
 import { TESTIMONIALS } from './data/testimonials'
 
 const transitionVariants = {
@@ -38,72 +35,55 @@ function App() {
       <main className="relative z-10 pt-[58px]">
 
         {/* ── HERO ────────────────────────────────────────────────────────── */}
-        <section className="relative flex items-center px-4 lg:px-8 py-16 lg:py-32 min-h-[600px] lg:min-h-[780px]" style={{ isolation: 'isolate', zIndex: 2 }}>
-          
-          {/* Background glow — positioned behind calculator */}
-          <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-1/4 left-[15%] w-[400px] h-[400px] bg-primary/[0.02] rounded-full blur-[100px] pointer-events-none" />
+        <section className="relative flex flex-col items-center px-4 lg:px-8 pt-24 lg:pt-32 pb-0 min-h-screen" style={{ isolation: 'isolate', zIndex: 2 }}>
 
+          {/* Background glow */}
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#c9a84c]/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
+          {/* Text content — centered editorial */}
+          <AnimatedGroup variants={transitionVariants} className="relative z-20 text-center space-y-7 max-w-4xl mx-auto w-full">
 
-          <div className="relative z-20 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+            {/* Overline */}
+            <div>
+              <span className="text-[11px] font-label font-bold uppercase tracking-[0.15em] text-[#c9a84c]">
+                Personal Injury Case Calculator
+              </span>
+            </div>
 
-            {/* Left column */}
-            <AnimatedGroup variants={transitionVariants} className="space-y-6 lg:space-y-0 text-center lg:text-left">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 lg:mb-6">
-                <span className="w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse flex-shrink-0"></span>
-                <span className="text-[11px] font-label font-semibold text-[#4ADE80] uppercase tracking-widest">Nevada Personal Injury Calculator</span>
-              </div>
+            {/* Headline */}
+            <h1 style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', lineHeight: 1.05, color: '#e2e2e8', fontWeight: 400 }}>
+              Most Injury Victims Settle for Less Than They're Owed.
+            </h1>
 
-              {/* Headline — stronger size contrast */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-headline text-on-background leading-[0.95] tracking-tight lg:mb-7">
-                Insurance companies{' '}
-                <br className="hidden lg:block" />
-                already know your number.{' '}
-                <br />
-                <span className="text-primary italic">Now you do too.</span>
-              </h1>
+            {/* Subhead */}
+            <p className="text-base sm:text-lg text-on-surface-variant/85 max-w-xl mx-auto leading-relaxed">
+              Find out what your case is actually worth — before you accept anything.
+            </p>
 
-              <p className="text-base sm:text-lg text-on-surface-variant/85 max-w-md mx-auto lg:mx-0 leading-relaxed lg:mb-9">
-                Find out what your Nevada injury case is actually worth before you talk to an adjuster, sign anything, or settle for less than you should.
-              </p>
+            {/* CTA */}
+            <div>
+              <button
+                onClick={() => navigate('/calculator')}
+                className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 sm:py-5 rounded-[16px] font-headline font-bold text-lg inline-flex items-center gap-2 shadow-[0_0_30px_rgba(201,168,76,0.2)] hover:shadow-[0_8px_40px_rgba(201,168,76,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
+              >
+                Calculate My Case Value
+                <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
+              </button>
+            </div>
+          </AnimatedGroup>
 
-              {/* Social proof — avatars */}
-              <div className="flex items-center gap-3 justify-center lg:justify-start lg:mb-6">
-                <RotatingAvatars />
-                <p className="text-base text-on-surface-variant">
-                  Join <span className="text-on-background font-bold">2,400+</span> people who discovered they were owed more
-                </p>
-              </div>
+          {/* Calculator widget — anchored below the fold */}
+          <motion.div
+            className="relative w-full max-w-lg mx-auto mt-20 mb-0 z-20"
+            initial={{ opacity: 0, y: 24, filter: 'blur(12px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.4 }}
+          >
+            <div className="rounded-xl border" style={{ borderColor: 'rgba(201,168,76,0.2)' }}>
+              <CalculatorForm />
+            </div>
+          </motion.div>
 
-              {/* Primary CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <button
-                  onClick={() => navigate('/calculator')}
-                  className="cta-gradient cta-shimmer text-on-primary-fixed px-8 py-4 sm:py-5 rounded-[16px] font-headline font-bold text-lg flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(164,230,255,0.2)] hover:shadow-[0_8px_40px_rgba(164,230,255,0.3)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 group"
-                >
-                  See What Your Case Is Worth
-                  <span className="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform duration-200" style={{ transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}>arrow_forward</span>
-                </button>
-                <p className="text-sm text-outline self-center text-center">No cost. No obligation. Built for Nevada injury cases.</p>
-              </div>
-            </AnimatedGroup>
-
-            {/* Right column — DESKTOP ONLY: embedded calculator preview */}
-            <motion.div
-              className="relative hidden lg:block self-center overflow-hidden z-20"
-              initial={{ opacity: 0, y: 24, filter: 'blur(12px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ type: 'spring', bounce: 0.2, duration: 1.8, delay: 0.3 }}
-            >
-              <div className="absolute inset-0 bg-primary/5 rounded-xl blur-2xl transform rotate-3" />
-              <ShineBorder borderWidth={2} duration={6} gradient="from-[#a855f7] via-[#3b82f6] via-[#06b6d4] to-[#ffffff]">
-                <CalculatorForm />
-              </ShineBorder>
-            </motion.div>
-
-          </div>
         </section>
 
         {/* ── TRUST BAR ──────────────────────────────────────────────────── */}
